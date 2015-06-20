@@ -24,13 +24,23 @@ PREREQ_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "bootstrap3",
+    "django_jinja",
+    "easy_thumbnails",
+    "filer",
+]
+
+SHOOP_APPS = [
+    "shoop.admin",
+    "shoop.core",
+    "shoop.front",
 ]
 
 PROJECT_APPS = [
 
 ]
 
-INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
+INSTALLED_APPS = PREREQ_APPS + SHOOP_APPS + PROJECT_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -46,6 +56,13 @@ MIDDLEWARE_CLASSES = [
 ROOT_URLCONF = 'kakaravaara.urls'
 
 TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "match_extension": ".jinja",
+        }
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
@@ -93,3 +110,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = "staticfiles"

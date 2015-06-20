@@ -1,1 +1,5 @@
 -r base.txt
+
+# runserver_plus and other goodies
+django-extensions==1.5.5
+Werkzeug==0.10.4

@@ -10,3 +10,7 @@ SECRET_KEY = 'wq$yp%s734opmtb56(p%r5!vfa=-n1=7mqps$xgpqr&ps5i$zu'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+INSTALLED_APPS += [
+    "django_extensions",
+]
