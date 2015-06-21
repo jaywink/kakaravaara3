@@ -12,11 +12,21 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from shoop.addons import add_enabled_addons
 
+######## PATHS ########
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, "var", "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "var", "static")
+MEDIA_URL = "/media/"
+STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = '/'
 
-# Application definition
+######## Shoop ########
+SHOOP_ENABLED_ADDONS_FILE = os.path.join(BASE_DIR, "var", "enabled_addons")
+SHOOP_PRICING_MODULE = "simple_pricing"
 
+######## Installed apps ########
 PREREQ_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,25 +34,38 @@ PREREQ_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "bootstrap3",
-    "django_jinja",
-    "easy_thumbnails",
-    "filer",
 ]
 
 SHOOP_APPS = [
-    "shoop.admin",
-    "shoop.core",
-    "shoop.front",
+    'shoop.core',
+    "django_jinja",
+    "easy_thumbnails",
+    "filer",
+    'shoop.simple_pricing',
+    'shoop.simple_supplier',
+    'shoop.default_tax',
+    'shoop.front',
+    'shoop.front.apps.registration',
+    'registration',
+    'shoop.front.apps.auth',
+    'shoop.front.apps.customer_information',
+    'shoop.front.apps.personal_order_history',
+    'shoop.front.apps.simple_order_notification',
+    'shoop.front.apps.simple_search',
+    'shoop.admin',
+    'shoop.addons',
+    'shoop.testing',
+    'bootstrap3',
+    'shoop.notify',
+    'shoop.simple_cms',
 ]
 
-PROJECT_APPS = [
+PROJECT_APPS = []
 
-]
+INSTALLED_APPS = PREREQ_APPS + add_enabled_addons(SHOOP_ENABLED_ADDONS_FILE, SHOOP_APPS) + PROJECT_APPS
 
-INSTALLED_APPS = PREREQ_APPS + SHOOP_APPS + PROJECT_APPS
-
-MIDDLEWARE_CLASSES = [
+######## Middleware ########
+BASE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -53,7 +76,27 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
+SHOOP_MIDDLEWARE = [
+    'shoop.front.middleware.ProblemMiddleware',
+    'shoop.front.middleware.ShoopFrontMiddleware',
+]
+
+MIDDLEWARE_CLASSES = BASE_CLASSES + SHOOP_MIDDLEWARE
+
+######## Urls ########
 ROOT_URLCONF = 'kakaravaara.urls'
+
+######## Templates ########
+TEMPLATE_CONTEXT_PROCESSORS = [
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.request",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+]
 
 TEMPLATES = [
     {
@@ -61,29 +104,25 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "match_extension": ".jinja",
-        }
+            'context_processors': TEMPLATE_CONTEXT_PROCESSORS,
+            "newstyle_gettext": True,
+        },
+        "NAME": "jinja2",
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
+            'context_processors': TEMPLATE_CONTEXT_PROCESSORS,
         },
     },
 ]
 
+######## WSGI ########
 WSGI_APPLICATION = 'kakaravaara.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
+######## Database ########
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -91,23 +130,47 @@ DATABASES = {
     }
 }
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
-
+######## Internatialization ########
 LANGUAGE_CODE = 'fi-FI'
+LANGUAGES = [
+    ('en', 'English'),
+    ('fi', 'Finnish'),
+]
 
 TIME_ZONE = 'Europe/Helsinki'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
+PARLER_DEFAULT_LANGUAGE_CODE = "en"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+PARLER_LANGUAGES = {
+    None: [{"code": c, "name": n} for (c, n) in LANGUAGES],
+    'default': {
+        'hide_untranslated': False,
+    }
+}
 
-STATIC_URL = '/static/'
-STATIC_ROOT = "staticfiles"
+######## Loggers ########
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'verbose': {'format': '[%(asctime)s] (%(name)s:%(levelname)s): %(message)s'},
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'shoop': {'handlers': ['console'], 'level': 'DEBUG', 'propagate': True},
+    }
+}
+
+######## Mailers ########
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+######## Sessions ########
+SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"

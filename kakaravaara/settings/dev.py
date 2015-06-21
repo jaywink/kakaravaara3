@@ -8,9 +8,12 @@ SECRET_KEY = 'wq$yp%s734opmtb56(p%r5!vfa=-n1=7mqps$xgpqr&ps5i$zu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS += [
     "django_extensions",
 ]
+
+SOUTH_TESTS_MIGRATE = False  # Makes tests that much faster.
