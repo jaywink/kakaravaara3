@@ -131,7 +131,7 @@ DATABASES = {
 }
 
 ######## Internatialization ########
-LANGUAGE_CODE = 'fi-FI'
+LANGUAGE_CODE = 'fi'
 LANGUAGES = [
     ('en', 'English'),
     ('fi', 'Finnish'),
