@@ -60,7 +60,9 @@ SHOOP_APPS = [
     'shoop.simple_cms',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    "reservations",
+]
 
 INSTALLED_APPS = PREREQ_APPS + add_enabled_addons(SHOOP_ENABLED_ADDONS_FILE, SHOOP_APPS) + PROJECT_APPS
 

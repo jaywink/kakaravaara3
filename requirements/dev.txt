@@ -3,3 +3,6 @@
 # runserver_plus and other goodies
 django-extensions==1.5.5
 Werkzeug==0.10.4
+
+# testing
+pytest-django==2.8.0
