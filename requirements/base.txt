@@ -1,0 +1,2 @@
+# Shoop
+git+https://github.com/shoopio/shoop.git@master#egg=shoop
