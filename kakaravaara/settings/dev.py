@@ -17,3 +17,8 @@ INSTALLED_APPS += [
 ]
 
 SOUTH_TESTS_MIGRATE = False  # Makes tests that much faster.
+
+# For faster tests
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+)
