@@ -36,6 +36,10 @@ PREREQ_APPS = [
     'django.contrib.staticfiles',
 ]
 
+PROJECT_APPS = [
+    "reservations",
+]
+
 SHOOP_APPS = [
     'shoop.core',
     "django_jinja",
@@ -60,11 +64,7 @@ SHOOP_APPS = [
     'shoop.simple_cms',
 ]
 
-PROJECT_APPS = [
-    "reservations",
-]
-
-INSTALLED_APPS = PREREQ_APPS + add_enabled_addons(SHOOP_ENABLED_ADDONS_FILE, SHOOP_APPS) + PROJECT_APPS
+INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS + add_enabled_addons(SHOOP_ENABLED_ADDONS_FILE, SHOOP_APPS)
 
 ######## Middleware ########
 BASE_CLASSES = [
