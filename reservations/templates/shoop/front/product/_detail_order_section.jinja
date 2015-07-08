@@ -54,7 +54,12 @@
                     <input type="hidden" name="return" value="{{ request.path }}">
                     <input type="hidden" name="command" value="add">
                     <input type="hidden" name="product_id" value="{{ product.id }}">
-                    {{ quantity_box() }}
+                    {% if product.type.identifier == "reservable" %}
+                        <input type="hidden" name="quantity" id="product-quantity" value="1">
+                        {{ reservable_dates_form.as_p() }}
+                    {% else %}
+                        {{ quantity_box() }}
+                    {% endif %}
                     {# TODO: This should be dynamically updated from the backend with AJA
                     <div class="price pull-right">
                         <h4>
