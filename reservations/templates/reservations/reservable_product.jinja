@@ -1,13 +1,6 @@
 {% extends "shoop/front/product/detail.jinja" %}
 
 {% block extrameta %}
-    {# load jquery and bootstrap in head
-    yes, this means twice, since Shoop loads them at the end.. :/ #}
-    {# jQuery #}
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    {# Include all Bootstrap JavaScript libraries #}
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
     {# also we need reservable dates form media #}
     {{ reservable_dates_form.media }}
 {% endblock %}
