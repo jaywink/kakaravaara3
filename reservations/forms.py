@@ -38,40 +38,6 @@ class ReservableDatesForm(forms.Form):
     )
 
 
-class ReservedDatesForm(forms.Form):
-    def __init__(self, **kwargs):
-        super(ReservedDatesForm, self).__init__()
-        self.languages = to_language_codes(kwargs.pop("languages", ()))
-        self.product = kwargs.pop("product")
-        self.reservations = self.product.reservable.reservations.all()
-
-    def cleaned_data(self):
-        return None
-
-    def save(self):
-        pass
-
-
-class ReservedDatesFormPart(FormPart):
-    priority = -950
-
-    def get_form_defs(self):
-        yield TemplatedFormDef(
-            "reservations",
-            ReservedDatesForm,
-            template_name="reservations/_reserved_dates_form.jinja",
-            required=True,
-            kwargs={
-                "product": self.object,
-                "languages": settings.LANGUAGES,
-                "initial": self.get_initial()
-            }
-        )
-
-    def get_initial(self):
-        pass
-
-
 class ReservableProductForm(ModelForm):
 
     class Meta:
