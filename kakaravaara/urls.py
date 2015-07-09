@@ -20,7 +20,7 @@ from django.views.i18n import set_language
 urlpatterns = [
     url(r'^set-language/', set_language, name="set-language"),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^sa/', include('shoop.admin.urls', namespace="shoop_admin", app_name="shoop_admin")),
     url(r'^', include('reservations.urls', namespace="reservations")),
+    url(r'^sa/', include('shoop.admin.urls', namespace="shoop_admin", app_name="shoop_admin")),
     url(r'^', include('shoop.front.urls', namespace="shoop", app_name="shoop")),
 ]
