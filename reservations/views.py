@@ -1,7 +1,7 @@
 from shoop.admin.modules.products.views import ProductEditView
 from shoop.front.views.product import ProductDetailView
 
-from reservations.forms import ReservableDatesForm, ReservedDatesFormPart
+from reservations.forms import ReservableDatesForm, ReservedDatesFormPart, ReservableProductFormPart
 
 
 class ReservableProductDetailView(ProductDetailView):
@@ -29,6 +29,6 @@ class ReservableProductEditView(ProductEditView):
     def get_form_part_classes(self):
         form_part_classes = super(ReservableProductEditView, self).get_form_part_classes()
         if self.object.type.identifier == "reservable":
-            form_part_classes.append(ReservedDatesFormPart)
+            form_part_classes += [ReservedDatesFormPart, ReservableProductFormPart]
 
         return form_part_classes

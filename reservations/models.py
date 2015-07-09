@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta
+from datetime import timedelta, time
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -10,8 +10,8 @@ class ReservableProduct(models.Model):
     """Products that have reservable properties."""
 
     product = models.OneToOneField(Product, verbose_name=_(u"reservable product"), related_name="reservable")
-    check_out_time = models.TimeField(verbose_name=_(u"sign out time"))
-    check_in_time = models.TimeField(verbose_name=_(u"sign in time"))
+    check_out_time = models.TimeField(verbose_name=_(u"sign out time"), default=time(hour=12))
+    check_in_time = models.TimeField(verbose_name=_(u"sign in time"), default=time(hour=15))
     available_count = models.IntegerField(verbose_name=_(u"available quantity"), default=1)
 
     class Meta:
