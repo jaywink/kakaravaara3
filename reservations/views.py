@@ -57,12 +57,16 @@ class ReservableProductEditView(ProductEditView):
 class ReservableReservationsListView(PicotableListView):
     model = Reservation
     columns = [
-        Column("name", _("Name"), sort_field="reservable__product__translations__name", display="reservable__product__name", filter_config=TextFilter(
-            filter_field="reservable__product__translations__name",
-            placeholder=_("Filter by reservable...")
-        )),
-        Column("start_time", _("Sign in time"), sort_field="start_time", display="format_start_time"),
-        Column("end_time", _("Sign out time"), sort_field="end_time", display="format_end_time"),
+        Column(
+            "name", _("Name"), sort_field="reservable__product__translations__name",
+            display="reservable__product__name",
+            filter_config=TextFilter(
+                filter_field="reservable__product__translations__name",
+                placeholder=_("Filter by reservable..."))
+        ),
+        Column("order", _("From Order"), sort_field="order", display="order"),
+        Column("start_time", _("Sign In Time"), sort_field="start_time", display="format_start_time"),
+        Column("end_time", _("Sign Out Time"), sort_field="end_time", display="format_end_time"),
         Column("adults", _("Adults"), display="adults"),
         Column("children", _("Children"), display="children"),
     ]

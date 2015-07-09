@@ -3,7 +3,7 @@ from datetime import timedelta, time
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from shoop.core.models import Product
+from shoop.core.models import Product, Order
 
 
 class ReservableProduct(models.Model):
@@ -50,6 +50,8 @@ class Reservation(models.Model):
 
     reservable = models.ForeignKey(
         ReservableProduct, verbose_name=_(u"reservable product"), related_name="reservations")
+    order = models.ForeignKey(
+        Order, verbose_name=_("order"), related_name="reservations", null=True, blank=True)
     start_time = models.DateTimeField(verbose_name=_(u"starts"))
     end_time = models.DateTimeField(verbose_name=_(u"ends"))
 
