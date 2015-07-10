@@ -1,12 +1,10 @@
 from datetime import date, timedelta
 
 from datetimewidget.widgets import DateWidget
-from django.conf import settings
 from django.forms import forms, DateField, ModelForm
 from django.utils.translation import ugettext as _
 
 from shoop.admin.form_part import FormPart, TemplatedFormDef
-from shoop.utils.multilanguage_model_form import to_language_codes
 
 from reservations.models import ReservableProduct
 
