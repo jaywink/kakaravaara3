@@ -1,4 +1,5 @@
 from babel.dates import format_datetime
+from datetime import date, timedelta, datetime
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.utils.timezone import localtime
@@ -13,7 +14,7 @@ from shoop.front.views.product import ProductDetailView
 from shoop.utils.i18n import get_current_babel_locale
 
 from reservations.forms import ReservableDatesForm, ReservableProductFormPart
-from reservations.models import Reservation
+from reservations.models import Reservation, ReservableProduct
 
 
 class ReservableProductDetailView(ProductDetailView):
@@ -115,4 +116,23 @@ class ReservationEditView(CreateOrUpdateView):
 class ReservableSearchView(TemplateView):
     template_name = "reservations/reservable_search.jinja"
 
+    def get(self, request, *args, **kwargs):
+        start = request.GET.get("start", None)
+        end = request.GET.get("end", None)
+        if not start:
+            self.start_date = date.today()
+            self.end_date = date.today() + timedelta(days=30)
+        else:
+            self.start_date = datetime.strptime(start, "%Y-%m-%d")
+            self.end_date = datetime.strptime(end, "%Y-%m-%d")
+        return super(ReservableSearchView, self).get(request, *args, **kwargs)
 
+    def _get_reservables(self):
+        return ReservableProduct.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(ReservableSearchView, self).get_context_data(**kwargs)
+        context["reservables"] = self._get_reservables()
+        context["start_date"] = self.start_date.strftime("%Y-%m-%d")
+        context["end_date"] = self.end_date.strftime("%Y-%m-%d")
+        return context

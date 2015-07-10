@@ -8,46 +8,47 @@
     </div>
 
     <script type="text/javascript">
-    $(function() {
-        $('#searchrange span').html(moment().format('MMMM D, YYYY') + ' - ' + moment().add(30, "days").format('MMMM D, YYYY'));
+        var start_date = moment('{{ start_date }}');
+        var end_date = moment('{{ end_date }}');
+        $(function() {
+            $('#searchrange span').html(start_date.format('MMMM D, YYYY') + ' - ' + end_date.format('MMMM D, YYYY'));
 
-        $('#searchrange').daterangepicker({
-            format: 'DD.MM.YYYY',
-            startDate: moment(),
-            endDate: moment().add(30, "days"),
-            dateLimit: { days: 180 },
-            showDropdowns: true,
-            showWeekNumbers: true,
-            timePicker: false,
-            timePickerIncrement: 1,
-            timePicker12Hour: true,
-            ranges: {
-               'Today': [moment(), moment()],
-               'Next 7 Days': [moment().add(6, 'days'), moment()],
-               'Next 30 Days': [moment().add(29, 'days'), moment()],
-               'This Month': [moment().startOf('month'), moment().endOf('month')],
-               'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
-            },
-            opens: 'left',
-            drops: 'down',
-            buttonClasses: ['btn', 'btn-sm'],
-            applyClass: 'btn-primary',
-            cancelClass: 'btn-default',
-            separator: ' to ',
-            locale: {
-                applyLabel: 'Search',
-                cancelLabel: 'Cancel',
-                fromLabel: 'From',
-                toLabel: 'To',
-                customRangeLabel: 'Custom',
-                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                firstDay: 1
-            }
-        }, function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-            $('#searchrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        });
+            $('#searchrange').daterangepicker({
+                format: 'DD.MM.YYYY',
+                startDate: moment(),
+                endDate: moment().add(30, "days"),
+                dateLimit: { days: 180 },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                   'Today': [moment(), moment()],
+                   'Next 7 Days': [moment().add(6, 'days'), moment()],
+                   'Next 30 Days': [moment().add(29, 'days'), moment()],
+                   'This Month': [moment().startOf('month'), moment().endOf('month')],
+                   'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
+                },
+                opens: 'left',
+                drops: 'down',
+                buttonClasses: ['btn', 'btn-sm'],
+                applyClass: 'btn-primary',
+                cancelClass: 'btn-default',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Search',
+                    cancelLabel: 'Cancel',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            }, function(start, end, label) {
+                window.location = '{{ url("reservations:reservable.search") }}?start='+moment(start).format("YYYY-MM-DD")+'&end='+moment(end).format("YYYY-MM-DD");
+            });
     });
     </script>
 
