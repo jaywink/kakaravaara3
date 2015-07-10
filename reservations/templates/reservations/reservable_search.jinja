@@ -1,59 +1,116 @@
 {% extends "shoop/front/base.jinja" %}
 
 
+{% block content_title %}
+    {% trans %}Reservations{% endtrans %}
+{% endblock %}
+
+
 {% block content %}
-    <div id="searchrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-        <i class="fa fa-calendar"></i>
-        <span></span> <b class="caret"></b>
-    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    {% trans %}Select date range to search from{% endtrans %}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="searchrange" class="text-center" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                    <i class="fa fa-calendar"></i>
+                    <span></span> <b class="caret"></b>
+                </div>
+            </div>
+        </div>
 
-    <script type="text/javascript">
-        var start_date = moment('{{ start_date }}');
-        var end_date = moment('{{ end_date }}');
-        $(function() {
-            $('#searchrange span').html(start_date.format('MMMM D, YYYY') + ' - ' + end_date.format('MMMM D, YYYY'));
+        <script type="text/javascript">
+            var start_date = moment('{{ start_date }}');
+            var end_date = moment('{{ end_date }}');
+            $(function() {
+                $('#searchrange span').html(start_date.format('MMMM D, YYYY') + ' - ' + end_date.format('MMMM D, YYYY'));
 
-            $('#searchrange').daterangepicker({
-                format: 'DD.MM.YYYY',
-                startDate: moment(),
-                endDate: moment().add(30, "days"),
-                dateLimit: { days: 180 },
-                showDropdowns: true,
-                showWeekNumbers: true,
-                timePicker: false,
-                timePickerIncrement: 1,
-                timePicker12Hour: true,
-                ranges: {
-                   'Today': [moment(), moment()],
-                   'Next 7 Days': [moment().add(6, 'days'), moment()],
-                   'Next 30 Days': [moment().add(29, 'days'), moment()],
-                   'This Month': [moment().startOf('month'), moment().endOf('month')],
-                   'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
-                },
-                opens: 'left',
-                drops: 'down',
-                buttonClasses: ['btn', 'btn-sm'],
-                applyClass: 'btn-primary',
-                cancelClass: 'btn-default',
-                separator: ' to ',
-                locale: {
-                    applyLabel: 'Search',
-                    cancelLabel: 'Cancel',
-                    fromLabel: 'From',
-                    toLabel: 'To',
-                    customRangeLabel: 'Custom',
-                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    firstDay: 1
-                }
-            }, function(start, end, label) {
-                window.location = '{{ url("reservations:reservable.search") }}?start='+moment(start).format("YYYY-MM-DD")+'&end='+moment(end).format("YYYY-MM-DD");
-            });
-    });
-    </script>
+                $('#searchrange').daterangepicker({
+                    format: 'DD.MM.YYYY',
+                    startDate: moment(),
+                    endDate: moment().add(30, "days"),
+                    dateLimit: { days: 180 },
+                    showDropdowns: true,
+                    showWeekNumbers: true,
+                    timePicker: false,
+                    timePickerIncrement: 1,
+                    timePicker12Hour: true,
+                    ranges: {
+                       'Today': [moment(), moment()],
+                       'Next 7 Days': [moment().add(6, 'days'), moment()],
+                       'Next 30 Days': [moment().add(29, 'days'), moment()],
+                       'This Month': [moment().startOf('month'), moment().endOf('month')],
+                       'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
+                    },
+                    opens: 'left',
+                    drops: 'down',
+                    buttonClasses: ['btn', 'btn-sm'],
+                    applyClass: 'btn-primary',
+                    cancelClass: 'btn-default',
+                    separator: ' to ',
+                    locale: {
+                        applyLabel: 'Search',
+                        cancelLabel: 'Cancel',
+                        fromLabel: 'From',
+                        toLabel: 'To',
+                        customRangeLabel: 'Custom',
+                        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                        firstDay: 1
+                    }
+                }, function(start, end, label) {
+                    window.location = '{{ url("reservations:reservable.search") }}?start='+moment(start).format("YYYY-MM-DD")+'&end='+moment(end).format("YYYY-MM-DD");
+                });
+        });
+        </script>
 
-    <div id="searchresults">
-
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-12">
+                {% trans %}Cottages with free dates during selected period{% endtrans %}
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-6">
+                <div id="reservables">
+                    {% for reservable in reservables %}
+                        <div style="width: 140px;">
+                            <div class="text-center" style="border: solid 1px; width:140px; height: 140px; margin: 0px 5px; border-radius: 3px; cursor: pointer;">
+                                <i style="font-size-adjust: 2.7; padding-top: 65px; padding-right: 5px;" class="glyphicon glyphicon-home"></i>
+                            </div>
+                            <div class="text-center" style="padding-left: 5px;">
+                                {{ reservable.product.name }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                {% for month in months %}
+                    <div style="display: inline-block;" id="reservable-dates-{{ month }}"></div>
+                    <script>
+                        $(document).ready(function() {
+                            $("#reservable-dates-{{ month }}").datetimepicker({
+                                startView: 2,
+                                language: 'fi',
+                                minView: 2,
+                                format: 'dd.mm.yyyy',
+                                weekStart: 1,
+                                maxView: 3,
+                                clearBtn: false,
+                                initialDate: '{{ month }}'
+                            });
+                            $(".datetimepicker td").removeClass("active").css("cursor", "unset");
+                            $(".datetimepicker").off("click");
+                        });
+                    </script>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -65,4 +122,9 @@
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/1/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/1/daterangepicker-bs3.css" />
+
+    <!-- Include Datetimepicker -->
+    <script type="text/javascript" src="{{ static("js/bootstrap-datetimepicker.js") }}"></script>
+    <script type="text/javascript" src="{{ static("js/locales/bootstrap-datetimepicker.fi.js") }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ static("css/datetimepicker.css") }}" />
 {% endblock %}

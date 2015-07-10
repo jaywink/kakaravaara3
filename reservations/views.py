@@ -1,5 +1,6 @@
 from babel.dates import format_datetime
 from datetime import date, timedelta, datetime
+from dateutil import rrule
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.utils.timezone import localtime
@@ -135,4 +136,10 @@ class ReservableSearchView(TemplateView):
         context["reservables"] = self._get_reservables()
         context["start_date"] = self.start_date.strftime("%Y-%m-%d")
         context["end_date"] = self.end_date.strftime("%Y-%m-%d")
+
+        # calculate months
+        months = []
+        for dt in rrule.rrule(rrule.MONTHLY, dtstart=self.start_date, until=self.end_date):
+            months.append(dt.strftime("%Y-%m-%d"))
+        context["months"] = months
         return context

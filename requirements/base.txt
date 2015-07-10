@@ -1,2 +1,5 @@
 # Shoop
 git+https://github.com/shoopio/shoop.git@master#egg=shoop
+
+# Reservations requirements
+python-dateutil==2.4.2
