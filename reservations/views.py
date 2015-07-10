@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.utils.timezone import localtime
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import TemplateView
 
 from shoop.admin.modules.products.views import ProductEditView
 from shoop.admin.toolbar import URLActionButton
@@ -109,3 +110,9 @@ class ReservationEditView(CreateOrUpdateView):
     template_name = "reservations/reservation_edit.jinja"
     context_object_name = "reservation"
     form_class = ReservationForm
+
+
+class ReservableSearchView(TemplateView):
+    template_name = "reservations/reservable_search.jinja"
+
+
