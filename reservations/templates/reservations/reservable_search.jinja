@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-6">
                 <p>
-                    {% trans %}Select date range to search from{% endtrans %}
+                    {% trans %}Select months to search from{% endtrans %}
                 </p>
             </div>
         </div>
@@ -43,8 +43,8 @@
                     timePicker12Hour: true,
                     ranges: {
                        'Today': [moment(), moment()],
-                       'Next 7 Days': [moment().add(6, 'days'), moment()],
-                       'Next 30 Days': [moment().add(29, 'days'), moment()],
+                       'Next 7 Days': [moment(), moment().add(6, 'days')],
+                       'Next 30 Days': [moment(), moment().add(29, 'days')],
                        'This Month': [moment().startOf('month'), moment().endOf('month')],
                        'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
                     },

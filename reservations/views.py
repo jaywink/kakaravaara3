@@ -1,6 +1,6 @@
+from calendar import monthrange
 from babel.dates import format_datetime
 from datetime import date, timedelta, datetime
-from dateutil import rrule
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.utils.timezone import localtime
@@ -121,11 +121,15 @@ class ReservableSearchView(TemplateView):
         start = request.GET.get("start", None)
         end = request.GET.get("end", None)
         if not start:
-            self.start_date = date.today()
-            self.end_date = date.today() + timedelta(days=30)
+            self.start_date = date(date.today().year, date.today().month, 1)
+            self.end_date = self.start_date + timedelta(days=40)
         else:
             self.start_date = datetime.strptime(start, "%Y-%m-%d")
+            self.start_date = self.start_date.replace(day=1)
             self.end_date = datetime.strptime(end, "%Y-%m-%d")
+        self.end_date = date(
+            self.end_date.year, self.end_date.month, monthrange(self.end_date.year, self.end_date.month)[1]
+        )
         return super(ReservableSearchView, self).get(request, *args, **kwargs)
 
     def _get_reservables(self):
@@ -151,7 +155,15 @@ class ReservableSearchView(TemplateView):
 
         # calculate months
         months = []
-        for dt in rrule.rrule(rrule.MONTHLY, dtstart=self.start_date, until=self.end_date):
-            months.append(dt.strftime("%Y-%m-01"))
+        # to not end up in endless loop
+        assert self.end_date.month >= self.start_date.month and self.end_date.year >= self.start_date.year
+        current = self.start_date
+        while True:
+            months.append(current.strftime("%Y-%m-01"))
+            if self.end_date.month != current.month or self.end_date.year != current.year:
+                # not super correct but enough
+                current = current + timedelta(days=30)
+            else:
+                break
         context["months"] = months
         return context
