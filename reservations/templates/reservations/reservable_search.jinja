@@ -27,6 +27,12 @@
         <script type="text/javascript">
             var start_date = moment('{{ start_date }}');
             var end_date = moment('{{ end_date }}');
+            var dates = {{ reserved_days|safe }};
+            var reservedDates = [];
+            for (var i=0; i<dates.length; i++) {
+                reservedDates.push(new Date(dates[i]));
+            }
+            window.reservedDates = reservedDates;
             $(function() {
                 $('#searchrange span').html(start_date.format('MMMM D, YYYY') + ' - ' + end_date.format('MMMM D, YYYY'));
 
@@ -102,7 +108,13 @@
                                 weekStart: 1,
                                 maxView: 3,
                                 clearBtn: false,
-                                initialDate: '{{ month }}'
+                                initialDate: '{{ month }}',
+                                specialDates: [
+                                    {
+                                        className: "reserved",
+                                        dates: window.reservedDates
+                                    }
+                                ]
                             });
                             $(".datetimepicker td").removeClass("active").css("cursor", "unset");
                             $(".datetimepicker").off("click");
@@ -127,4 +139,5 @@
     <script type="text/javascript" src="{{ static("js/bootstrap-datetimepicker.js") }}"></script>
     <script type="text/javascript" src="{{ static("js/locales/bootstrap-datetimepicker.fi.js") }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ static("css/datetimepicker.css") }}" />
+    <link rel="stylesheet" type="text/css" href="{{ static("css/reservations.css") }}" />
 {% endblock %}

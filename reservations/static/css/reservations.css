@@ -1,0 +1,7 @@
+.reserved, .reserved:hover {
+    background-color: red;
+}
+
+.datetimepicker table tr td.reserved:hover {
+    background-color: red !important;
+}

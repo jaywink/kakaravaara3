@@ -131,15 +131,23 @@ class ReservableSearchView(TemplateView):
     def _get_reservables(self):
         return ReservableProduct.objects.all()
 
+    def _get_reserved_days_as_strings(self):
+        days = Reservation.get_reserved_days_for_period(self.start_date, self.end_date)
+        day_list = []
+        for day in days:
+            day_list.append("%s" % day.strftime("%Y-%m-%d"))
+        return day_list
+
     def get_context_data(self, **kwargs):
         context = super(ReservableSearchView, self).get_context_data(**kwargs)
         context["reservables"] = self._get_reservables()
         context["start_date"] = self.start_date.strftime("%Y-%m-%d")
         context["end_date"] = self.end_date.strftime("%Y-%m-%d")
+        context["reserved_days"] = self._get_reserved_days_as_strings()
 
         # calculate months
         months = []
         for dt in rrule.rrule(rrule.MONTHLY, dtstart=self.start_date, until=self.end_date):
-            months.append(dt.strftime("%Y-%m-%d"))
+            months.append(dt.strftime("%Y-%m-01"))
         context["months"] = months
         return context

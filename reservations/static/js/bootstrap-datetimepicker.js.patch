@@ -1,0 +1,29 @@
+--- kakaravaara/var/static/js/bootstrap-datetimepicker.js	2015-07-21 15:46:01.986372159 +0300
++++ reservations/static/js/bootstrap-datetimepicker.js	2015-07-21 15:46:34.354058943 +0300
+@@ -72,6 +72,7 @@
+ 		this.pickerPosition = options.pickerPosition || this.element.data('picker-position') || 'bottom-right';
+ 		this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
+ 		this.initialDate = options.initialDate || new Date();
++		this.specialDates = options.specialDates || None;
+ 
+ 		this._attachEvents();
+ 
+@@ -595,6 +596,18 @@
+ 					$.inArray(prevMonth.getUTCDay(), this.daysOfWeekDisabled) !== -1) {
+ 					clsName += ' disabled';
+ 				}
++				for (var s=0; s<this.specialDates.length; s++) {
++					var isSpecial = false;
++					for (var di=0; di<this.specialDates[s].dates.length; di++) {
++						if (prevMonth.getTime() == this.specialDates[s].dates[di].getTime()) {
++							isSpecial = true;
++							break;
++						}
++					}
++					if (isSpecial) {
++						clsName += ' ' + this.specialDates[s].className;
++					}
++				}
+ 				html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
+ 				if (prevMonth.getUTCDay() == this.weekEnd) {
+ 					html.push('</tr>');

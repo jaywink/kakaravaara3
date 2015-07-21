@@ -65,7 +65,7 @@ SHOOP_APPS = [
     'shoop.simple_cms',
 ]
 
-INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS + add_enabled_addons(SHOOP_ENABLED_ADDONS_FILE, SHOOP_APPS)
+INSTALLED_APPS = PROJECT_APPS + PREREQ_APPS + add_enabled_addons(SHOOP_ENABLED_ADDONS_FILE, SHOOP_APPS)
 
 ######## Middleware ########
 BASE_CLASSES = [
