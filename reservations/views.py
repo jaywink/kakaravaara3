@@ -132,11 +132,15 @@ class ReservableSearchView(TemplateView):
         return ReservableProduct.objects.all()
 
     def _get_reserved_days_as_strings(self):
-        days = Reservation.get_reserved_days_for_period(self.start_date, self.end_date)
-        day_list = []
-        for day in days:
-            day_list.append("%s" % day.strftime("%Y-%m-%d"))
-        return day_list
+        reservables = self._get_reservables()
+        reserved_days = {}
+        for reservable in reservables:
+            days = Reservation.get_reserved_days_for_period(self.start_date, self.end_date, reservable)
+            day_list = []
+            for day in days:
+                day_list.append("%s" % day.strftime("%Y-%m-%d"))
+            reserved_days[reservable.product.sku] = day_list
+        return reserved_days
 
     def get_context_data(self, **kwargs):
         context = super(ReservableSearchView, self).get_context_data(**kwargs)
