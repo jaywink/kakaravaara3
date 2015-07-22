@@ -12,7 +12,7 @@ class ReservableBasket(BaseBasket):
     def add_product(self, supplier, shop, product, quantity, force_new_line=False, extra=None, parent_line=None):
         if not extra:
             extra = {}
-        if self.request.POST.get("reservation-start", None):
-            extra["reservation-start"] = self.request.POST.get("reservation-start")
+        if self.request.POST.get("reservation_start", None):
+            extra["reservation_start"] = self.request.POST.get("reservation_start")
         return super(ReservableBasket, self).add_product(
             supplier, shop, product, quantity, force_new_line=force_new_line, extra=extra, parent_line=parent_line)
