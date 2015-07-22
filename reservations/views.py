@@ -162,7 +162,7 @@ class ReservableSearchView(TemplateView):
             months.append(current.strftime("%Y-%m-01"))
             if self.end_date.month != current.month or self.end_date.year != current.year:
                 # not super correct but enough
-                current = current + timedelta(days=30)
+                current = current + timedelta(days=32)
             else:
                 break
         context["months"] = months

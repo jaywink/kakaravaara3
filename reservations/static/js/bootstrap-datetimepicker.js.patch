@@ -1,17 +1,33 @@
 --- kakaravaara/var/static/js/bootstrap-datetimepicker.js	2015-07-21 15:46:01.986372159 +0300
-+++ reservations/static/js/bootstrap-datetimepicker.js	2015-07-21 15:46:34.354058943 +0300
-@@ -72,6 +72,7 @@
++++ reservations/static/js/bootstrap-datetimepicker.js	2015-07-22 14:54:29.868357006 +0300
+@@ -72,6 +72,8 @@
  		this.pickerPosition = options.pickerPosition || this.element.data('picker-position') || 'bottom-right';
  		this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
  		this.initialDate = options.initialDate || new Date();
 +		this.specialDates = options.specialDates || None;
++		this.datesHaveData = options.datesHaveData || false;
  
  		this._attachEvents();
  
-@@ -595,6 +596,18 @@
+@@ -571,11 +573,13 @@
+ 			nextMonth = nextMonth.valueOf();
+ 			var html = [];
+ 			var clsName;
++			var extraAttrs;
+ 			while (prevMonth.valueOf() < nextMonth) {
+ 				if (prevMonth.getUTCDay() == this.weekStart) {
+ 					html.push('<tr>');
+ 				}
+ 				clsName = '';
++				extraAttrs = '';
+ 				if (prevMonth.getUTCFullYear() < year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() < month)) {
+ 					clsName += ' old';
+ 				} else if (prevMonth.getUTCFullYear() > year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() > month)) {
+@@ -595,7 +599,22 @@
  					$.inArray(prevMonth.getUTCDay(), this.daysOfWeekDisabled) !== -1) {
  					clsName += ' disabled';
  				}
+-				html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
 +				for (var s=0; s<this.specialDates.length; s++) {
 +					var isSpecial = false;
 +					for (var di=0; di<this.specialDates[s].dates.length; di++) {
@@ -24,6 +40,10 @@
 +						clsName += ' ' + this.specialDates[s].className;
 +					}
 +				}
- 				html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
++				if (this.datesHaveData) {
++					extraAttrs += ' data-date="'+prevMonth.getUTCFullYear()+'-'+(prevMonth.getUTCMonth()+1)+'-'+prevMonth.getUTCDate()+'"';
++				}
++				html.push('<td class="day' + clsName + '" '+extraAttrs+'>' + prevMonth.getUTCDate() + '</td>');
  				if (prevMonth.getUTCDay() == this.weekEnd) {
  					html.push('</tr>');
+ 				}

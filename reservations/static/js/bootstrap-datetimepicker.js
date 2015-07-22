@@ -73,6 +73,7 @@
 		this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
 		this.initialDate = options.initialDate || new Date();
 		this.specialDates = options.specialDates || None;
+		this.datesHaveData = options.datesHaveData || false;
 
 		this._attachEvents();
 
@@ -572,11 +573,13 @@
 			nextMonth = nextMonth.valueOf();
 			var html = [];
 			var clsName;
+			var extraAttrs;
 			while (prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getUTCDay() == this.weekStart) {
 					html.push('<tr>');
 				}
 				clsName = '';
+				extraAttrs = '';
 				if (prevMonth.getUTCFullYear() < year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() < month)) {
 					clsName += ' old';
 				} else if (prevMonth.getUTCFullYear() > year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() > month)) {
@@ -608,7 +611,10 @@
 						clsName += ' ' + this.specialDates[s].className;
 					}
 				}
-				html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
+				if (this.datesHaveData) {
+					extraAttrs += ' data-date="'+prevMonth.getUTCFullYear()+'-'+(prevMonth.getUTCMonth()+1)+'-'+prevMonth.getUTCDate()+'"';
+				}
+				html.push('<td class="day' + clsName + '" '+extraAttrs+'>' + prevMonth.getUTCDate() + '</td>');
 				if (prevMonth.getUTCDay() == this.weekEnd) {
 					html.push('</tr>');
 				}
