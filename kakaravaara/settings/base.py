@@ -25,6 +25,7 @@ LOGIN_REDIRECT_URL = '/'
 ######## Shoop ########
 SHOOP_ENABLED_ADDONS_FILE = os.path.join(BASE_DIR, "var", "enabled_addons")
 SHOOP_PRICING_MODULE = "simple_pricing"
+SHOOP_BASKET_CLASS_SPEC = ("reservations.basket:ReservableBasket")
 
 ######## Installed apps ########
 PREREQ_APPS = [
