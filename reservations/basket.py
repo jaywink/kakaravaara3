@@ -1,4 +1,8 @@
+from datetime import datetime, timedelta
 from shoop.front.basket.objects import BaseBasket
+from shoop.front.basket.order_creator import BasketOrderCreator
+
+from reservations.models import Reservation, ReservableProduct
 
 
 class ReservableBasket(BaseBasket):
@@ -16,3 +20,17 @@ class ReservableBasket(BaseBasket):
             extra["reservation_start"] = self.request.POST.get("reservation_start")
         return super(ReservableBasket, self).add_product(
             supplier, shop, product, quantity, force_new_line=force_new_line, extra=extra, parent_line=parent_line)
+
+
+class ReservableOrderCreator(BasketOrderCreator):
+    def process_saved_order_line(self, order, order_line):
+        if order_line.product and order_line.product.type.identifier == "reservable":
+            # Create reservation
+            start_date = datetime.strptime(order_line.source_line.get("reservation_start"), "%Y-%m-%d")
+            reservable = ReservableProduct.objects.get(product=order_line.product)
+            Reservation.objects.create(
+                reservable=reservable,
+                order=order_line.order,
+                start_time=start_date,
+                end_time=start_date + timedelta(days=int(order_line.quantity))
+            )
