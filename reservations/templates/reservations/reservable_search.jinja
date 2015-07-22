@@ -95,16 +95,19 @@
                             </div>
                         </div>
                         <div class="hidden text-center reservation-control">
-                            <form>
+                            <form role="form" method="post" action="{{ url("shoop:basket") }}">
+                                <input type="hidden" name="return" value="{{ request.path }}">
+                                <input type="hidden" name="command" value="add">
+                                <input type="hidden" name="product_id" value="{{ reservable.product.id }}">
                                 <div class="form-group">
                                     <label for="{{ reservable.product.sku }}-start">{% trans %}Arrival Date{% endtrans %}</label>
                                     <input class="form-control" name="reservation-start" type="date" id="{{ reservable.product.sku }}-start">
                                 </div>
                                 <div class="form-group">
                                     <label for="{{ reservable.product.sku }}-days">{% trans %}Number of nights{% endtrans %}</label>
-                                    <input class="form-control" name="reservation-days" type="number" value="1" id="{{ reservable.product.sku }}-days">
+                                    <input class="form-control" name="quantity" type="number" value="1" id="{{ reservable.product.sku }}-days">
                                 </div>
-                                <button type="submit" class="btn btn-primary">{% trans %}Reserve{% endtrans %}</button>
+                                <button type="submit" class="btn btn-primary btn-block">{% trans %}Reserve{% endtrans %}</button>
                             </form>
                         </div>
                     </div>
