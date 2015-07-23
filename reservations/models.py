@@ -81,7 +81,7 @@ class Reservation(models.Model):
         dates = []
         for reservation in reservations:
             current = reservation.start_time.date()
-            while current <= reservation.end_time.date():
+            while current < reservation.end_time.date():
                 dates.append(current)
                 current += timedelta(days=1)
         return dates

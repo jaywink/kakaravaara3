@@ -28,7 +28,7 @@ class ReservationsGetReservedDatesTestCase(TestCase):
             start=datetime(year=2015, month=5, day=1),
             end=datetime(year=2015, month=8, day=1)
         )
-        self.assertEquals(len(dates), 12)
+        self.assertEquals(len(dates), 10)
 
     def test_get_reserved_dates_for_period_returns_correct_dates(self):
         self.reservable2 = ReservableProductFactory()
@@ -46,4 +46,4 @@ class ReservationsGetReservedDatesTestCase(TestCase):
             start_time=datetime(year=2015, month=6, day=30, hour=15),
             end_time=datetime(year=2015, month=7, day=15, hour=12)
         )
-        self.assertEquals(len(dates), 12)
+        self.assertEquals(len(dates), 10)
