@@ -18,6 +18,9 @@ from shoop.addons import add_enabled_addons
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, "var", "media")
 STATIC_ROOT = os.path.join(BASE_DIR, "var", "static")
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, "var", "locale"),
+)
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
@@ -74,6 +77,7 @@ BASE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
