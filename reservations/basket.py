@@ -31,8 +31,10 @@ class ReservableOrderCreator(BasketOrderCreator):
             Reservation.objects.create(
                 reservable=reservable,
                 order=order_line.order,
-                start_time=start_date,
-                end_time=start_date + timedelta(days=int(order_line.quantity))
+                start_time=start_date + timedelta(
+                    hours=reservable.check_in_time.hour, minutes=reservable.check_in_time.minute),
+                end_time=start_date + timedelta(days=int(order_line.quantity)) + timedelta(
+                    hours=reservable.check_out_time.hour, minutes=reservable.check_out_time.minute)
             )
             if not order_line.extra_data:
                 order_line.extra_data = {}
