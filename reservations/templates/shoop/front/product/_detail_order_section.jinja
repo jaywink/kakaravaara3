@@ -48,18 +48,13 @@
 {% else %}
     {% set is_orderable=shop_product.is_orderable(supplier=None, customer=request.customer, quantity=1) %}
     <div class="prices row">
-        {% if is_orderable %}
+        {% if is_orderable and product.type.identifier != "reservable" %}
             <form role="form" method="post" action="{{ url("shoop:basket") }}" class="form-inline">
                 <div class="col-sm-12">
                     <input type="hidden" name="return" value="{{ request.path }}">
                     <input type="hidden" name="command" value="add">
                     <input type="hidden" name="product_id" value="{{ product.id }}">
-                    {% if product.type.identifier == "reservable" %}
-                        <input type="hidden" name="quantity" id="product-quantity" value="1">
-                        {{ reservable_dates_form.as_p() }}
-                    {% else %}
-                        {{ quantity_box() }}
-                    {% endif %}
+                    {{ quantity_box() }}
                     {# TODO: This should be dynamically updated from the backend with AJA
                     <div class="price pull-right">
                         <h4>
@@ -77,15 +72,17 @@
                 <div class="col-sm-12">
                     <hr>
                     <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-shopping-cart"></span>
-                        {% if product.type.identifier == "reservable" %}
-                            {% trans %}Reserve{% endtrans %}
-                        {% else %}
-                            {% trans %}Add to cart{% endtrans %}
-                        {% endif %}
+                        {% trans %}Add to cart{% endtrans %}
                     </button>
                 </div>
             </form>
         {% endif %}
-
+        {% if product.type.identifier == "reservable" %}
+            <div class="col-sm-12">
+                <a href="{{ url("reservations:reservable.search") }}" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-calendar"></span>
+                    {% trans %}Check availability{% endtrans %}
+                </a>
+            </div>
+        {% endif %}
     </div>
 {% endif %}
