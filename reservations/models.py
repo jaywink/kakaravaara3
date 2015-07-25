@@ -95,5 +95,5 @@ class Reservation(models.Model):
             while current < reservation.end_time.date() and current <= end_time.date():
                 if current >= start_time.date() and current <= end_time.date():
                     dates.append(current)
-                    current += timedelta(days=1)
+                current += timedelta(days=1)
         return dates
