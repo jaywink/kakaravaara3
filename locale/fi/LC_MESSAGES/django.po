@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 18:40+0300\n"
+"POT-Creation-Date: 2015-07-25 18:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,9 +67,248 @@ msgstr "varaus"
 msgid "reservations"
 msgstr "varaukset"
 
+#: reservations/templates/reservations/_reservable_product_form.jinja:5
+msgid "Reservable"
+msgstr "Varattava tuote"
+
+#: reservations/templates/reservations/_reserved_dates_form.jinja:4
+#: reservations/templates/reservations/reservable_search.jinja:5
+#: reservations/templates/shoop/front/includes/_navigation.jinja:32
 #: reservations/views.py:34
 msgid "Reservations"
 msgstr "Varaukset"
+
+#: reservations/templates/reservations/reservable_search.jinja:14
+msgid "Select months to search from"
+msgstr "Etsi valitulta ajanjaksolta"
+
+#: reservations/templates/reservations/reservable_search.jinja:76
+msgid "Cottages and their reserved periods."
+msgstr "Mökit ja niiden varaukset."
+
+#: reservations/templates/reservations/reservable_search.jinja:79
+msgid ""
+"To reserve a cottage, click on a free date in the calendar, type in the "
+"number of days and click 'Reserve'."
+msgstr ""
+"Varataksesi mökin klikkaa haluamaasi saapumispäivämäärää ja valitse "
+"kuinka monta yötä haluat varata. Klikkaa sitten 'Varaa' nappia."
+
+#: reservations/templates/reservations/reservable_search.jinja:103
+msgid "Arrival Date"
+msgstr "Saapumispäivämäärä"
+
+#: reservations/templates/reservations/reservable_search.jinja:107
+msgid "Number of nights"
+msgstr "Öiden määrä"
+
+#: reservations/templates/reservations/reservable_search.jinja:111
+msgid "Chosen period is not available."
+msgstr "Valittu ajanjakso ei ole saatavilla."
+
+#: reservations/templates/reservations/reservable_search.jinja:113
+msgid "Reserve"
+msgstr "Varaa"
+
+#: reservations/templates/reservations/reservation_edit.jinja:7
+#: reservations/views.py:70
+msgid "New Reservation"
+msgstr "Uusi varaus"
+
+#: reservations/templates/reservations/reservation_edit.jinja:17
+msgid "General information"
+msgstr "Yleistiedot"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:9
+msgid "Details & Status"
+msgstr "Tilanne"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:33
+msgid "Addresses"
+msgstr "Osoitteet"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:36
+msgid "Shipping address"
+msgstr "Toimitusosoite"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:40
+msgid "No shipping address defined."
+msgstr "Ei toimitusosoitetta."
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:44
+msgid "Billing address"
+msgstr "Laskutusosoite."
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:48
+msgid "No billing address defined."
+msgstr "Ei laskutusosoitetta."
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:55
+msgid "Order Contents"
+msgstr "Tilauksen sisältö"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:60
+msgid "SKU"
+msgstr "Tuotekoodi"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:61
+msgid "Text"
+msgstr "Teksti"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:62
+msgid "Start Date"
+msgstr "Saapumispäivämäärä"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:63
+msgid "End Date"
+msgstr "Lähtöpäivämäärä"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:64
+msgid "Taxless Unit Price"
+msgstr "Veroton yksikköhinta"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:65
+#: reservations/templates/shoop/front/basket/partials/table.jinja:18
+#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:14
+#: reservations/templates/shoop/front/order/partials/product_table.jinja:13
+#: reservations/templates/shoop/front/product/_detail_order_section.jinja:3
+msgid "Quantity"
+msgstr "Määrä"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:66
+msgid "Taxless Discount"
+msgstr "Veroton alennus"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:67
+#: reservations/templates/shoop/admin/orders/detail.jinja:125
+msgid "Tax"
+msgstr "Vero"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:68
+#: reservations/templates/shoop/admin/orders/detail.jinja:132
+msgid "Taxless Total"
+msgstr "Veroton yhteensä"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:69
+#: reservations/templates/shoop/admin/orders/detail.jinja:136
+msgid "Total incl. Tax"
+msgstr "Verollinen yhteensä"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:119
+msgid "Discount"
+msgstr "Alennus"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:122
+#: reservations/templates/shoop/front/basket/partials/table.jinja:19
+#: reservations/templates/shoop/front/basket/partials/table.jinja:31
+#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:15
+#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:21
+#: reservations/templates/shoop/front/includes/_navigation.jinja:74
+#: reservations/templates/shoop/front/order/partials/product_table.jinja:14
+#: reservations/templates/shoop/front/order/partials/product_table.jinja:20
+msgid "Total"
+msgstr "Yhteensä"
+
+#: reservations/templates/shoop/admin/orders/detail.jinja:125
+msgid "Taxless"
+msgstr "Veroton"
+
+#: reservations/templates/shoop/front/basket/partials/table.jinja:15
+#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:11
+msgid "Product"
+msgstr "Tuote"
+
+#: reservations/templates/shoop/front/basket/partials/table.jinja:16
+#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:12
+#: reservations/templates/shoop/front/order/partials/product_table.jinja:11
+msgid "Arrival"
+msgstr "Saapuminen"
+
+#: reservations/templates/shoop/front/basket/partials/table.jinja:17
+#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:13
+#: reservations/templates/shoop/front/order/partials/product_table.jinja:12
+msgid "Price"
+msgstr "Hinta"
+
+#: reservations/templates/shoop/front/basket/partials/table.jinja:18
+#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:14
+#: reservations/templates/shoop/front/order/partials/product_table.jinja:13
+msgid "Nights"
+msgstr "Öitä"
+
+#: reservations/templates/shoop/front/basket/partials/table.jinja:27
+msgid "Update quantities"
+msgstr "Päivitä määrät"
+
+#: reservations/templates/shoop/front/basket/partials/table.jinja:94
+msgid "Remove product from basket"
+msgstr "Poista tuote ostoskorista"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:16
+msgid "Categories"
+msgstr "Kategoriat"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:38
+msgid "Pages"
+msgstr "Sivut"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:57
+msgid "Cart"
+msgstr "Ostoskori"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:89
+msgid "Your shopping cart is empty"
+msgstr "Ostoskori on tyhjä"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:95
+msgid "View cart"
+msgstr "Avaa ostoskori"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:133
+msgid "Edit account details"
+msgstr "Muokkaa tilitietoja"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:140
+msgid "My orders"
+msgstr "Tilaukseni"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:150
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:159
+#: reservations/templates/shoop/front/includes/_navigation.jinja:166
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+#: reservations/templates/shoop/front/includes/_navigation.jinja:173
+msgid "Register"
+msgstr "Rekisteröi"
+
+#: reservations/templates/shoop/front/order/partials/product_table.jinja:10
+msgid "Title"
+msgstr "Nimike"
+
+#: reservations/templates/shoop/front/product/_detail_order_section.jinja:23
+msgid "Product not orderable"
+msgstr "Tuote ei ole tilattavissa"
+
+#: reservations/templates/shoop/front/product/_detail_order_section.jinja:37
+msgid "incl. VAT"
+msgstr "mukaanlukien ALV"
+
+#: reservations/templates/shoop/front/product/_detail_order_section.jinja:38
+msgid "VAT"
+msgstr "ALV"
+
+#: reservations/templates/shoop/front/product/_detail_order_section.jinja:44
+#: reservations/templates/shoop/front/product/_detail_order_section.jinja:75
+msgid "Add to cart"
+msgstr "Lisään ostoskoriin"
+
+#: reservations/templates/shoop/front/product/_detail_order_section.jinja:83
+msgid "Check availability"
+msgstr "Tarkista varaustilanne"
 
 #: reservations/views.py:45
 msgid "Name"
@@ -98,7 +337,3 @@ msgstr "Aikuisia"
 #: reservations/views.py:55
 msgid "Children"
 msgstr "Lapsia"
-
-#: reservations/views.py:70
-msgid "New Reservation"
-msgstr "Uusi varaus"
