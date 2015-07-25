@@ -47,3 +47,27 @@ class ReservationsGetReservedDatesTestCase(TestCase):
             end_time=datetime(year=2015, month=7, day=15, hour=12)
         )
         self.assertEquals(len(dates), 10)
+
+    def test_is_period_free(self):
+        ReservationFactory(
+            reservable=self.reservable,
+            start_time=datetime(year=2015, month=6, day=30, hour=15),
+            end_time=datetime(year=2015, month=7, day=5, hour=12)
+        )
+        ReservationFactory(
+            reservable=self.reservable,
+            start_time=datetime(year=2015, month=7, day=10, hour=12),
+            end_time=datetime(year=2015, month=7, day=15, hour=12)
+        )
+        self.assertFalse(self.reservable.is_period_free(
+            datetime(year=2015, month=6, day=27, hour=15),
+            datetime(year=2015, month=7, day=3, hour=12)
+        ))
+        self.assertTrue(self.reservable.is_period_free(
+            datetime(year=2015, month=6, day=27, hour=15),
+            datetime(year=2015, month=6, day=29, hour=12)
+        ))
+        self.assertTrue(self.reservable.is_period_free(
+            datetime(year=2015, month=6, day=27, hour=15),
+            datetime(year=2015, month=6, day=30, hour=12)
+        ))

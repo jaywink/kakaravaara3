@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta, time
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from shoop.core.models import Product, Order
@@ -32,6 +33,17 @@ class ReservableProduct(models.Model):
             list of datetimes or []
         """
         return Reservation.get_reserved_days_for_period(start, end, self)
+
+    def is_period_free(self, start, end):
+        """Check if period is free.
+
+        Fix hours before checking.
+        """
+        if start.hour == 0:
+            start += timedelta(hours=self.check_in_time.hour)
+        if end.hour == 0:
+            end += timedelta(hours=self.check_out_time.hour)
+        return len(self.get_reserved_dates(start, end)) == 0
 
 
 class Reservation(models.Model):
@@ -73,15 +85,15 @@ class Reservation(models.Model):
             list of datetimes or []
         """
         reservations = Reservation.objects.filter(
-            start_time__gte=start_time,
-            end_time__lte=end_time
+            Q(start_time__range=(start_time, end_time)) | Q(end_time__range=(start_time, end_time))
         )
         if reservable:
             reservations = reservations.filter(reservable=reservable)
         dates = []
         for reservation in reservations:
             current = reservation.start_time.date()
-            while current < reservation.end_time.date():
-                dates.append(current)
-                current += timedelta(days=1)
+            while current < reservation.end_time.date() and current <= end_time.date():
+                if current >= start_time.date() and current <= end_time.date():
+                    dates.append(current)
+                    current += timedelta(days=1)
         return dates

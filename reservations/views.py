@@ -1,11 +1,13 @@
 from calendar import monthrange
 from babel.dates import format_datetime
 from datetime import date, timedelta, datetime
+from django import http
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
+from django.http import JsonResponse
 from django.utils.timezone import localtime
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 
 from shoop.admin.modules.products.views import ProductEditView
 from shoop.admin.toolbar import URLActionButton
@@ -100,13 +102,13 @@ class ReservableSearchView(TemplateView):
         start = request.GET.get("start", None)
         end = request.GET.get("end", None)
         if not start:
-            self.start_date = date(date.today().year, date.today().month, 1)
+            self.start_date = datetime(date.today().year, date.today().month, 1)
             self.end_date = self.start_date + timedelta(days=40)
         else:
             self.start_date = datetime.strptime(start, "%Y-%m-%d")
             self.start_date = self.start_date.replace(day=1)
             self.end_date = datetime.strptime(end, "%Y-%m-%d")
-        self.end_date = date(
+        self.end_date = datetime(
             self.end_date.year, self.end_date.month, monthrange(self.end_date.year, self.end_date.month)[1]
         )
         return super(ReservableSearchView, self).get(request, *args, **kwargs)
@@ -146,3 +148,20 @@ class ReservableSearchView(TemplateView):
                 break
         context["months"] = months
         return context
+
+
+class DateRangeCheckView(View):
+    def get(self, request, *args, **kwargs):
+        reservable_id = request.GET.get("reservable_id", None)
+        start = request.GET.get("start", None)
+        end = request.GET.get("end", None)
+        days = request.GET.get("days", None)
+        if not start or (not end and not days) or not reservable_id:
+            return http.HttpResponseBadRequest("Need reservable id, start and end dates.")
+        start_date = datetime.strptime(start, "%Y-%m-%d")
+        if end:
+            end_date = datetime.strptime(end, "%Y-%m-%d")
+        else:
+            end_date = start_date + timedelta(days=int(days))
+        reservable = ReservableProduct.objects.get(id=reservable_id)
+        return JsonResponse({'result': reservable.is_period_free(start_date, end_date)})

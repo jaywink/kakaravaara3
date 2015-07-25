@@ -1,10 +1,12 @@
 from django.conf.urls import url, patterns
 
 from reservations.views import ReservableProductEditView, ReservableReservationsListView, \
-    ReservationEditView, ReservableSearchView
+    ReservationEditView, ReservableSearchView, DateRangeCheckView
 
 urlpatterns = patterns(
     '',
+    url(r"^reservable/check_period/$", DateRangeCheckView.as_view(), name="check_period"),
+
     url(r"^reservable/search/$", ReservableSearchView.as_view(), name="reservable.search"),
 
     url(
