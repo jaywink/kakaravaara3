@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-25 18:40+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: reservations/models.py:13 reservations/models.py:19
+#: reservations/models.py:53
+msgid "reservable product"
+msgstr "varattava tuote"
+
+#: reservations/models.py:14
+msgid "sign out time"
+msgstr "uloskirjautuminen"
+
+#: reservations/models.py:15
+msgid "sign in time"
+msgstr "sisäänkirjautuminen"
+
+#: reservations/models.py:16
+msgid "available quantity"
+msgstr "saatavilla oleva määrä"
+
+#: reservations/models.py:20
+msgid "reservable products"
+msgstr "varattavat tuotteet"
+
+#: reservations/models.py:55
+msgid "order"
+msgstr "tilaus"
+
+#: reservations/models.py:56
+msgid "starts"
+msgstr "alkaa"
+
+#: reservations/models.py:57
+msgid "ends"
+msgstr "päättyy"
+
+#: reservations/models.py:59
+msgid "adults"
+msgstr "aikuisia"
+
+#: reservations/models.py:60
+msgid "children"
+msgstr "lapsia"
+
+#: reservations/models.py:63
+msgid "reservation"
+msgstr "varaus"
+
+#: reservations/models.py:64
+msgid "reservations"
+msgstr "varaukset"
+
+#: reservations/views.py:34
+msgid "Reservations"
+msgstr "Varaukset"
+
+#: reservations/views.py:45
+msgid "Name"
+msgstr "Nimi"
+
+#: reservations/views.py:49
+msgid "Filter by reservable..."
+msgstr "Etsi varattavan mukaan..."
+
+#: reservations/views.py:51
+msgid "From Order"
+msgstr "Tilauksesta"
+
+#: reservations/views.py:52
+msgid "Sign In Time"
+msgstr "Sisäänkirjautuminen"
+
+#: reservations/views.py:53
+msgid "Sign Out Time"
+msgstr "Uloskirjautuminen"
+
+#: reservations/views.py:54
+msgid "Adults"
+msgstr "Aikuisia"
+
+#: reservations/views.py:55
+msgid "Children"
+msgstr "Lapsia"
+
+#: reservations/views.py:70
+msgid "New Reservation"
+msgstr "Uusi varaus"

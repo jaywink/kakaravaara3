@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-25 18:40+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: reservations/models.py:13 reservations/models.py:19
+#: reservations/models.py:53
+msgid "reservable product"
+msgstr ""
+
+#: reservations/models.py:14
+msgid "sign out time"
+msgstr ""
+
+#: reservations/models.py:15
+msgid "sign in time"
+msgstr ""
+
+#: reservations/models.py:16
+msgid "available quantity"
+msgstr ""
+
+#: reservations/models.py:20
+msgid "reservable products"
+msgstr ""
+
+#: reservations/models.py:55
+msgid "order"
+msgstr ""
+
+#: reservations/models.py:56
+msgid "starts"
+msgstr ""
+
+#: reservations/models.py:57
+msgid "ends"
+msgstr ""
+
+#: reservations/models.py:59
+msgid "adults"
+msgstr ""
+
+#: reservations/models.py:60
+msgid "children"
+msgstr ""
+
+#: reservations/models.py:63
+msgid "reservation"
+msgstr ""
+
+#: reservations/models.py:64
+msgid "reservations"
+msgstr ""
+
+#: reservations/views.py:34
+msgid "Reservations"
+msgstr ""
+
+#: reservations/views.py:45
+msgid "Name"
+msgstr ""
+
+#: reservations/views.py:49
+msgid "Filter by reservable..."
+msgstr ""
+
+#: reservations/views.py:51
+msgid "From Order"
+msgstr ""
+
+#: reservations/views.py:52
+msgid "Sign In Time"
+msgstr ""
+
+#: reservations/views.py:53
+msgid "Sign Out Time"
+msgstr ""
+
+#: reservations/views.py:54
+msgid "Adults"
+msgstr ""
+
+#: reservations/views.py:55
+msgid "Children"
+msgstr ""
+
+#: reservations/views.py:70
+msgid "New Reservation"
+msgstr ""

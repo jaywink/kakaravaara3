@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, "var", "media")
 STATIC_ROOT = os.path.join(BASE_DIR, "var", "static")
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, "var", "locale"),
+    os.path.join(BASE_DIR, "..", "locale"),
 )
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
