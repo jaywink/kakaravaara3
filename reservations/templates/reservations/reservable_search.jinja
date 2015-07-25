@@ -105,7 +105,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="{{ reservable.product.sku }}-days">{% trans %}Number of nights{% endtrans %}</label>
-                                    <input class="form-control" name="quantity" type="number" value="1" id="{{ reservable.product.sku }}-days">
+                                    <input class="form-control" name="quantity" type="number" value="1" id="{{ reservable.product.sku }}-days" min="1">
+                                </div>
+                                <div id="{{ reservable.product.sku }}-error-container" class="text-center hidden">
+                                    <p class="text-danger">{% trans %}Chosen period is not available.{% endtrans %}</p>
                                 </div>
                                 <button id="{{ reservable.product.sku }}-submit" type="submit" class="btn btn-primary btn-block">{% trans %}Reserve{% endtrans %}</button>
                             </form>
@@ -152,19 +155,40 @@
                     {% endfor %}
                     <script>
                         $(document).ready(function() {
-                            $("#{{ reservable.product.sku }}-days").change(function() {
+                            function set{{ reservable.product.sku }}Button(status) {
+                                $("#{{ reservable.product.sku }}-submit").prop("disabled", status);
+                            }
+
+                            function set{{ reservable.product.sku }}Error(status) {
+                                if (status)
+                                    $("#{{ reservable.product.sku }}-error-container").removeClass("hidden");
+                                else
+                                    $("#{{ reservable.product.sku }}-error-container").addClass("hidden");
+                            }
+
+                            function check{{ reservable.product.sku }}Period() {
                                 // Lookup backend to see if new range is free
-                                $.getJSON(
-                                    '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start='+$("#{{ reservable.product.sku }}-start").val()+'&days='+$("#{{ reservable.product.sku }}-days").val(),
-                                    function(data) {
-                                        if (data && data.result === true) {
-                                            $("#{{ reservable.product.sku }}-submit").prop("disabled", false);
-                                        } else {
-                                            $("#{{ reservable.product.sku }}-submit").prop("disabled", true);
+                                if ($("#{{ reservable.product.sku }}-days").val() <= 0) {
+                                    set{{ reservable.product.sku }}Button(true);
+                                } else {
+                                    $.getJSON(
+                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ reservable.product.sku }}-start").val() + '&days=' + $("#{{ reservable.product.sku }}-days").val(),
+                                        function (data) {
+                                            if (data && data.result === true) {
+                                                set{{ reservable.product.sku }}Button(false);
+                                                set{{ reservable.product.sku }}Error(false);
+                                            } else {
+                                                set{{ reservable.product.sku }}Button(true);
+                                                set{{ reservable.product.sku }}Error(true);
+                                            }
                                         }
-                                    }
-                                );
-                            });
+                                    ).fail(function () {
+                                        set{{ reservable.product.sku }}Button(true);
+                                    });
+                                }
+                            }
+                            $("#{{ reservable.product.sku }}-days").change(check{{ reservable.product.sku }}Period);
+                            $("#{{ reservable.product.sku }}-days").keyup(check{{ reservable.product.sku }}Period);
                         });
                     </script>
                 </div>
