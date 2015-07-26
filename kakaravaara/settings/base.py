@@ -20,6 +20,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "var", "media")
 STATIC_ROOT = os.path.join(BASE_DIR, "var", "static")
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, "..", "locale"),
+    os.path.join(BASE_DIR, "..", "locale_shoop"),
 )
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
@@ -152,7 +153,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-PARLER_DEFAULT_LANGUAGE_CODE = "en"
+PARLER_DEFAULT_LANGUAGE_CODE = "fi"
 
 PARLER_LANGUAGES = {
     None: [{"code": c, "name": n} for (c, n) in LANGUAGES],
