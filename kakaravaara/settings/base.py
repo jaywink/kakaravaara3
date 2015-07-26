@@ -110,6 +110,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "match_extension": ".jinja",

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 18:47+0300\n"
+"POT-Creation-Date: 2015-07-26 18:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr "Varattava tuote"
 
 #: reservations/templates/reservations/_reserved_dates_form.jinja:4
 #: reservations/templates/reservations/reservable_search.jinja:5
-#: reservations/templates/shoop/front/includes/_navigation.jinja:32
+#: reservations/templates/shoop/front/includes/_navigation.jinja:22
 #: reservations/views.py:34
 msgid "Reservations"
 msgstr "Varaukset"
@@ -91,8 +91,8 @@ msgid ""
 "To reserve a cottage, click on a free date in the calendar, type in the "
 "number of days and click 'Reserve'."
 msgstr ""
-"Varataksesi mökin klikkaa haluamaasi saapumispäivämäärää ja valitse "
-"kuinka monta yötä haluat varata. Klikkaa sitten 'Varaa' nappia."
+"Varataksesi mökin klikkaa haluamaasi saapumispäivämäärää ja valitse kuinka "
+"monta yötä haluat varata. Klikkaa sitten 'Varaa' nappia."
 
 #: reservations/templates/reservations/reservable_search.jinja:103
 msgid "Arrival Date"
@@ -203,7 +203,7 @@ msgstr "Alennus"
 #: reservations/templates/shoop/front/basket/partials/table.jinja:31
 #: reservations/templates/shoop/front/checkout/_confirm_table.jinja:15
 #: reservations/templates/shoop/front/checkout/_confirm_table.jinja:21
-#: reservations/templates/shoop/front/includes/_navigation.jinja:74
+#: reservations/templates/shoop/front/includes/_navigation.jinja:66
 #: reservations/templates/shoop/front/order/partials/product_table.jinja:14
 #: reservations/templates/shoop/front/order/partials/product_table.jinja:20
 msgid "Total"
@@ -244,44 +244,40 @@ msgstr "Päivitä määrät"
 msgid "Remove product from basket"
 msgstr "Poista tuote ostoskorista"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:16
-msgid "Categories"
-msgstr "Kategoriat"
+#: reservations/templates/shoop/front/includes/_navigation.jinja:28
+msgid "Information"
+msgstr "Info"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:38
-msgid "Pages"
-msgstr "Sivut"
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:57
+#: reservations/templates/shoop/front/includes/_navigation.jinja:49
 msgid "Cart"
 msgstr "Ostoskori"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:89
+#: reservations/templates/shoop/front/includes/_navigation.jinja:81
 msgid "Your shopping cart is empty"
 msgstr "Ostoskori on tyhjä"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:95
+#: reservations/templates/shoop/front/includes/_navigation.jinja:87
 msgid "View cart"
 msgstr "Avaa ostoskori"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:133
+#: reservations/templates/shoop/front/includes/_navigation.jinja:125
 msgid "Edit account details"
 msgstr "Muokkaa tilitietoja"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:140
+#: reservations/templates/shoop/front/includes/_navigation.jinja:132
 msgid "My orders"
 msgstr "Tilaukseni"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:150
+#: reservations/templates/shoop/front/includes/_navigation.jinja:142
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:159
-#: reservations/templates/shoop/front/includes/_navigation.jinja:166
+#: reservations/templates/shoop/front/includes/_navigation.jinja:151
+#: reservations/templates/shoop/front/includes/_navigation.jinja:158
 msgid "Log in"
 msgstr "Kirjaudu sisään"
 
-#: reservations/templates/shoop/front/includes/_navigation.jinja:173
+#: reservations/templates/shoop/front/includes/_navigation.jinja:165
 msgid "Register"
 msgstr "Rekisteröi"
 
@@ -337,3 +333,9 @@ msgstr "Aikuisia"
 #: reservations/views.py:55
 msgid "Children"
 msgstr "Lapsia"
+
+#~ msgid "Categories"
+#~ msgstr "Kategoriat"
+
+#~ msgid "Pages"
+#~ msgstr "Sivut"
