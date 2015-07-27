@@ -13,14 +13,21 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.i18n import set_language
 
 from kakaravaara.views import KakaravaaraIndexView
 
 
-urlpatterns = [
+if settings.DEBUG:
+    urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns = []
+
+urlpatterns += [
     url(r'^set-language/', set_language, name="set-language"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', KakaravaaraIndexView.as_view(), name='kakaravaara_index'),
