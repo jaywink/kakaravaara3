@@ -18,6 +18,8 @@ class ReservableBasket(BaseBasket):
             extra = {}
         if self.request.POST.get("reservation_start", None):
             extra["reservation_start"] = self.request.POST.get("reservation_start")
+            extra["adults"] = self.request.POST.get("adults", 1)
+            extra["children"] = self.request.POST.get("children", 0)
         return super(ReservableBasket, self).add_product(
             supplier, shop, product, quantity, force_new_line=force_new_line, extra=extra, parent_line=parent_line)
 
@@ -34,9 +36,13 @@ class ReservableOrderCreator(BasketOrderCreator):
                 start_time=start_date + timedelta(
                     hours=reservable.check_in_time.hour, minutes=reservable.check_in_time.minute),
                 end_time=start_date + timedelta(days=int(order_line.quantity)) + timedelta(
-                    hours=reservable.check_out_time.hour, minutes=reservable.check_out_time.minute)
+                    hours=reservable.check_out_time.hour, minutes=reservable.check_out_time.minute),
+                adults=order_line.source_line.get("adults", 1),
+                children=order_line.source_line.get("children", 0)
             )
             if not order_line.extra_data:
                 order_line.extra_data = {}
             order_line.extra_data["reservation_start"] = order_line.source_line.get("reservation_start")
+            order_line.extra_data["adults"] = order_line.source_line.get("adults", 1)
+            order_line.extra_data["children"] = order_line.source_line.get("children", 0)
             order_line.save()

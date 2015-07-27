@@ -3,6 +3,8 @@
         <col style="width: 70px">
         <col width="30%">
         <col>
+        <col>
+        <col>
         <col style="width: 150px">
         <col>
         <thead>
@@ -10,6 +12,7 @@
             <th></th>
             <th class="text-left">{% trans %}Product{% endtrans %}</th>
             <th class="text-left">{% trans %}Arrival{% endtrans %}</th>
+            <th class="text-right">{% trans %}Aikuisia / Lapsia{% endtrans %}</th>
             <th class="text-right">{% trans %}Price{% endtrans %}</th>
             <th class="text-right">{% trans %}Quantity{% endtrans %} / {% trans %}Nights{% endtrans %}</th>
             <th class="text-right">{% trans %}Total{% endtrans %}</th>
@@ -17,7 +20,7 @@
         </thead>
         <tfoot>
         <tr>
-            <td colspan="6" class="text-right">
+            <td colspan="7" class="text-right">
                 {% trans %}Total{% endtrans %}:
                 <span class="total-price"><strong>{{ basket.taxful_total_price|home_currency }}</strong></span>
             </td>
@@ -43,6 +46,11 @@
                 </td>
                 <td>
                     {{ line.get("reservation_start", "") }}
+                </td>
+                <td class="text-right">
+                    {% if line.get("adults", None) %}
+                        {{ line.get("adults") }} / {{ line.get("children") }}
+                    {% endif %}
                 </td>
                 <td class="text-right">
                     {{ line.taxful_unit_price|home_currency }}

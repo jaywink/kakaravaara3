@@ -4,11 +4,14 @@
     <col>
     <col>
     <col>
+    <col>
+    <col>
     <thead>
         <tr>
             <th></th>
             <th class="text-left">{% trans %}Title{% endtrans %}</th>
             <th class="text-left">{% trans %}Arrival{% endtrans %}</th>
+            <th class="text-right">{% trans %}Aikuisia / Lapsia{% endtrans %}</th>
             <th class="text-right">{% trans %}Price{% endtrans %}</th>
             <th class="text-right">{% trans %}Quantity{% endtrans %} / {% trans %}Nights{% endtrans %}</th>
             <th class="text-right">{% trans %}Total{% endtrans %}</th>
@@ -16,7 +19,7 @@
     </thead>
     <tfoot>
         <tr>
-            <td colspan="6" class="text-right">
+            <td colspan="7" class="text-right">
                 <strong>{% trans %}Total{% endtrans %}:
                 <span class="total-price">{{ order.taxful_total_price|home_currency }}</span></strong>
             </td>
@@ -42,6 +45,11 @@
                 <td>
                     {% if line.extra_data %}
                         {{ line.extra_data.get("reservation_start", "") }}
+                    {% endif %}
+                </td>
+                <td class="text-right">
+                    {% if line.extra_data and line.extra_data.get("adults", None) %}
+                        {{ line.extra_data.get("adults") }} / {{ line.extra_data.get("children") }}
                     {% endif %}
                 </td>
                 <td class="text-right">
