@@ -184,3 +184,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ######## Sessions ########
 SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
+
+######## Reservations ########
+RESERVABLE_SEARCH_VISIBLE_ATTRIBUTES = [
+    "maxpersons",
+    "wifi",
+    "equipment",
+    "pets",
+    "sauna",
+]

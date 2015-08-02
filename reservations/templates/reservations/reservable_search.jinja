@@ -86,7 +86,10 @@
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6">
                     <div id="reservables">
-                        <div style="width: 140px;">
+                        <div class="pull-left" style="width: 140px;">
+                            <div class="text-center" style="padding-left: 5px;">
+                                <h3 style="margin-top: 0px;">{{ reservable.product.name }}</h3>
+                            </div>
                             <div class="text-center" style="border: solid 1px; width:140px; height: 140px; margin: 0px 5px; border-radius: 3px; cursor: pointer;">
                                 <a href="{{ url("shoop:product", pk=reservable.product.id, slug=reservable.product.slug) }}">
                                     {% if reservable.product.primary_image %}
@@ -96,10 +99,18 @@
                                     {% endif %}
                                 </a>
                             </div>
-                            <div class="text-center" style="padding-left: 5px;">
-                                {{ reservable.product.name }}
-                            </div>
                         </div>
+                        <div class="pull-left" style="margin-top: 21px;">
+                            <dl class="dl-horizontal">
+                                {% for attribute in reservable.product.attributes.all() %}
+                                    {% if attribute.attribute.identifier in visible_attributes %}
+                                        <dt>{{ attribute.name }}</dt>
+                                        <dd>{{ attribute.formatted_value }}</dd>
+                                    {% endif %}
+                                {% endfor %}
+                            </dl>
+                        </div>
+                        <div class="clearfix"></div>
                         <div class="hidden text-center reservation-control">
                             <form role="form" method="post" action="{{ url("shoop:basket") }}">
                                 <input type="hidden" name="return" value="{{ request.path }}">

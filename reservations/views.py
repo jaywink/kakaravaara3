@@ -2,6 +2,7 @@ from calendar import monthrange
 from babel.dates import format_datetime
 from datetime import date, timedelta, datetime
 from django import http
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.http import JsonResponse
@@ -133,6 +134,7 @@ class ReservableSearchView(TemplateView):
         context["start_date"] = self.start_date.strftime("%Y-%m-%d")
         context["end_date"] = self.end_date.strftime("%Y-%m-%d")
         context["reserved_days"] = self._get_reserved_days_as_strings()
+        context["visible_attributes"] = settings.RESERVABLE_SEARCH_VISIBLE_ATTRIBUTES
 
         # calculate months
         months = []
