@@ -14,6 +14,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS += [
     "django_extensions",
+    'debug_toolbar',
 ]
 
 SOUTH_TESTS_MIGRATE = False  # Makes tests that much faster.
