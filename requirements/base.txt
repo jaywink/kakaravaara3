@@ -1,2 +1,8 @@
 # Shoop
 git+https://github.com/jaywink/shoop.git@kakaravaara#egg=shoop
+
+django-datetime-widget==0.9.3
+
+MarkupSafe==0.23
+
+django-extensions==1.5.5
