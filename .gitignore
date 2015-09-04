@@ -107,3 +107,7 @@ crashlytics-build.properties
 # Project stuff
 staticfiles/
 db.sqlite3
+
+# Vagrant
+.vagrant
+Vagrantfile

@@ -1,0 +1,3 @@
+---
+- name: Kakaravaara user
+  user: name=kakara state=present

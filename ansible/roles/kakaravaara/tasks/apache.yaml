@@ -1,0 +1,31 @@
+---
+- name: Apache uwsgi module deps
+  apt: name=libapache2-mod-proxy-uwsgi
+  notify:
+    - restart apache
+- name: Apache modules
+  apache2_module: state=present name={{ item }}
+  with_items:
+    - proxy_uwsgi
+    - proxy
+    - ssl
+  notify:
+    - restart apache
+- name: Apache site
+  template: dest=/etc/apache2/sites-available/kakara.conf src=apache.conf.j2
+- name: SSL cert
+  copy:
+      content: "{{ ssl_cert }}"
+      dest: /etc/ssl/certs/{{ hostname }}.crt
+- name: SSL key
+  copy:
+      content: "{{ ssl_key }}"
+      dest: /etc/ssl/private/{{ hostname }}.key
+- name: SSL chain
+  copy:
+      content: "{{ ssl_chain }}"
+      dest: /etc/ssl/certs/{{ hostname }}.chain.pem
+- name: Enable site
+  command: a2ensite kakara
+  notify:
+    - restart apache

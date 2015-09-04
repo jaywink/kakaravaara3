@@ -1,0 +1,7 @@
+---
+- name: uWSGI log path
+  file: path=/home/kakara/logs owner=kakara group=kakara state=directory
+- name: uWSGI ini file
+  template: src=kakara.ini dest=/home/kakara/kakara.ini
+- name: uWSGI upstart config
+  template: src=upstart.conf dest=/etc/init/kakara.conf

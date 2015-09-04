@@ -1,0 +1,26 @@
+---
+hostname: kakaravaara.fi
+secret_key: changeme
+web_root: /home/kakara/kakaravaara/kakaravaara/var/static
+db_user: kakara
+db_name: kakara
+db_password: changeme
+ssl_cert: |
+  -----BEGIN CERTIFICATE-----
+  MIIGTjCCBTagAwIBAgIHBfgd6sKHTjANBgkqhkiG9w0BAQsFADCBjDELMAkGA1UE
+  ...
+  /DZqf7yQbqvJyFKw5do2WNsHT65TKK9oneDt+DyFOz/8tg==
+  -----END CERTIFICATE-----
+ssl_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  MIIEpAIBAAKCAQEA43kaAeUMv9VBw4nTyYVbxDtUAOJNbAOgqACaQribBU0IRFeN
+  ...
+  CU2meYP3R6aFp4ccvaM6oQ2vfyMTvRJpJ6ziwvyNVExKtBQoAxekWQ==
+  -----END RSA PRIVATE KEY-----
+ssl_chain: |
+  -----BEGIN CERTIFICATE-----
+  MIIF2TCCA8GgAwIBAgIHFxU9nqs/vzANBgkqhkiG9w0BAQsFADB9MQswCQYDVQQG
+  ...
+  GBXCkxllRLWOgdyll11ift/4IO1aCOGDijGIfh498YisM1LGxytmGcxvbJERVri+
+  gGpWAZ5J6dvtf0s+bA==
+  -----END CERTIFICATE-----
