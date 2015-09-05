@@ -2,5 +2,7 @@
 - hosts: changeme
   become: yes
   become_user: root
+  vars_files:
+    - vars/kakara.yml
   roles:
     - kakaravaara

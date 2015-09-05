@@ -1,5 +1,5 @@
 ---
-hostname: kakaravaara.fi
+hostname: 127.0.0.1
 secret_key: changeme
 web_root: /home/kakara/kakaravaara/kakaravaara/var/static
 db_user: kakara
@@ -21,6 +21,5 @@ ssl_chain: |
   -----BEGIN CERTIFICATE-----
   MIIF2TCCA8GgAwIBAgIHFxU9nqs/vzANBgkqhkiG9w0BAQsFADB9MQswCQYDVQQG
   ...
-  GBXCkxllRLWOgdyll11ift/4IO1aCOGDijGIfh498YisM1LGxytmGcxvbJERVri+
   gGpWAZ5J6dvtf0s+bA==
   -----END CERTIFICATE-----

@@ -1,0 +1,7 @@
+---
+hostname: 127.0.0.1
+secret_key: changeme
+web_root: /home/kakara/kakaravaara/kakaravaara/var/static
+db_user: kakara
+db_name: kakara
+db_password: changeme
