@@ -5,3 +5,4 @@ web_root: /home/kakara/kakaravaara/kakaravaara/var/static
 db_user: kakara
 db_name: kakara
 db_password: changeme
+db_host: 127.0.0.1

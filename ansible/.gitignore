@@ -1,3 +1,8 @@
-kakaravaara.yaml
+# Ignore all by default
+*
 
-vars/kakara.yml
+# Whitelist needed
+!.gitignore
+!roles
+!kakaravaara.yaml.example
+!vars/kakara.yml.example

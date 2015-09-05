@@ -14,12 +14,14 @@
 
     Alias /robots.txt {{ web_root }}/robots.txt
     Alias /favicon.ico {{ web_root }}/favicon.ico
+    Alias /static {{ web_root }}
 
     <Directory {{ web_root }}>
         Require all granted
         Options -MultiViews -Indexes
     </Directory>
 
+    ProxyPass /static !
     ProxyPass / uwsgi://127.0.0.1:3031/
 
     SSLEngine on
