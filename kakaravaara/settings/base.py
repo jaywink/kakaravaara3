@@ -26,10 +26,10 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 ######## Shoop ########
-SHOOP_ENABLED_ADDONS_FILE = os.path.join(BASE_DIR, "var", "enabled_addons")
-SHOOP_PRICING_MODULE = "simple_pricing"
 SHOOP_BASKET_CLASS_SPEC = ("reservations.basket:ReservableBasket")
 SHOOP_BASKET_ORDER_CREATOR_SPEC = ("reservations.basket:ReservableOrderCreator")
+SHOOP_ENABLED_ADDONS_FILE = os.path.join(BASE_DIR, "var", "enabled_addons")
+SHOOP_PRICING_MODULE = "discount_pricing"
 
 ######## Installed apps ########
 PREREQ_APPS = [
@@ -47,27 +47,33 @@ PROJECT_APPS = [
 ]
 
 SHOOP_APPS = [
-    'shoop.core',
+    "bootstrap3",
     "django_jinja",
     "easy_thumbnails",
     "filer",
-    'shoop.simple_pricing',
-    'shoop.simple_supplier',
-    'shoop.default_tax',
-    'shoop.front',
-    'shoop.front.apps.registration',
-    'registration',
-    'shoop.front.apps.auth',
-    'shoop.front.apps.customer_information',
-    'shoop.front.apps.personal_order_history',
-    'shoop.front.apps.simple_order_notification',
-    'shoop.front.apps.simple_search',
-    'shoop.admin',
-    'shoop.addons',
-    'shoop.testing',
-    'bootstrap3',
-    'shoop.notify',
-    'shoop.simple_cms',
+    "registration",
+    "rest_framework",
+    "shoop.addons",
+    "shoop.admin",
+    "shoop.api",
+    "shoop.core",
+    "shoop.default_tax",
+    "shoop.discount_pricing",
+    "shoop.front",
+    "shoop.front.apps.auth",
+    "shoop.front.apps.customer_information",
+    "shoop.front.apps.personal_order_history",
+    "shoop.front.apps.registration",
+    "shoop.front.apps.simple_order_notification",
+    "shoop.front.apps.simple_search",
+    "shoop.notify",
+    "shoop.simple_cms",
+    "shoop.simple_pricing",
+    "shoop.simple_supplier",
+    "shoop.testing",
+    "shoop.themes.classic_gray",
+    "shoop.themes.default_theme",
+    "shoop.xtheme",
 ]
 
 INSTALLED_APPS = PROJECT_APPS + PREREQ_APPS + add_enabled_addons(SHOOP_ENABLED_ADDONS_FILE, SHOOP_APPS)
@@ -115,6 +121,7 @@ TEMPLATES = [
             "match_extension": ".jinja",
             'context_processors': TEMPLATE_CONTEXT_PROCESSORS,
             "newstyle_gettext": True,
+            "environment": "shoop.xtheme.engine.XthemeEnvironment"
         },
         "NAME": "jinja2",
     },
@@ -183,6 +190,18 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ######## Sessions ########
 SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
+
+######## REST API ########
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser',
+    )
+}
 
 ######## Reservations ########
 RESERVABLE_SEARCH_VISIBLE_ATTRIBUTES = [

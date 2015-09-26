@@ -1,5 +1,5 @@
 # Shoop
-git+https://github.com/jaywink/shoop.git@kakaravaara#egg=shoop==1.2.0.post0.dev
+git+https://github.com/jaywink/shoop.git@79e6b5c512f77d9a4a3e36cb68525ff220830ccc#egg=shoop
 
 django-datetime-widget==0.9.3
 
