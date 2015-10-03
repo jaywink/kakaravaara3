@@ -4,7 +4,8 @@
   notify:
     - restart uwsgi
 - name: Install app requirements
-  pip: requirements=/home/kakara/kakaravaara/requirements/prod.txt virtualenv=/home/kakara/venv
+  #pip: requirements=/home/kakara/kakaravaara/requirements/prod.txt virtualenv=/home/kakara/venv extra_args='--upgrade'
+  command: chdir=/home/kakara/kakaravaara /home/kakara/venv/bin/pip install -r requirements/prod.txt -U
   notify:
     - restart uwsgi
 - name: Create local settings
