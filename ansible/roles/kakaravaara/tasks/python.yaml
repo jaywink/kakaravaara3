@@ -1,6 +1,9 @@
 ---
 - name: Virtualenv
-  apt: name=python-virtualenv
+  apt: name={{ item }}
+  with_items:
+    - python-virtualenv
+    - python3-setuptools
 - name: Create virtualenv
   # We do this here since Ansible only has virtualenv_python in 2.x
   command: creates=/home/kakara/venv virtualenv -p python3.4 /home/kakara/venv
