@@ -1,37 +1,50 @@
 ---
-- name: Get latest kakara code
-  git: accept_hostkey=yes dest=/home/kakara/kakaravaara repo=https://github.com/jaywink/kakaravaara3.git force=yes
-  notify:
-    - restart uwsgi
-- name: Install app requirements
-  #pip: requirements=/home/kakara/kakaravaara/requirements/prod.txt virtualenv=/home/kakara/venv extra_args='--upgrade'
-  command: chdir=/home/kakara/kakaravaara /home/kakara/venv/bin/pip install -r requirements/prod.txt -U
-  notify:
-    - restart uwsgi
-- name: Create local settings
-  template: dest=/home/kakara/kakaravaara/kakaravaara/settings/prod.py src=local_config.py.j2
-  notify:
-    - restart uwsgi
 - name: Make sure home directory is owned by user
   file: path=/home/kakara/kakaravaara owner=kakara group=kakara recurse=yes
 - name: Make sure venv directory is owned by user
   file: path=/home/kakara/venv owner=kakara group=kakara recurse=yes
+- name: Get latest kakara code
+  git: accept_hostkey=yes dest=/home/kakara/kakaravaara repo=https://github.com/jaywink/kakaravaara3.git force=yes
+  become: yes
+  become_user: kakara
+  notify:
+    - restart uwsgi
+- name: Install app requirements
+  pip: requirements=/home/kakara/kakaravaara/requirements/prod.txt virtualenv=/home/kakara/venv extra_args='-U'
+  become: yes
+  become_user: kakara
+  notify:
+    - restart uwsgi
+- name: Create local settings
+  template: dest=/home/kakara/kakaravaara/kakaravaara/settings/prod.py src=local_config.py.j2
+  become: yes
+  become_user: kakara
+  notify:
+    - restart uwsgi
 - name: Migrate db
   django_manage: app_path=/home/kakara/kakaravaara command=migrate virtualenv=/home/kakara/venv
+  become: yes
+  become_user: kakara
   environment:
     DJANGO_SETTINGS_MODULE: kakaravaara.settings.prod
 - name: Compile messages
   django_manage: app_path=/home/kakara/kakaravaara command=compilemessages virtualenv=/home/kakara/venv
+  become: yes
+  become_user: kakara
   environment:
     DJANGO_SETTINGS_MODULE: kakaravaara.settings.prod
   notify:
     - restart uwsgi
 - name: Collect statics
   django_manage: app_path=/home/kakara/kakaravaara command=collectstatic virtualenv=/home/kakara/venv
+  become: yes
+  become_user: kakara
   environment:
     DJANGO_SETTINGS_MODULE: kakaravaara.settings.prod
 - name: Init shoop
   django_manage: app_path=/home/kakara/kakaravaara command=shoop_init virtualenv=/home/kakara/venv
+  become: yes
+  become_user: kakara
   when: init_site is defined
   environment:
     DJANGO_SETTINGS_MODULE: kakaravaara.settings.prod
