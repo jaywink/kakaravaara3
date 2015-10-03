@@ -32,10 +32,7 @@
                             {% set price = p.get_price(request) %}
                             <option value="{{ p.id }}">
                                 {{ p.variation_name or p.name }}
-                                {# TODO: Tax rendering of variation children #}
-                                {# TODO: Remove hard coded euro in rendering of variation children prices #}
-                                ({{ price.taxful_price|floatformat(2) }} &euro; {% trans %}incl. VAT{% endtrans %} {{ product.get_tax_value_display() }}%,
-                                {{ price.taxless_price|floatformat(2)}} &euro; {% trans %}VAT{% endtrans %} 0%)
+                                ({{ price|money }})
                             </option>
                         {% endfor %}
                     </select>
@@ -60,7 +57,8 @@
                         <h4>
                             <small>Total: </small>
                             <span id="product-price-placeholder">
-                                {{ product.get_price(request)|home_currency }}
+                                {% set price_info = product.get_price(request) %}
+                                {{ price_info.price|money }}
                             </span>
                             <span class="sales-unit">
                                 {{ product.sales_unit.short_name }}
@@ -71,9 +69,7 @@
                 </div>
                 <div class="col-sm-12">
                     <hr>
-                    <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-shopping-cart"></span>
-                        {% trans %}Add to cart{% endtrans %}
-                    </button>
+                    <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-shopping-cart"></span> {% trans %}Add to cart{% endtrans %}</button>
                 </div>
             </form>
         {% endif %}

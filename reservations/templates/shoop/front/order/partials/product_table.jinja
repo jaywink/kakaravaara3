@@ -21,7 +21,7 @@
         <tr>
             <td colspan="7" class="text-right">
                 <strong>{% trans %}Total{% endtrans %}:
-                <span class="total-price">{{ order.taxful_total_price|home_currency }}</span></strong>
+                <span class="total-price">{{ order.taxful_total_price|money }}</span></strong>
             </td>
         </tr>
     </tfoot>
@@ -53,13 +53,13 @@
                     {% endif %}
                 </td>
                 <td class="text-right">
-                    {{ line.taxful_unit_price|home_currency }}
+                    {{ line.taxful_base_unit_price|money }}
                 </td>
                 <td class="text-right">
                     {{ line.quantity|number }}
                 </td>
                 <td class="text-right">
-                    <span class="line-total">{{ line.taxful_total_price|home_currency }}</span>
+                    <span class="line-total">{{ line.taxful_total_price|money }}</span>
                 </td>
             </tr>
         {% endfor %}
