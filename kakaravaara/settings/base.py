@@ -40,6 +40,7 @@ PREREQ_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "datetimewidget",
+    "django_extensions",
 ]
 
 PROJECT_APPS = [
