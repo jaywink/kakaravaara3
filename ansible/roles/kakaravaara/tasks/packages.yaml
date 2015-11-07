@@ -2,7 +2,6 @@
 - name: Ensure locales are set
   lineinfile: line='LANGUAGE="en_US.UTF-8"' dest=/etc/default/locale state=present
   lineinfile: line='LC_ALL="en_US.UTF-8"' dest=/etc/default/locale state=present
-  when: ansible_user_id == "vagrant"
 - name: Node.js repository
   shell: curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 - name: System dependencies
