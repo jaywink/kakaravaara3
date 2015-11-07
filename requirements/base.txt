@@ -3,4 +3,4 @@ git+https://github.com/jaywink/shoop.git@kakaravaara#egg=shoop
 
 django-datetime-widget==0.9.3
 
-django-extensions==1.5.5
+django-extensions==1.5.9
