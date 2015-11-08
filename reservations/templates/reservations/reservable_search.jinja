@@ -16,58 +16,47 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div id="searchrange" class="text-center" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                    <i class="fa fa-calendar"></i>
-                    <span></span> <b class="caret"></b>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="from_month">{% trans %}Starting month{% endtrans %}</label>
+                    <input name="from" id="from_month" class="form_datetime form-control" size="16" type="text" placeholder="{% trans %}mm/yyyy{% endtrans %}" value="{{ start_month }}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="to_month">{% trans %}End month{% endtrans %}</label>
+                    <input name="to" id="to_month" class="form_datetime form-control" size="16" type="text" placeholder="{% trans %}mm/yyyy{% endtrans %}" value="{{ end_month }}">
                 </div>
             </div>
         </div>
 
         <script type="text/javascript">
-            var start_date = moment('{{ start_date }}');
-            var end_date = moment('{{ end_date }}');
             var dates = {{ reserved_days|safe }};
-            $(function() {
-                $('#searchrange span').html(start_date.format('MMMM D, YYYY') + ' - ' + end_date.format('MMMM D, YYYY'));
-
-                $('#searchrange').daterangepicker({
-                    format: 'DD.MM.YYYY',
-                    startDate: moment(),
-                    endDate: moment().add(30, "days"),
-                    dateLimit: { days: 180 },
-                    showDropdowns: true,
-                    showWeekNumbers: true,
-                    timePicker: false,
-                    timePickerIncrement: 1,
-                    timePicker12Hour: true,
-                    ranges: {
-                       'Today': [moment(), moment()],
-                       'Next 7 Days': [moment(), moment().add(6, 'days')],
-                       'Next 30 Days': [moment(), moment().add(29, 'days')],
-                       'This Month': [moment().startOf('month'), moment().endOf('month')],
-                       'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
-                    },
-                    opens: 'left',
-                    drops: 'down',
-                    buttonClasses: ['btn', 'btn-sm'],
-                    applyClass: 'btn-primary',
-                    cancelClass: 'btn-default',
-                    separator: ' to ',
-                    locale: {
-                        applyLabel: 'Search',
-                        cancelLabel: 'Cancel',
-                        fromLabel: 'From',
-                        toLabel: 'To',
-                        customRangeLabel: 'Custom',
-                        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-                        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                        firstDay: 1
-                    }
-                }, function(start, end, label) {
-                    window.location = '{{ url("reservations:reservable.search") }}?start='+moment(start).format("YYYY-MM-DD")+'&end='+moment(end).format("YYYY-MM-DD");
+            $(window).ready(function() {
+                $("#from_month").datetimepicker({
+                    format: "mm/yyyy",
+                    weekStart: 1,
+                    autoclose: true,
+                    startView: "year",
+                    minView: "year",
+                    language: "fi",
+                    initialDate: moment.tz("{{ start_date }}", "Europe/Helsinki")
                 });
-        });
+                $("#to_month").datetimepicker({
+                    format: "mm/yyyy",
+                    weekStart: 1,
+                    autoclose: true,
+                    startView: "year",
+                    minView: "year",
+                    language: "fi",
+                    initialDate: moment.tz("{{ end_date }}", "Europe/Helsinki")
+                }).change(function() {
+                    $("body").addClass("loading");
+                    var from = $("#from_month").val();
+                    var to = $("#to_month").val();
+                    window.location = '{{ url("reservations:reservable.search") }}?start='+moment(from, "MM/YYYY").format("YYYY-MM-DD")+'&end='+moment(to, "MM/YYYY").format("YYYY-MM-DD");
+                });
+            });
         </script>
 
         <div class="row" style="margin-top: 20px;">
@@ -82,6 +71,7 @@
         </div>
 
         {% for reservable in reservables %}
+            {% set sku = reservable.product.sku|replace("-", "_") %}
             <hr>
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6">
@@ -117,42 +107,42 @@
                                 <input type="hidden" name="command" value="add">
                                 <input type="hidden" name="product_id" value="{{ reservable.product.id }}">
                                 <div class="form-group">
-                                    <label for="{{ reservable.product.sku }}-start">{% trans %}Arrival Date{% endtrans %}</label>
-                                    <input class="form-control" name="reservation_start" type="date" id="{{ reservable.product.sku }}-start">
+                                    <label for="{{ sku }}-start">{% trans %}Arrival Date{% endtrans %}</label>
+                                    <input class="form-control" name="reservation_start" type="date" id="{{ sku }}-start">
                                 </div>
                                 <div class="form-group">
-                                    <label for="{{ reservable.product.sku }}-days">{% trans %}Number of nights{% endtrans %}</label>
-                                    <input class="form-control" name="quantity" type="number" value="1" id="{{ reservable.product.sku }}-days" min="1">
+                                    <label for="{{ sku }}-days">{% trans %}Number of nights{% endtrans %}</label>
+                                    <input class="form-control" name="quantity" type="number" value="1" id="{{ sku }}-days" min="1">
                                 </div>
                                 <div class="form-group pull-left" style="width: 40%;">
-                                    <label for="{{ reservable.product.sku }}-adults">{% trans %}Adults{% endtrans %}</label>
-                                    <input class="form-control" name="adults" type="number" value="1" id="{{ reservable.product.sku }}-adults" min="1">
+                                    <label for="{{ sku }}-adults">{% trans %}Adults{% endtrans %}</label>
+                                    <input class="form-control" name="adults" type="number" value="1" id="{{ sku }}-adults" min="1">
                                 </div>
                                 <div class="form-group pull-right" style="width: 40%;">
-                                    <label for="{{ reservable.product.sku }}-children">{% trans %}Children{% endtrans %}</label>
-                                    <input class="form-control" name="children" type="number" value="0" id="{{ reservable.product.sku }}-children" min="0">
+                                    <label for="{{ sku }}-children">{% trans %}Children{% endtrans %}</label>
+                                    <input class="form-control" name="children" type="number" value="0" id="{{ sku }}-children" min="0">
                                 </div>
                                 <div class="text-info" style="display: inline-block;">
                                     <p>{% trans %}The number of adults and children is needed to provide bedding.{% endtrans %}</p>
                                 </div>
-                                <div id="{{ reservable.product.sku }}-error-container" class="text-center hidden">
+                                <div id="{{ sku }}-error-container" class="text-center hidden">
                                     <p class="text-danger">{% trans %}Chosen period is not available.{% endtrans %}</p>
                                 </div>
-                                <button id="{{ reservable.product.sku }}-submit" type="submit" class="btn btn-primary btn-block">{% trans %}Reserve{% endtrans %}</button>
+                                <button id="{{ sku }}-submit" type="submit" class="btn btn-primary btn-block">{% trans %}Reserve{% endtrans %}</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     {% for month in months %}
-                        <div style="display: inline-block;" id="reservable-dates-{{ reservable.product.sku }}-{{ month }}"></div>
+                        <div style="display: inline-block;" id="reservable-dates-{{ sku }}-{{ month }}"></div>
                         <script>
                             $(document).ready(function() {
                                 var reservedDates = [];
-                                for (var i=0; i<dates.{{ reservable.product.sku }}.length; i++) {
-                                    reservedDates.push(new Date(dates.{{ reservable.product.sku }}[i]));
+                                for (var i=0; i<dates.{{ sku }}.length; i++) {
+                                    reservedDates.push(new Date(dates.{{ sku }}[i]));
                                 }
-                                $("#reservable-dates-{{ reservable.product.sku }}-{{ month }}").datetimepicker({
+                                $("#reservable-dates-{{ sku }}-{{ month }}").datetimepicker({
                                     startView: 2,
                                     language: 'fi',
                                     minView: 2,
@@ -169,70 +159,68 @@
                                     ],
                                     datesHaveData: true
                                 });
-                                $("#reservable-dates-{{ reservable.product.sku }}-{{ month }} .datetimepicker td").removeClass("active");
-                                $("#reservable-dates-{{ reservable.product.sku }}-{{ month }} .datetimepicker").off("click");
-                                $("#reservable-dates-{{ reservable.product.sku }}-{{ month }} .day:not('.reserved')").click(function (ev) {
+                                $("#reservable-dates-{{ sku }}-{{ month }} .datetimepicker td").removeClass("active");
+                                $("#reservable-dates-{{ sku }}-{{ month }} .datetimepicker").off("click");
+                                $("#reservable-dates-{{ sku }}-{{ month }} .day:not('.reserved')").click(function (ev) {
                                     // Transfer start date to correct input and show the form
                                     var t = $(ev.currentTarget);
-                                    $("#{{ reservable.product.sku }}-start").val(t.data("date"));
-                                    $("#{{ reservable.product.sku }}-start").closest(".reservation-control").removeClass("hidden");
-                                    $("#{{ reservable.product.sku }}-days").trigger("change");
+                                    $("#{{ sku }}-start").val(t.data("date"));
+                                    $("#{{ sku }}-start").closest(".reservation-control").removeClass("hidden");
+                                    $("#{{ sku }}-days").trigger("change");
                                 });
                             });
                         </script>
                     {% endfor %}
                     <script>
                         $(document).ready(function() {
-                            function set{{ reservable.product.sku }}Button(status) {
-                                $("#{{ reservable.product.sku }}-submit").prop("disabled", status);
+                            function set{{ sku }}Button(status) {
+                                $("#{{ sku }}-submit").prop("disabled", status);
                             }
 
-                            function set{{ reservable.product.sku }}Error(status) {
+                            function set{{ sku }}Error(status) {
                                 if (status)
-                                    $("#{{ reservable.product.sku }}-error-container").removeClass("hidden");
+                                    $("#{{ sku }}-error-container").removeClass("hidden");
                                 else
-                                    $("#{{ reservable.product.sku }}-error-container").addClass("hidden");
+                                    $("#{{ sku }}-error-container").addClass("hidden");
                             }
 
-                            function check{{ reservable.product.sku }}Period() {
+                            function check{{ sku }}Period() {
                                 // Lookup backend to see if new range is free
-                                if ($("#{{ reservable.product.sku }}-days").val() <= 0) {
-                                    set{{ reservable.product.sku }}Button(true);
+                                if ($("#{{ sku }}-days").val() <= 0) {
+                                    set{{ sku }}Button(true);
                                 } else {
                                     $.getJSON(
-                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ reservable.product.sku }}-start").val() + '&days=' + $("#{{ reservable.product.sku }}-days").val(),
+                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ sku }}-start").val() + '&days=' + $("#{{ sku }}-days").val(),
                                         function (data) {
                                             if (data && data.result === true) {
-                                                set{{ reservable.product.sku }}Button(false);
-                                                set{{ reservable.product.sku }}Error(false);
+                                                set{{ sku }}Button(false);
+                                                set{{ sku }}Error(false);
                                             } else {
-                                                set{{ reservable.product.sku }}Button(true);
-                                                set{{ reservable.product.sku }}Error(true);
+                                                set{{ sku }}Button(true);
+                                                set{{ sku }}Error(true);
                                             }
                                         }
                                     ).fail(function () {
-                                        set{{ reservable.product.sku }}Button(true);
+                                        set{{ sku }}Button(true);
                                     });
                                 }
                             }
-                            $("#{{ reservable.product.sku }}-days").change(check{{ reservable.product.sku }}Period);
-                            $("#{{ reservable.product.sku }}-days").keyup(check{{ reservable.product.sku }}Period);
+                            $("#{{ sku }}-days").change(check{{ sku }}Period);
+                            $("#{{ sku }}-days").keyup(check{{ sku }}Period);
                         });
                     </script>
                 </div>
             </div>
         {% endfor %}
     </div>
+    <div class="modal spinner"></div>
 {% endblock %}
 
 
 {% block extrameta %}
-    <!-- Include Required Prerequisites -->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/2.9.0/moment.min.js"></script>
-
-    <!-- Include Date Range Picker -->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/1/daterangepicker.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/1/daterangepicker-bs3.css" />
+    <!-- Moment.js -->
+    <script type="text/javascript" src="{{ static("js/moment-with-locales.min.js") }}"></script>
+    <script type="text/javascript" src="{{ static("js/moment-timezone-with-data.min.js") }}"></script>
 
     <!-- Include Datetimepicker -->
     <script type="text/javascript" src="{{ static("js/bootstrap-datetimepicker.js") }}"></script>

@@ -4,7 +4,7 @@
  		this.pickerPosition = options.pickerPosition || this.element.data('picker-position') || 'bottom-right';
  		this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
  		this.initialDate = options.initialDate || new Date();
-+		this.specialDates = options.specialDates || None;
++		this.specialDates = options.specialDates || false;
 +		this.datesHaveData = options.datesHaveData || false;
  
  		this._attachEvents();

@@ -125,14 +125,16 @@ class ReservableSearchView(TemplateView):
             day_list = []
             for day in days:
                 day_list.append("%s" % day.strftime("%Y-%m-%d"))
-            reserved_days[reservable.product.sku] = day_list
-        return reserved_days
+            reserved_days[reservable.product.sku.replace("-", "_")] = day_list
+        return reserved_days or {}
 
     def get_context_data(self, **kwargs):
         context = super(ReservableSearchView, self).get_context_data(**kwargs)
         context["reservables"] = self._get_reservables()
-        context["start_date"] = self.start_date.strftime("%Y-%m-%d")
-        context["end_date"] = self.end_date.strftime("%Y-%m-%d")
+        context["start_month"] = self.start_date.strftime("%m/%Y")
+        context["end_month"] = self.end_date.strftime("%m/%Y")
+        context["start_date"] = self.start_date.strftime("%Y-%m-%d %H:%M")
+        context["end_date"] = self.end_date.strftime("%Y-%m-%d %H:%M")
         context["reserved_days"] = self._get_reserved_days_as_strings()
         context["visible_attributes"] = settings.RESERVABLE_SEARCH_VISIBLE_ATTRIBUTES
 
