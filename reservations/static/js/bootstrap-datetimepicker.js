@@ -694,7 +694,7 @@
 				.end()
 				.find('span').removeClass('active');
 			if (currentYear == year) {
-				months.eq(this.date.getUTCMonth()).addClass('active');
+				months.eq(this.date.getUTCMonth()+2).addClass('active');
 			}
 			if (year < startYear || year > endYear) {
 				months.addClass('disabled');

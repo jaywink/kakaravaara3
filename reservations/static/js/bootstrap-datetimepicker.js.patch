@@ -1,5 +1,7 @@
---- kakaravaara/var/static/js/bootstrap-datetimepicker.js	2015-07-21 15:46:01.986372159 +0300
-+++ reservations/static/js/bootstrap-datetimepicker.js	2015-07-22 14:54:29.868357006 +0300
+diff --git a/home/jaywink/.virtualenvs/shoop/lib/python3.4/site-packages/datetimewidget/static/js/bootstrap-datetimepicker.js b/reservations/static/js/bootstrap-datetimepicker.js
+index 9ba9888..b822748 100644
+--- a/home/jaywink/.virtualenvs/shoop/lib/python3.4/site-packages/datetimewidget/static/js/bootstrap-datetimepicker.js
++++ b/reservations/static/js/bootstrap-datetimepicker.js
 @@ -72,6 +72,8 @@
  		this.pickerPosition = options.pickerPosition || this.element.data('picker-position') || 'bottom-right';
  		this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
@@ -47,3 +49,12 @@
  				if (prevMonth.getUTCDay() == this.weekEnd) {
  					html.push('</tr>');
  				}
+@@ -675,7 +694,7 @@
+ 				.end()
+ 				.find('span').removeClass('active');
+ 			if (currentYear == year) {
+-				months.eq(this.date.getUTCMonth()).addClass('active');
++				months.eq(this.date.getUTCMonth()+2).addClass('active');
+ 			}
+ 			if (year < startYear || year > endYear) {
+ 				months.addClass('disabled');
