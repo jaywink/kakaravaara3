@@ -1,60 +1,51 @@
-diff --git a/home/jaywink/.virtualenvs/shoop/lib/python3.4/site-packages/datetimewidget/static/js/bootstrap-datetimepicker.js b/reservations/static/js/bootstrap-datetimepicker.js
-index 9ba9888..b822748 100644
---- a/home/jaywink/.virtualenvs/shoop/lib/python3.4/site-packages/datetimewidget/static/js/bootstrap-datetimepicker.js
+diff --git a/reservations/static/js/bootstrap-datetimepicker.js b/reservations/static/js/bootstrap-datetimepicker.js
+index 997b8dd..fa1426f 100644
+--- a/reservations/static/js/bootstrap-datetimepicker.js
 +++ b/reservations/static/js/bootstrap-datetimepicker.js
-@@ -72,6 +72,8 @@
- 		this.pickerPosition = options.pickerPosition || this.element.data('picker-position') || 'bottom-right';
- 		this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
- 		this.initialDate = options.initialDate || new Date();
-+		this.specialDates = options.specialDates || false;
-+		this.datesHaveData = options.datesHaveData || false;
+@@ -99,6 +99,8 @@
+     this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
+     this.initialDate = options.initialDate || new Date();
+     this.zIndex = options.zIndex || this.element.data('z-index') || undefined;
++    this.specialDates = options.specialDates || false;
++    this.datesHaveData = options.datesHaveData || false;
  
- 		this._attachEvents();
- 
-@@ -571,11 +573,13 @@
- 			nextMonth = nextMonth.valueOf();
- 			var html = [];
- 			var clsName;
-+			var extraAttrs;
- 			while (prevMonth.valueOf() < nextMonth) {
- 				if (prevMonth.getUTCDay() == this.weekStart) {
- 					html.push('<tr>');
- 				}
- 				clsName = '';
-+				extraAttrs = '';
- 				if (prevMonth.getUTCFullYear() < year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() < month)) {
- 					clsName += ' old';
- 				} else if (prevMonth.getUTCFullYear() > year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() > month)) {
-@@ -595,7 +599,22 @@
- 					$.inArray(prevMonth.getUTCDay(), this.daysOfWeekDisabled) !== -1) {
- 					clsName += ' disabled';
- 				}
--				html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
-+				for (var s=0; s<this.specialDates.length; s++) {
-+					var isSpecial = false;
-+					for (var di=0; di<this.specialDates[s].dates.length; di++) {
-+						if (prevMonth.getTime() == this.specialDates[s].dates[di].getTime()) {
-+							isSpecial = true;
-+							break;
-+						}
-+					}
-+					if (isSpecial) {
-+						clsName += ' ' + this.specialDates[s].className;
-+					}
-+				}
-+				if (this.datesHaveData) {
-+					extraAttrs += ' data-date="'+prevMonth.getUTCFullYear()+'-'+(prevMonth.getUTCMonth()+1)+'-'+prevMonth.getUTCDate()+'"';
-+				}
-+				html.push('<td class="day' + clsName + '" '+extraAttrs+'>' + prevMonth.getUTCDate() + '</td>');
- 				if (prevMonth.getUTCDay() == this.weekEnd) {
- 					html.push('</tr>');
- 				}
-@@ -675,7 +694,7 @@
- 				.end()
- 				.find('span').removeClass('active');
- 			if (currentYear == year) {
--				months.eq(this.date.getUTCMonth()).addClass('active');
-+				months.eq(this.date.getUTCMonth()+2).addClass('active');
- 			}
- 			if (year < startYear || year > endYear) {
- 				months.addClass('disabled');
+     this.icons = {
+       leftArrow: this.fontAwesome ? 'fa-arrow-left' : (this.bootcssVer === 3 ? 'glyphicon-arrow-left' : 'icon-arrow-left'),
+@@ -634,11 +636,13 @@
+       nextMonth = nextMonth.valueOf();
+       var html = [];
+       var clsName;
++      var extraAttrs;
+       while (prevMonth.valueOf() < nextMonth) {
+         if (prevMonth.getUTCDay() == this.weekStart) {
+           html.push('<tr>');
+         }
+         clsName = '';
++        extraAttrs = '';
+         if (prevMonth.getUTCFullYear() < year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() < month)) {
+           clsName += ' old';
+         } else if (prevMonth.getUTCFullYear() > year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() > month)) {
+@@ -658,7 +662,22 @@
+           $.inArray(prevMonth.getUTCDay(), this.daysOfWeekDisabled) !== -1) {
+           clsName += ' disabled';
+         }
+-        html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
++        for (var s=0; s<this.specialDates.length; s++) {
++          var isSpecial = false;
++          for (var di=0; di<this.specialDates[s].dates.length; di++) {
++              if (prevMonth.getTime() == this.specialDates[s].dates[di].getTime()) {
++                  isSpecial = true;
++                  break;
++              }
++          }
++          if (isSpecial) {
++              clsName += ' ' + this.specialDates[s].className;
++          }
++        }
++        if (this.datesHaveData) {
++            extraAttrs += ' data-date="'+prevMonth.getUTCFullYear()+'-'+(prevMonth.getUTCMonth()+1)+'-'+prevMonth.getUTCDate()+'"';
++        }
++        html.push('<td class="day' + clsName + '" '+extraAttrs+'>' + prevMonth.getUTCDate() + '</td>');
+         if (prevMonth.getUTCDay() == this.weekEnd) {
+           html.push('</tr>');
+         }

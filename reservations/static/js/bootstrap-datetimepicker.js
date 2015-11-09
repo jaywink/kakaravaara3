@@ -99,6 +99,8 @@
     this.showMeridian = options.showMeridian || this.element.data('show-meridian') || false;
     this.initialDate = options.initialDate || new Date();
     this.zIndex = options.zIndex || this.element.data('z-index') || undefined;
+    this.specialDates = options.specialDates || false;
+    this.datesHaveData = options.datesHaveData || false;
 
     this.icons = {
       leftArrow: this.fontAwesome ? 'fa-arrow-left' : (this.bootcssVer === 3 ? 'glyphicon-arrow-left' : 'icon-arrow-left'),
@@ -634,11 +636,13 @@
       nextMonth = nextMonth.valueOf();
       var html = [];
       var clsName;
+      var extraAttrs;
       while (prevMonth.valueOf() < nextMonth) {
         if (prevMonth.getUTCDay() == this.weekStart) {
           html.push('<tr>');
         }
         clsName = '';
+        extraAttrs = '';
         if (prevMonth.getUTCFullYear() < year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() < month)) {
           clsName += ' old';
         } else if (prevMonth.getUTCFullYear() > year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() > month)) {
@@ -658,7 +662,22 @@
           $.inArray(prevMonth.getUTCDay(), this.daysOfWeekDisabled) !== -1) {
           clsName += ' disabled';
         }
-        html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
+        for (var s=0; s<this.specialDates.length; s++) {
+          var isSpecial = false;
+          for (var di=0; di<this.specialDates[s].dates.length; di++) {
+              if (prevMonth.getTime() == this.specialDates[s].dates[di].getTime()) {
+                  isSpecial = true;
+                  break;
+              }
+          }
+          if (isSpecial) {
+              clsName += ' ' + this.specialDates[s].className;
+          }
+        }
+        if (this.datesHaveData) {
+            extraAttrs += ' data-date="'+prevMonth.getUTCFullYear()+'-'+(prevMonth.getUTCMonth()+1)+'-'+prevMonth.getUTCDate()+'"';
+        }
+        html.push('<td class="day' + clsName + '" '+extraAttrs+'>' + prevMonth.getUTCDate() + '</td>');
         if (prevMonth.getUTCDay() == this.weekEnd) {
           html.push('</tr>');
         }
