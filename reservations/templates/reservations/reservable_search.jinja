@@ -40,7 +40,8 @@
                     startView: "year",
                     minView: "year",
                     language: "fi",
-                    initialDate: moment.tz("{{ start_date }}", "Europe/Helsinki")
+                    initialDate: moment.tz("{{ start_date }}", "Europe/Helsinki"),
+                    startDate: moment().startOf("month").tz("Europe/Helsinki").toDate()
                 });
                 $("#to_month").datetimepicker({
                     format: "mm/yyyy",
@@ -49,7 +50,8 @@
                     startView: "year",
                     minView: "year",
                     language: "fi",
-                    initialDate: moment.tz("{{ end_date }}", "Europe/Helsinki")
+                    initialDate: moment.tz("{{ end_date }}", "Europe/Helsinki"),
+                    startDate: moment().startOf("month").tz("Europe/Helsinki").toDate()
                 }).change(function() {
                     $("body").addClass("loading");
                     var from = $("#from_month").val();
@@ -225,6 +227,6 @@
     <!-- Include Datetimepicker -->
     <script type="text/javascript" src="{{ static("js/bootstrap-datetimepicker.js") }}"></script>
     <script type="text/javascript" src="{{ static("js/locales/bootstrap-datetimepicker.fi.js") }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ static("css/datetimepicker.css") }}" />
+    <link rel="stylesheet" type="text/css" href="{{ static("css/bootstrap-datetimepicker.min.css") }}" />
     <link rel="stylesheet" type="text/css" href="{{ static("css/reservations.css") }}" />
 {% endblock %}
