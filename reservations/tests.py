@@ -43,8 +43,8 @@ class ReservationsGetReservedDatesTestCase(TestCase):
             end_time=datetime(year=2015, month=7, day=15, hour=12)
         )
         dates = Reservation.get_reserved_days_for_period(
-            start_time=datetime(year=2015, month=6, day=30, hour=15),
-            end_time=datetime(year=2015, month=7, day=15, hour=12)
+            start_date=datetime(year=2015, month=6, day=30, hour=15),
+            end_date=datetime(year=2015, month=7, day=15, hour=12)
         )
         self.assertEquals(len(dates), 10)
 

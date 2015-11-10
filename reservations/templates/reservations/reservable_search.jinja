@@ -56,7 +56,7 @@
                     $("body").addClass("loading");
                     var from = $("#from_month").val();
                     var to = $("#to_month").val();
-                    window.location = '{{ url("reservations:reservable.search") }}?start='+moment(from, "MM/YYYY").format("YYYY-MM-DD")+'&end='+moment(to, "MM/YYYY").format("YYYY-MM-DD");
+                    window.location = '{{ url("reservations:reservable.search") }}?start='+moment(from, "MM/YYYY").format("YYYY-MM")+'&end='+moment(to, "MM/YYYY").format("YYYY-MM");
                 });
             });
         </script>
@@ -152,7 +152,7 @@
                                     weekStart: 1,
                                     maxView: 3,
                                     clearBtn: false,
-                                    initialDate: '{{ month }}',
+                                    initialDate: '{{ month }}-01',
                                     specialDates: [
                                         {
                                             className: "reserved",

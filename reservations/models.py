@@ -73,27 +73,27 @@ class Reservation(models.Model):
         return super(Reservation, self).save(*args, **kwargs)
 
     @staticmethod
-    def get_reserved_days_for_period(start_time, end_time, reservable=None):
+    def get_reserved_days_for_period(start_date, end_date, reservable=None):
         """Get a list of reserved dates, between and including start and end.
 
         Args:
-            start_time (datetime)
-            end_time (datetime)
+            start_date (date)
+            end_date (date)
             reservable (ReservableProduct, optional)    - optionally filter by reservable
 
         Returns:
             list of datetimes or []
         """
         reservations = Reservation.objects.filter(
-            Q(start_time__range=(start_time, end_time)) | Q(end_time__range=(start_time, end_time))
+            Q(start_time__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
         )
         if reservable:
             reservations = reservations.filter(reservable=reservable)
         dates = []
         for reservation in reservations:
             current = reservation.start_time.date()
-            while current < reservation.end_time.date() and current <= end_time.date():
-                if current >= start_time.date() and current <= end_time.date():
+            while current < reservation.end_time.date() and current <= end_date:
+                if current >= start_date and current <= end_date:
                     dates.append(current)
                 current += timedelta(days=1)
         return dates
