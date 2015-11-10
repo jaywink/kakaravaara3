@@ -158,11 +158,12 @@
                                             dates: reservedDates
                                         }
                                     ],
-                                    datesHaveData: true
+                                    datesHaveData: true,
+                                    startDate: moment().add(2, "days").toDate()
                                 });
                                 $("#reservable-dates-{{ sku }}-{{ month }} .datetimepicker td").removeClass("active");
                                 $("#reservable-dates-{{ sku }}-{{ month }} .datetimepicker").off("click");
-                                $("#reservable-dates-{{ sku }}-{{ month }} .day:not('.reserved')").click(function (ev) {
+                                $("#reservable-dates-{{ sku }}-{{ month }} .day:not('.reserved'):not('.disabled')").click(function (ev) {
                                     // Transfer start date to correct input and show the form
                                     var t = $(ev.currentTarget);
                                     $("#{{ sku }}-start").val(t.data("date"));
