@@ -1,0 +1,5 @@
+/* Make sure certain Shoop forms show required after label */
+div#billing div.required-field label.control-label::after,
+div#shipping div.required-field label.control-label::after {
+    content: " *";
+}
