@@ -105,7 +105,6 @@
                         <div class="clearfix"></div>
                         <div class="hidden text-center reservation-control">
                             <form role="form" method="post" action="{{ url("shoop:basket") }}">
-                                <input type="hidden" name="return" value="{{ request.path }}">
                                 <input type="hidden" name="command" value="add">
                                 <input type="hidden" name="product_id" value="{{ reservable.product.id }}">
                                 <div class="form-group">
