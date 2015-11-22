@@ -77,60 +77,66 @@
             <hr>
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6">
-                    <div id="reservables">
-                        <div class="pull-left" style="width: 140px;">
-                            <div class="text-center" style="padding-left: 5px;">
-                                <h3 style="margin-top: 0px;">{{ reservable.product.name }}</h3>
-                            </div>
-                            <div class="text-center" style="border: solid 1px; width:140px; height: 140px; margin: 0px 5px; border-radius: 3px; cursor: pointer;">
-                                <a href="{{ url("shoop:product", pk=reservable.product.id, slug=reservable.product.slug) }}">
-                                    {% if reservable.product.primary_image %}
-                                        <img src="{{ reservable.product.primary_image|thumbnail(size=(140, 140), crop="smart", upscale=True)}}" class="img-responsive" alt="{{ reservable.product.name }}">
-                                    {% else %}
-                                        <i style="font-size-adjust: 2.7; padding-top: 65px; padding-right: 5px;" class="glyphicon glyphicon-home"></i>
-                                    {% endif %}
-                                </a>
+                    <div class="row" id="reservables">
+                        <div class="col-md-2">
+                            <div style="width: 140px;">
+                                <div class="text-center" style="padding-left: 5px;">
+                                    <h3 style="margin-top: 0;">{{ reservable.product.name }}</h3>
+                                </div>
+                                <div class="text-center" style="border: solid 1px; width:140px; height: 140px; margin: 0 5px; border-radius: 3px; cursor: pointer;">
+                                    <a href="{{ url("shoop:product", pk=reservable.product.id, slug=reservable.product.slug) }}">
+                                        {% if reservable.product.primary_image %}
+                                            <img src="{{ reservable.product.primary_image|thumbnail(size=(140, 140), crop="smart", upscale=True)}}" class="img-responsive" alt="{{ reservable.product.name }}">
+                                        {% else %}
+                                            <i style="font-size-adjust: 2.7; padding-top: 65px; padding-right: 5px;" class="glyphicon glyphicon-home"></i>
+                                        {% endif %}
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="pull-left" style="margin-top: 21px;">
-                            <dl class="dl-horizontal">
-                                {% for attribute in reservable.product.attributes.all() %}
-                                    {% if attribute.attribute.identifier in visible_attributes %}
-                                        <dt>{{ attribute.name }}</dt>
-                                        <dd>{{ attribute.formatted_value }}</dd>
-                                    {% endif %}
-                                {% endfor %}
-                            </dl>
+                        <div class="col-md-10">
+                            <div style="margin-top: 21px;">
+                                <dl class="dl-horizontal">
+                                    {% for attribute in reservable.product.attributes.all() %}
+                                        {% if attribute.attribute.identifier in visible_attributes %}
+                                            <dt>{{ attribute.name }}</dt>
+                                            <dd>{{ attribute.formatted_value }}</dd>
+                                        {% endif %}
+                                    {% endfor %}
+                                </dl>
+                            </div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="hidden text-center reservation-control">
-                            <form role="form" method="post" action="{{ url("shoop:basket") }}">
-                                <input type="hidden" name="command" value="add">
-                                <input type="hidden" name="product_id" value="{{ reservable.product.id }}">
-                                <div class="form-group">
-                                    <label for="{{ sku }}-start">{% trans %}Arrival Date{% endtrans %}</label>
-                                    <input class="form-control" name="reservation_start" type="date" id="{{ sku }}-start">
-                                </div>
-                                <div class="form-group">
-                                    <label for="{{ sku }}-days">{% trans %}Number of nights{% endtrans %}</label>
-                                    <input class="form-control" name="quantity" type="number" value="2" id="{{ sku }}-days" min="2">
-                                </div>
-                                <div class="form-group pull-left" style="width: 40%;">
-                                    <label for="{{ sku }}-adults">{% trans %}Adults{% endtrans %}</label>
-                                    <input class="form-control" name="adults" type="number" value="1" id="{{ sku }}-adults" min="1">
-                                </div>
-                                <div class="form-group pull-right" style="width: 40%;">
-                                    <label for="{{ sku }}-children">{% trans %}Children{% endtrans %}</label>
-                                    <input class="form-control" name="children" type="number" value="0" id="{{ sku }}-children" min="0">
-                                </div>
-                                <div class="text-info" style="display: inline-block;">
-                                    <p>{% trans %}The number of adults and children is needed to provide bedding.{% endtrans %}</p>
-                                </div>
-                                <div id="{{ sku }}-error-container" class="text-center hidden">
-                                    <p class="text-danger">{% trans %}Chosen period is not available.{% endtrans %}</p>
-                                </div>
-                                <button id="{{ sku }}-submit" type="submit" class="btn btn-primary btn-block">{% trans %}Reserve{% endtrans %}</button>
-                            </form>
+                        <div class="row">
+                            <div class="col-md-12 hidden text-center reservation-control">
+                                <form role="form" method="post" action="{{ url("shoop:basket") }}">
+                                    <input type="hidden" name="command" value="add">
+                                    <input type="hidden" name="product_id" value="{{ reservable.product.id }}">
+                                    <div class="form-group">
+                                        <label for="{{ sku }}-start">{% trans %}Arrival Date{% endtrans %}</label>
+                                        <input class="form-control" name="reservation_start" type="date" id="{{ sku }}-start">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="{{ sku }}-days">{% trans %}Number of nights{% endtrans %}</label>
+                                        <input class="form-control" name="quantity" type="number" value="2" id="{{ sku }}-days" min="2">
+                                    </div>
+                                    <div class="form-group pull-left" style="width: 40%;">
+                                        <label for="{{ sku }}-adults">{% trans %}Adults{% endtrans %}</label>
+                                        <input class="form-control" name="adults" type="number" value="1" id="{{ sku }}-adults" min="1">
+                                    </div>
+                                    <div class="form-group pull-right" style="width: 40%;">
+                                        <label for="{{ sku }}-children">{% trans %}Children{% endtrans %}</label>
+                                        <input class="form-control" name="children" type="number" value="0" id="{{ sku }}-children" min="0">
+                                    </div>
+                                    <div class="text-info" style="display: inline-block;">
+                                        <p>{% trans %}The number of adults and children is needed to provide bedding.{% endtrans %}</p>
+                                    </div>
+                                    <div id="{{ sku }}-error-container" class="text-center hidden">
+                                        <p class="text-danger">{% trans %}Chosen period is not available.{% endtrans %}</p>
+                                    </div>
+                                    <button id="{{ sku }}-submit" type="submit" class="btn btn-primary btn-block">{% trans %}Reserve{% endtrans %}</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
