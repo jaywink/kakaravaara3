@@ -28,6 +28,7 @@ LOGIN_REDIRECT_URL = '/'
 ######## Shoop ########
 SHOOP_BASKET_CLASS_SPEC = ("reservations.basket:ReservableBasket")
 SHOOP_BASKET_ORDER_CREATOR_SPEC = ("reservations.basket:ReservableOrderCreator")
+SHOOP_CHECKOUT_VIEW_SPEC = ("reservations.checkout:ReservationsCheckoutView")
 SHOOP_ENABLED_ADDONS_FILE = os.path.join(BASE_DIR, "var", "enabled_addons")
 SHOOP_PRICING_MODULE = "discount_pricing"
 SHOOP_ADDRESS_HOME_COUNTRY = "FI"
