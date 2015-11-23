@@ -40,50 +40,6 @@ class ReservableProductEditView(ProductEditView):
         return toolbar
 
 
-class ReservableReservationsListView(PicotableListView):
-    model = Reservation
-    columns = [
-        Column(
-            "name", _("Name"), sort_field="reservable__product__translations__name",
-            display="reservable__product__name",
-            filter_config=TextFilter(
-                filter_field="reservable__product__translations__name",
-                placeholder=_("Filter by reservable..."))
-        ),
-        Column("order", _("From Order"), sort_field="order", display="order"),
-        Column("start_time", _("Sign In Time"), sort_field="start_time", display="format_start_time"),
-        Column("end_time", _("Sign Out Time"), sort_field="end_time", display="format_end_time"),
-        Column("adults", _("Adults"), display="adults"),
-        Column("children", _("Children"), display="children"),
-    ]
-
-    def format_start_time(self, instance, *args, **kwargs):
-        return format_datetime(localtime(instance.start_time), locale=get_current_babel_locale())
-
-    def format_end_time(self, instance, *args, **kwargs):
-        return format_datetime(localtime(instance.end_time), locale=get_current_babel_locale())
-
-    def get_queryset(self):
-        return Reservation.objects.filter(reservable__id=self.reservable_id)
-
-    def get_toolbar(self):
-        toolbar = super(ReservableReservationsListView, self).get_toolbar()
-        toolbar.append(URLActionButton(
-            text=_("New Reservation"),
-            icon="fa fa-calendar",
-            url=reverse("reservations:product.reservations.new", kwargs={"reservable": self.reservable_id}),
-        ))
-        return toolbar
-
-    def get(self, request, *args, **kwargs):
-        self.reservable_id = kwargs.get("pk")
-        return super(ReservableReservationsListView, self).get(request, *args, **kwargs)
-
-    def get_object_url(self, instance):
-        return reverse(
-            "reservations:product.reservations.edit", kwargs={"reservable": self.reservable_id, "pk": instance.id})
-
-
 class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
@@ -166,3 +122,40 @@ class DateRangeCheckView(View):
             end_date = start_date + timedelta(days=int(days))
         reservable = ReservableProduct.objects.get(id=reservable_id)
         return JsonResponse({'result': reservable.is_period_free(start_date, end_date)})
+
+
+class ReservationsAdminList(PicotableListView):
+    model = Reservation
+    columns = [
+        Column(
+            "name", _("Name"), sort_field="reservable__product__translations__name",
+            display="reservable__product__name",
+            filter_config=TextFilter(
+                filter_field="reservable__product__translations__name",
+                placeholder=_("Filter by reservable..."))
+        ),
+        Column("order", _("From Order"), sort_field="order", display="order"),
+        Column("start_time", _("Sign In Time"), sort_field="start_time", display="format_start_time"),
+        Column("end_time", _("Sign Out Time"), sort_field="end_time", display="format_end_time"),
+        Column("adults", _("Adults"), display="adults"),
+        Column("children", _("Children"), display="children"),
+    ]
+
+    def format_start_time(self, instance, *args, **kwargs):
+        return format_datetime(localtime(instance.start_time), locale=get_current_babel_locale())
+
+    def format_end_time(self, instance, *args, **kwargs):
+        return format_datetime(localtime(instance.end_time), locale=get_current_babel_locale())
+
+    def get_toolbar(self):
+        toolbar = super(ReservationsAdminList, self).get_toolbar()
+        toolbar.append(URLActionButton(
+            text=_("New Reservation"),
+            icon="fa fa-calendar",
+            url=reverse("reservations:reservations.new"),
+        ))
+        return toolbar
+
+    def get_object_url(self, instance):
+        return reverse(
+            "reservations:reservations.edit", kwargs={"pk": instance.id})
