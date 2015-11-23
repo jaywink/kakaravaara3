@@ -1,8 +1,8 @@
-.reserved {
+.reserved:not(".disabled") {
     background-color: red;
 }
 
-.datetimepicker table tr td.reserved:hover {
+.datetimepicker table tr td.reserved:not(".disabled"):hover {
     background-color: red !important;
     cursor: unset;
 }
