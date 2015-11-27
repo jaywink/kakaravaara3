@@ -26,23 +26,16 @@ class ReservableProduct(models.Model):
         """Get a list of reserved dates, between and including start and end.
 
         Args:
-            start (datetime)
-            end (datetime)
+            start (date)
+            end (date)
 
         Returns:
-            list of datetimes or []
+            list of dates or []
         """
         return Reservation.get_reserved_days_for_period(start, end, self)
 
-    def is_period_free(self, start, end):
-        """Check if period is free.
-
-        Fix hours before checking.
-        """
-        if start.hour == 0:
-            start += timedelta(hours=self.check_in_time.hour)
-        if end.hour == 0:
-            end += timedelta(hours=self.check_out_time.hour)
+    def is_period_days_free(self, start, end):
+        """Check if period is free."""
         return len(self.get_reserved_dates(start, end)) == 0
 
 
@@ -82,7 +75,7 @@ class Reservation(models.Model):
             reservable (ReservableProduct, optional)    - optionally filter by reservable
 
         Returns:
-            list of datetimes or []
+            list of dates or []
         """
         reservations = Reservation.objects.filter(
             Q(start_time__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
@@ -91,9 +84,8 @@ class Reservation(models.Model):
             reservations = reservations.filter(reservable=reservable)
         dates = []
         for reservation in reservations:
-            current = reservation.start_time.date()
+            current = max(reservation.start_time.date(), start_date)
             while current < reservation.end_time.date() and current <= end_date:
-                if current >= start_date and current <= end_date:
-                    dates.append(current)
+                dates.append(current)
                 current += timedelta(days=1)
         return dates
