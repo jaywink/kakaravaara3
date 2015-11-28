@@ -1,11 +1,8 @@
 language: python
 python:
   - "3.4"
-  - "3.5"
-  - "3.5-dev"
-  - "nightly"
 install: "pip install -r requirements/dev.txt"
-script: py.test kakaravaara
+script: py.test reservations
 env:
   - TRAVIS_NODE_VERSION="4"
 before_install:
