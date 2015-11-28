@@ -63,8 +63,8 @@ class ReservableSearchView(TemplateView):
             self.start_date = date.today().replace(day=1)
             self.end_date = date.today() + relativedelta(day=1, months=2, days=-1)
         else:
-            self.start_date = datetime.strptime(start, "%Y-%m").replace(day=1)
-            self.end_date = datetime.strptime(end, "%Y-%m") + relativedelta(day=1, months=1, days=-1)
+            self.start_date = datetime.strptime(start, "%Y-%m").date().replace(day=1)
+            self.end_date = datetime.strptime(end, "%Y-%m").date() + relativedelta(day=1, months=1, days=-1)
         return super(ReservableSearchView, self).get(request, *args, **kwargs)
 
     def _get_reservables(self):
