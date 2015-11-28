@@ -135,3 +135,51 @@ class ReservableSearchViewTestCase(ReservableViewsBaseTestCase):
                 (self.today + relativedelta.relativedelta(months=1)).strftime("%Y-%m"),
             ]
         )
+
+
+class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
+    def setUp(self):
+        super(DateRangeCheckViewTestCase, self).setUp()
+        self.reservable = ReservableProductFactory()
+        self.reservation = ReservationFactory(
+            reservable=self.reservable,
+            start_time=datetime.datetime.today(),
+            end_time=datetime.datetime.today() + datetime.timedelta(days=3)
+        )
+        self.today = datetime.date.today()
+        self.next = datetime.date.today() + relativedelta.relativedelta(months=1)
+
+    def test_view_returns_bad_request_on_missing_parameters(self):
+        response = self.client.get(reverse('reservations:check_period'))
+        self.assertEqual(response.status_code, 400)
+        url = "%s?reservable_id=1" % reverse('reservations:check_period')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 400)
+        url = "%s?start=2015-10-01" % reverse('reservations:check_period')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 400)
+        url = "%s?end=2015-10-01" % reverse('reservations:check_period')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 400)
+
+    def test_free_period_should_return_period_is_free(self):
+        response = self.client.get(
+            "%s?reservable_id=%s&start=%s&end=%s" % (
+                reverse('reservations:check_period'),
+                self.reservable.id,
+                self.next.strftime("%Y-%m-%d"),
+                (self.next + datetime.timedelta(days=3)).strftime("%Y-%m-%d")
+            )
+        )
+        self.assertJSONEqual(response.content.decode("utf-8"), {"result": True})
+
+    def test_reserved_period_should_return_period_is_reserved(self):
+        response = self.client.get(
+            "%s?reservable_id=%s&start=%s&end=%s" % (
+                reverse('reservations:check_period'),
+                self.reservable.id,
+                self.today.strftime("%Y-%m-%d"),
+                (self.today + datetime.timedelta(days=10)).strftime("%Y-%m-%d")
+            )
+        )
+        self.assertJSONEqual(response.content.decode("utf-8"), {"result": False})

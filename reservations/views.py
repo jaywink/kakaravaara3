@@ -121,7 +121,7 @@ class DateRangeCheckView(View):
         else:
             end_date = start_date + timedelta(days=int(days))
         reservable = ReservableProduct.objects.get(id=reservable_id)
-        return JsonResponse({'result': reservable.is_period_days_free(start_date, end_date)})
+        return JsonResponse({'result': reservable.is_period_days_free(start_date.date(), end_date.date())})
 
 
 class ReservationsAdminList(PicotableListView):
