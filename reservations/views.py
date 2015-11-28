@@ -31,16 +31,6 @@ class ReservableProductEditView(ProductEditView):
             form_part_classes.append(ReservableProductFormPart)
         return form_part_classes
 
-    def get_toolbar(self):
-        toolbar = super(ReservableProductEditView, self).get_toolbar()
-        if hasattr(self.object, "reservable") and self.object.pk:
-            toolbar.append(URLActionButton(
-                text=_("Reservations"),
-                icon="fa fa-calendar-o",
-                url=reverse("reservations:product.reservations", kwargs={"pk": self.object.reservable.pk}),
-            ))
-        return toolbar
-
 
 class ReservationForm(ModelForm):
     class Meta:
