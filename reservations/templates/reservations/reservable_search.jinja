@@ -94,8 +94,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-10">
-                            <div style="margin-top: 21px;">
+                        <div class="col-md-10" style="margin-top: 15px;">
+                            <div class="pull-right">
+                                {% set price = reservable.product.get_price(request) %}
+                                {{ _("Price/night (from)") }}: <strong>{{ price|money }}</strong>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div style="margin-top: 6px;">
                                 <dl class="dl-horizontal">
                                     {% for attribute in reservable.product.attributes.all() %}
                                         {% if attribute.attribute.identifier in visible_attributes %}
