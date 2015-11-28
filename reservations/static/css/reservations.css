@@ -7,6 +7,10 @@
     cursor: unset;
 }
 
+.datetimepicker table tr td.disabled, .datetimepicker table tr td.new, .datetimepicker table tr td.old {
+    opacity: 0;
+}
+
 .datetimepicker table tr td.disabled:hover {
     background-color: inherit;
 }
