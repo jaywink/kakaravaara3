@@ -1,10 +1,11 @@
 import datetime
+from decimal import Decimal
 
 import pytest
 from dateutil import relativedelta
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
+from django.test import TestCase, Client, RequestFactory
 from django.utils.translation import activate
 
 from reservations.factories import ReservableProductFactory, ReservationFactory
@@ -104,7 +105,6 @@ class ReservableSearchViewTestCase(ReservableViewsBaseTestCase):
         self.next = datetime.date.today() + relativedelta.relativedelta(months=1)
 
     def test_view_responds(self):
-        print(vars(self.response))
         self.assertContains(self.response, u"Select months to search from")
 
     def test_context_data(self):
@@ -163,6 +163,8 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_free_period_should_return_period_is_free(self):
+        request = RequestFactory().get("/")
+        request.shop = self.shop
         response = self.client.get(
             "%s?reservable_id=%s&start=%s&end=%s" % (
                 reverse('reservations:check_period'),
@@ -171,7 +173,12 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
                 (self.next + datetime.timedelta(days=3)).strftime("%Y-%m-%d")
             )
         )
-        self.assertJSONEqual(response.content.decode("utf-8"), {"result": True})
+        self.assertJSONEqual(response.content.decode("utf-8"), {
+            "result": True,
+            "price": {
+                "total": str((self.reservable.product.get_price(request) * 3).quantize(Decimal("1.00"))),
+            }
+        })
 
     def test_reserved_period_should_return_period_is_reserved(self):
         response = self.client.get(
@@ -182,4 +189,7 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
                 (self.today + datetime.timedelta(days=10)).strftime("%Y-%m-%d")
             )
         )
-        self.assertJSONEqual(response.content.decode("utf-8"), {"result": False})
+        self.assertJSONEqual(response.content.decode("utf-8"), {
+            "result": False,
+            "price": None,
+        })

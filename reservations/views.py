@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from babel.dates import format_datetime
 from datetime import date, timedelta, datetime
 
@@ -121,7 +123,18 @@ class DateRangeCheckView(View):
         else:
             end_date = start_date + timedelta(days=int(days))
         reservable = ReservableProduct.objects.get(id=reservable_id)
-        return JsonResponse({'result': reservable.is_period_days_free(start_date.date(), end_date.date())})
+        is_free = reservable.is_period_days_free(start_date.date(), end_date.date())
+        total_days = (end_date - start_date).days
+        if is_free:
+            price = {
+                "total": (reservable.product.get_price(request) * total_days).quantize(Decimal("1.00"))
+            }
+        else:
+            price = None
+        return JsonResponse({
+            "result": is_free,
+            "price": price,
+        })
 
 
 class ReservationsAdminList(PicotableListView):

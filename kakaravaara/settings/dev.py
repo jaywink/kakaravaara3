@@ -1,3 +1,7 @@
+import sys
+
+from pytest_django.migrations import DisableMigrations
+
 from kakaravaara.settings.base import *
 
 # Quick-start development settings - unsuitable for production
@@ -16,7 +20,8 @@ INSTALLED_APPS += [
     'debug_toolbar',
 ]
 
-SOUTH_TESTS_MIGRATE = False  # Makes tests that much faster.
+if "test" in sys.argv[1:]:
+    MIGRATION_MODULES = DisableMigrations()
 
 # For faster tests
 PASSWORD_HASHERS = (
