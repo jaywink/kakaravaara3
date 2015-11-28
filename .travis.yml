@@ -6,4 +6,7 @@ python:
   - "nightly"
 install: "pip install -r requirements/dev.txt"
 script: py.test kakaravaara
-
+before_install:
+  - pip install codecov
+after_success:
+  - codecov
