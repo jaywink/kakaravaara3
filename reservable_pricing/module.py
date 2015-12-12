@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 import six
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
+from reservable_pricing.models import PeriodPriceModifier
+from reservations.utils import get_start_and_end_from_request
+from shoop.admin.base import AdminModule, MenuEntry
 from shoop.core.models import ShopProduct
 from shoop.core.pricing import PriceInfo, PricingContext, PricingModule
 
-from .models import ReservableProductPrice
-
 
 class ReservablePricingContext(PricingContext):
-    REQUIRED_VALUES = ("customer_group_ids", "shop")
-    customer_group_ids = ()
+    REQUIRED_VALUES = ("start_date", "end_date", "shop")
     shop = None
 
 
@@ -22,16 +24,12 @@ class ReservablePricingModule(PricingModule):
     pricing_context_class = ReservablePricingContext
 
     def get_context_from_request(self, request):
-        customer = getattr(request, "customer", None)
-
-        if not customer or customer.is_anonymous:
-            customer_group_ids = []
-        else:
-            customer_group_ids = sorted(customer.groups.all().values_list("id", flat=True))
+        start_date, end_date = get_start_and_end_from_request(request)
 
         return self.pricing_context_class(
             shop=request.shop,
-            customer_group_ids=customer_group_ids
+            start_date=start_date,
+            end_date=end_date,
         )
 
     def get_price_info(self, context, product, quantity=1):
@@ -44,29 +42,51 @@ class ReservablePricingModule(PricingModule):
             shop_product = product.get_shop_instance(shop)
             product_id = product.pk
 
-        default_price = (shop_product.default_price_value or 0)
-
-        if context.customer_group_ids:
-            filter = Q(
-                price_value__gt=0, product=product_id, shop=shop,
-                group__in=context.customer_group_ids)
-            result = (
-                ReservableProductPrice.objects.filter(filter)
-                .order_by("price_value")[:1]
-                .values_list("price_value", flat=True)
-            )
-        else:
-            result = None
-
-        if result:
-            price = result[0]
-            if default_price > 0:
-                price = min([default_price, price])
-        else:
-            price = default_price
+        base_price = (shop_product.default_price_value or 0) * quantity
+        modifiers_price = self.get_modifiers_price(product_id, quantity, context.start_date, context.end_date)
+        total_price = base_price + modifiers_price
 
         return PriceInfo(
-            price=shop.create_price(price * quantity),
-            base_price=shop.create_price(price * quantity),
+            price=shop.create_price(total_price),
+            base_price=shop.create_price(total_price),
             quantity=quantity,
         )
+
+    @staticmethod
+    def get_modifiers_price(product_id, quantity, start_date, end_date):
+        """Get amount to add to base price from period modifiers."""
+        modifiers_price = 0
+        if start_date and end_date:
+            # Get any period modifiers that could affect this period
+            date_filters = Q(start_date__lte=start_date, end_date__gte=start_date) | \
+                           Q(start_date__lte=end_date, end_date__gte=end_date)
+            modifiers = PeriodPriceModifier.objects.filter(
+                modifier__gt=0, product=product_id
+            ).filter(date_filters)
+            # Add to the total days * modifier value
+            for modifier in modifiers:
+                start_from = max(start_date, modifier.start_date)
+                # We add +1 day to end because end date is always the *next day*, ie the day guest leaves
+                end_on = min(end_date, modifier.end_date + datetime.timedelta(days=1))
+                days = min((end_on - start_from).days, quantity)
+                modifiers_price += days * modifier.modifier
+        return modifiers_price
+
+
+class PriceModifierModule(AdminModule):
+    name = _("Price modifiers")
+    category = name
+
+    def get_menu_entries(self, request):
+        return [
+            MenuEntry(
+                text=_("Period"), icon="fa fa-money",
+                url="reservable_pricing:modifiers.list",
+                category=self.category
+            ),
+            MenuEntry(
+                text=_("Day of Week"), icon="fa fa-money",
+                url="reservable_pricing:modifiers.list",
+                category=self.category
+            ),
+        ]

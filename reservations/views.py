@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 from babel.dates import format_datetime
-from datetime import date, timedelta, datetime
+from datetime import date, datetime
 
 from dateutil.relativedelta import relativedelta
 from django import http
@@ -21,6 +21,7 @@ from shoop.utils.i18n import get_current_babel_locale
 
 from reservations.forms import ReservableProductFormPart
 from reservations.models import Reservation, ReservableProduct
+from reservations.utils import get_start_and_end_from_request
 
 
 class ReservableProductEditView(ProductEditView):
@@ -102,22 +103,17 @@ class ReservableSearchView(TemplateView):
 class DateRangeCheckView(View):
     def get(self, request, *args, **kwargs):
         reservable_id = request.GET.get("reservable_id", None)
-        start = request.GET.get("start", None)
-        end = request.GET.get("end", None)
-        days = request.GET.get("days", None)
-        if not start or (not end and not days) or not reservable_id:
-            return http.HttpResponseBadRequest("Need reservable id, start and end dates.")
-        start_date = datetime.strptime(start, "%Y-%m-%d")
-        if end:
-            end_date = datetime.strptime(end, "%Y-%m-%d")
-        else:
-            end_date = start_date + timedelta(days=int(days))
+        start_date, end_date = get_start_and_end_from_request(request)
+        if not start_date or not end_date:
+            return http.HttpResponseBadRequest("Need start and end dates.")
+        if not reservable_id:
+            return http.HttpResponseBadRequest("Need reservable id.")
         reservable = ReservableProduct.objects.get(id=reservable_id)
-        is_free = reservable.is_period_days_free(start_date.date(), end_date.date())
+        is_free = reservable.is_period_days_free(start_date, end_date)
         total_days = (end_date - start_date).days
         if is_free:
             price = {
-                "total": (reservable.product.get_price(request) * total_days).quantize(Decimal("1.00"))
+                "total": reservable.product.get_price(request, quantity=total_days).quantize(Decimal("1.00"))
             }
         else:
             price = None

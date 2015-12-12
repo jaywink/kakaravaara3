@@ -32,6 +32,7 @@ urlpatterns += [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', KakaravaaraIndexView.as_view(), name='kakaravaara_index'),
     url(r'^', include('reservations.urls', namespace="reservations")),
+    url(r'^', include('reservable_pricing.urls', namespace="reservable_pricing")),
     url(r'^sa/', include('shoop.admin.urls', namespace="shoop_admin", app_name="shoop_admin")),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^', include('shoop.front.urls', namespace="shoop", app_name="shoop")),

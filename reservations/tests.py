@@ -1,21 +1,19 @@
 import datetime
 from decimal import Decimal
 
-import pytest
 from dateutil import relativedelta
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client, RequestFactory
+from django.test import Client, RequestFactory
 from django.utils.translation import activate
 
+from kakaravaara.tests import KakaravaaraTestsBase
 from reservations.factories import ReservableProductFactory, ReservationFactory
 from reservations.models import Reservation
-from shoop.testing.factories import get_default_shop
 from shoop.xtheme.theme import set_current_theme
 
 
-@pytest.mark.django_db
-class ReservationsGetReservedDatesTestCase(TestCase):
+class ReservationsGetReservedDatesTestCase(KakaravaaraTestsBase):
 
     def setUp(self):
         super(ReservationsGetReservedDatesTestCase, self).setUp()
@@ -81,12 +79,10 @@ class ReservationsGetReservedDatesTestCase(TestCase):
         ))
 
 
-@pytest.mark.django_db
-class ReservableViewsBaseTestCase(TestCase):
+class ReservableViewsBaseTestCase(KakaravaaraTestsBase):
     def setUp(self):
         super(ReservableViewsBaseTestCase, self).setUp()
         activate("en")
-        self.shop = get_default_shop()
         set_current_theme("shoop.themes.default_theme")
         self.client = Client()
 
@@ -110,8 +106,8 @@ class ReservableSearchViewTestCase(ReservableViewsBaseTestCase):
     def test_context_data(self):
         context = self.response.context_data
         self.assertEqual(list(context["reservables"]), [self.reservable])
-        self.assertEqual(context["start_month"], "%s/%s" % (self.today.month, self.today.year))
-        self.assertEqual(context["end_month"], "%s/%s" % (self.next.month, self.next.year))
+        self.assertEqual(context["start_month"], self.today.strftime("%m/%Y"))
+        self.assertEqual(context["end_month"], self.next.strftime("%m/%Y"))
         self.assertEqual(
             context["start_date"],
             (self.today + relativedelta.relativedelta(day=1)).strftime("%Y-%m-%d %H:%M")
