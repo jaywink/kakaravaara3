@@ -27,3 +27,8 @@ if "test" in sys.argv[1:]:
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.MD5PasswordHasher',
 )
+
+try:
+    from kakaravaara.settings.local import *
+except ImportError:
+    pass

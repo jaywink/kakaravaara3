@@ -10,3 +10,8 @@ from kakaravaara.settings.base import *
 DEBUG = False
 
 ALLOWED_HOSTS = ["kakaravaara.fi"]
+
+try:
+    from kakaravaara.settings.local import *
+except ImportError:
+    pass

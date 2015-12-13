@@ -107,6 +107,7 @@ crashlytics-build.properties
 # Project stuff
 staticfiles/
 db.sqlite3
+kakaravaara/settings/local.py
 
 # Vagrant
 .vagrant
