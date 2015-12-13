@@ -20,6 +20,11 @@ class ReservableBasket(BaseBasket):
             extra["reservation_start"] = self.request.POST.get("reservation_start")
             extra["adults"] = self.request.POST.get("adults", 1)
             extra["children"] = self.request.POST.get("children", 0)
+        # TODO: enable this here once https://github.com/shoopio/shoop/issues/291 is resolved in some way
+        # Currently setting `force_new_line` causes product not to be added at all.
+        # Once this works, remove above override of `_compare_line_for_addition`.
+        # if product.type.identifier == "reservable":
+        #     force_new_line = True
         return super(ReservableBasket, self).add_product(
             supplier, shop, product, quantity, force_new_line=force_new_line, extra=extra, parent_line=parent_line)
 
