@@ -217,7 +217,7 @@
                                     set{{ sku }}Button(true);
                                 } else {
                                     $.getJSON(
-                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ sku }}-start").val() + '&days=' + $("#{{ sku }}-days").val(),
+                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + moment($("#{{ sku }}-start").val(), "YYYY-MM-DD").format("YYYY-MM")  + '&days=' + $("#{{ sku }}-days").val(),
                                         function (data) {
                                             if (data && data.result === true) {
                                                 set{{ sku }}Button(false);
