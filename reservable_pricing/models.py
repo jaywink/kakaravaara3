@@ -27,3 +27,32 @@ class PeriodPriceModifier(MoneyPropped, models.Model):
             self.end_date.strftime(settings.SHORT_DATE_FORMAT),
             self.modifier,
         )
+
+
+DAYS_OF_WEEK = (
+    (0, _("Monday")),
+    (1, _("Tuesday")),
+    (2, _("Wednesday")),
+    (3, _("Thursday")),
+    (4, _("Friday")),
+    (5, _("Saturday")),
+    (6, _("Sunday")),
+)
+
+
+class DoWPriceModifier(MoneyPropped, models.Model):
+    product = models.ForeignKey("shoop.Product", related_name="dow_price_modifiers", on_delete=models.CASCADE)
+    modifier = MoneyValueField()
+    dow = models.CharField(choices=DAYS_OF_WEEK)
+
+    class Meta:
+        unique_together = (("product", "dow"))
+        verbose_name = _(u"dow price modifier")
+        verbose_name_plural = _(u"dow price modifiers")
+
+    def __repr__(self):
+        return "<DoWPriceModifier (%s, %s, %s)" % (
+            self.product_id,
+            self.get_dow_display(),
+            self.modifier,
+        )
