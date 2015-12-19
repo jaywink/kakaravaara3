@@ -11,9 +11,15 @@ def get_start_and_end_from_request(request):
     end = request.GET.get("end", None)
     days = request.GET.get("days", None)
     if start and (end or days):
-        start_date = datetime.strptime(start, "%Y-%m")
+        try:
+            start_date = datetime.strptime(start, "%Y-%m-%d")
+        except ValueError:
+            start_date = datetime.strptime(start, "%Y-%m")
         if end:
-            end_date = datetime.strptime(end, "%Y-%m")
+            try:
+                end_date = datetime.strptime(end, "%Y-%m-%d")
+            except ValueError:
+                end_date = datetime.strptime(end, "%Y-%m")
         else:
             end_date = start_date + timedelta(days=int(days))
     else:

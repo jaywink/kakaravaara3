@@ -20,7 +20,7 @@ INSTALLED_APPS += [
     'debug_toolbar',
 ]
 
-if "test" in sys.argv[1:]:
+if "test" in sys.argv[1:] or sys.argv[0].find("py.test") > -1:
     MIGRATION_MODULES = DisableMigrations()
 
 # For faster tests
