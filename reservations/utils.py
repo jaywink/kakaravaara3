@@ -27,6 +27,16 @@ def get_start_and_end_from_request(request):
     return start_date.date(), end_date.date()
 
 
+def get_persons_from_request(request):
+    """Get person count from request.
+
+    Returns:
+        int
+    """
+    persons = request.GET.get("persons", None)
+    return persons
+
+
 def daterange(start_date, end_date):
     """Taken from http://stackoverflow.com/a/1060330/1489738."""
     for n in range(int ((end_date - start_date).days)):

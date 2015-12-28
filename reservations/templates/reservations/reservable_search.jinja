@@ -126,16 +126,13 @@
                                         <input class="form-control" name="quantity" type="number" value="2" id="{{ sku }}-days" min="2">
                                     </div>
                                     <div class="form-group pull-left" style="width: 40%;">
-                                        <label for="{{ sku }}-adults">{% trans %}Adults{% endtrans %}</label>
-                                        <input class="form-control" name="adults" type="number" value="1" id="{{ sku }}-adults" min="1">
+                                        <label for="{{ sku }}-persons">{% trans %}Persons{% endtrans %}</label>
+                                        <input class="form-control" name="persons" type="number" value="1" id="{{ sku }}-persons" min="1">
                                     </div>
-                                    <div class="form-group pull-right" style="width: 40%;">
-                                        <label for="{{ sku }}-children">{% trans %}Children{% endtrans %}</label>
-                                        <input class="form-control" name="children" type="number" value="0" id="{{ sku }}-children" min="0">
+                                    <div class="pull-right text-info" style="width: 40%;">
+                                        <p>{% trans %}Fill in the number of persons (6 years or older). This is needed for bedding, when included in the cottage price. Please check cottage details.{% endtrans %}</p>
                                     </div>
-                                    <div class="text-info" style="display: inline-block;">
-                                        <p>{% trans %}The number of adults and children is needed to provide bedding.{% endtrans %}</p>
-                                    </div>
+                                    <div class="clearfix"></div>
                                     <div id="{{ sku }}-error-container" class="text-center hidden">
                                         <p class="text-danger">{% trans %}Chosen period is not available.{% endtrans %}</p>
                                     </div>

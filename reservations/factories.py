@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
 from datetime import time, datetime
 import factory
-from shoop.testing.factories import ProductFactory
+from shoop.testing.factories import ProductFactory, ProductTypeFactory
 
 from reservations.models import Reservation, ReservableProduct
+
+
+class ReservableProductTypeFactory(ProductTypeFactory):
+    identifier = "reservable"
+
+
+class ReservableProductProductFactory(ProductFactory):
+    type = factory.SubFactory(ReservableProductTypeFactory)
 
 
 class ReservableProductFactory(factory.DjangoModelFactory):
     class Meta:
         model = ReservableProduct
 
-    product = factory.SubFactory(ProductFactory)
+    product = factory.SubFactory(ReservableProductProductFactory)
     check_out_time = time(hour=12)
     check_in_time = time(hour=15)
 

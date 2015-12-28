@@ -136,8 +136,7 @@ class ReservationsAdminList(PicotableListView):
         Column("order", _("From Order"), sort_field="order", display="order"),
         Column("start_time", _("Sign In Time"), sort_field="start_time", display="format_start_time"),
         Column("end_time", _("Sign Out Time"), sort_field="end_time", display="format_end_time"),
-        Column("adults", _("Adults"), display="adults"),
-        Column("children", _("Children"), display="children"),
+        Column("persons", _("Persons"), display="persons"),
     ]
 
     def format_start_time(self, instance, *args, **kwargs):

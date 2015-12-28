@@ -50,8 +50,8 @@
                     {{ line.get("reservation_start", "") }}
                 </td>
                 <td class="text-right">
-                    {% if line.get("adults", None) %}
-                        {{ line.get("adults") }} / {{ line.get("children") }}
+                    {% if line.get("persons", None) %}
+                        {{ line.get("persons") }}
                     {% endif %}
                 </td>
                 <td class="text-right">

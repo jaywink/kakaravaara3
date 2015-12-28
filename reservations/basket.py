@@ -18,8 +18,7 @@ class ReservableBasket(BaseBasket):
             extra = {}
         if self.request.POST.get("reservation_start", None):
             extra["reservation_start"] = self.request.POST.get("reservation_start")
-            extra["adults"] = self.request.POST.get("adults", 1)
-            extra["children"] = self.request.POST.get("children", 0)
+            extra["persons"] = self.request.POST.get("persons", 1)
         # TODO: enable this here once https://github.com/shoopio/shoop/issues/291 is resolved in some way
         # Currently setting `force_new_line` causes product not to be added at all.
         # Once this works, remove above override of `_compare_line_for_addition`.
@@ -42,12 +41,10 @@ class ReservableOrderCreator(BasketOrderCreator):
                     hours=reservable.check_in_time.hour, minutes=reservable.check_in_time.minute),
                 end_time=start_date + timedelta(days=int(order_line.quantity)) + timedelta(
                     hours=reservable.check_out_time.hour, minutes=reservable.check_out_time.minute),
-                adults=order_line.source_line.get("adults", 1),
-                children=order_line.source_line.get("children", 0)
+                persons=order_line.source_line.get("persons", 1),
             )
             if not order_line.extra_data:
                 order_line.extra_data = {}
             order_line.extra_data["reservation_start"] = order_line.source_line.get("reservation_start")
-            order_line.extra_data["adults"] = order_line.source_line.get("adults", 1)
-            order_line.extra_data["children"] = order_line.source_line.get("children", 0)
+            order_line.extra_data["persons"] = order_line.source_line.get("persons", 1)
             order_line.save()

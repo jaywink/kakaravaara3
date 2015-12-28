@@ -48,8 +48,8 @@
                     {% endif %}
                 </td>
                 <td class="text-right">
-                    {% if line.extra_data and line.extra_data.get("adults", None) %}
-                        {{ line.extra_data.get("adults") }} / {{ line.extra_data.get("children") }}
+                    {% if line.extra_data and line.extra_data.get("persons", None) %}
+                        {{ line.extra_data.get("persons") }}
                     {% endif %}
                 </td>
                 <td class="text-right">

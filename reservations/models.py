@@ -14,6 +14,13 @@ class ReservableProduct(models.Model):
     check_out_time = models.TimeField(verbose_name=_(u"sign out time"), default=time(hour=12))
     check_in_time = models.TimeField(verbose_name=_(u"sign in time"), default=time(hour=15))
     available_count = models.IntegerField(verbose_name=_(u"available quantity"), default=1)
+    pricing_per_person = models.BooleanField(verbose_name=_("pricing per person"), default=False)
+    pricing_per_person_included = models.PositiveIntegerField(
+        verbose_name=_("people included in price"), null=True, blank=True,
+    )
+    pricing_per_person_price = models.DecimalField(
+        verbose_name=_("price per person"), null=True, blank=True, decimal_places=2, max_digits=6,
+    )
 
     class Meta:
         verbose_name = _('reservable product')
@@ -48,9 +55,7 @@ class Reservation(models.Model):
         Order, verbose_name=_("order"), related_name="reservations", null=True, blank=True)
     start_time = models.DateTimeField(verbose_name=_(u"starts"))
     end_time = models.DateTimeField(verbose_name=_(u"ends"))
-
-    adults = models.IntegerField(verbose_name=_(u"adults"), default=1)
-    children = models.IntegerField(verbose_name=_(u"children"), default=0)
+    persons = models.IntegerField(verbose_name=_(u"persons"), default=1)
 
     class Meta:
         verbose_name = _('reservation')

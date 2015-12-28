@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from reservable_pricing.models import PeriodPriceModifier
-from reservations.utils import get_start_and_end_from_request
+from reservations.utils import get_start_and_end_from_request, get_persons_from_request
 from shoop.admin.base import AdminModule, MenuEntry
 from shoop.core.models import ShopProduct
 from shoop.core.pricing import PriceInfo, PricingContext, PricingModule
@@ -25,11 +25,13 @@ class ReservablePricingModule(PricingModule):
 
     def get_context_from_request(self, request):
         start_date, end_date = get_start_and_end_from_request(request)
+        persons = get_persons_from_request(request)
 
         return self.pricing_context_class(
             shop=request.shop,
             start_date=start_date,
             end_date=end_date,
+            persons=persons,
         )
 
     def get_price_info(self, context, product, quantity=1):
@@ -45,12 +47,24 @@ class ReservablePricingModule(PricingModule):
         base_price = (shop_product.default_price_value or 0) * quantity
         modifiers_price = self.get_modifiers_price(product_id, quantity, context.start_date, context.end_date)
         total_price = base_price + modifiers_price
+        total_price = total_price + self.get_per_person_price(product, context.persons)
 
         return PriceInfo(
             price=shop.create_price(total_price),
             base_price=shop.create_price(total_price),
             quantity=quantity,
         )
+
+    @staticmethod
+    def get_per_person_price(product, persons):
+        """Get added price for per person priced reservables."""
+        if not product.type.identifier == "reservable" or not persons:
+            return 0
+        reservable = product.reservable
+        if not reservable.pricing_per_person:
+            return 0
+        difference = persons - reservable.pricing_per_person_included
+        return difference * reservable.pricing_per_person_price
 
     @staticmethod
     def get_modifiers_price(product_id, quantity, start_date, end_date):
