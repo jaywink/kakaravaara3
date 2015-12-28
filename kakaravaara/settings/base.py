@@ -73,8 +73,7 @@ SHOOP_APPS = [
     "shoop.simple_cms",
     "shoop.simple_pricing",
     "shoop.simple_supplier",
-    "shoop.themes.classic_gray",
-    "shoop.themes.default_theme",
+    "shoop_simple_theme",
     "shoop.xtheme",
 ]
 

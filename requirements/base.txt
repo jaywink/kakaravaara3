@@ -1,5 +1,8 @@
 # Shoop
-git+https://github.com/jaywink/shoop.git@kakaravaara#egg=shoop
+git+https://github.com/jaywink/shoop.git@kakara-upstream#egg=shoop
+
+# Theme
+git+https://github.com/shoopio/shoop-simple-theme.git@d05eae6a962b765d338abbaeac1ed97df5db8ae0#egg=shoop_simple_theme
 
 django-extensions==1.5.9
 
