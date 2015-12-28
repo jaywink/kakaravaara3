@@ -84,7 +84,7 @@ class ReservableViewsBaseTestCase(KakaravaaraTestsBase):
     def setUp(self):
         super(ReservableViewsBaseTestCase, self).setUp()
         activate("en")
-        set_current_theme("shoop.themes.default_theme")
+        set_current_theme("shoop_simple_theme")
         self.client = Client()
 
 

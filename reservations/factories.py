@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from datetime import time, datetime
 import factory
-from shoop.testing.factories import ProductFactory, ProductTypeFactory
+
+from shoop.core.models import ProductType
+from shoop.testing.factories import ProductFactory
 
 from reservations.models import Reservation, ReservableProduct
 
 
-class ReservableProductTypeFactory(ProductTypeFactory):
-    identifier = "reservable"
-
-
 class ReservableProductProductFactory(ProductFactory):
-    type = factory.SubFactory(ReservableProductTypeFactory)
+    @factory.lazy_attribute
+    def type(self):
+        return ProductType.objects.get_or_create(identifier="reservable")[0]
 
 
 class ReservableProductFactory(factory.DjangoModelFactory):
