@@ -3,13 +3,14 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
+from shoop.front.checkout.addresses import AddressesPhase, AddressForm
 from shoop.front.checkout.confirm import ConfirmPhase, ConfirmForm
 from shoop.front.views.checkout import DefaultCheckoutView
 
 
 class ReservationsCheckoutView(DefaultCheckoutView):
     phase_specs = [
-        "shoop.front.checkout.addresses:AddressesPhase",
+        "reservations.checkout:ReservationsAddressesPhase",
         "reservations.checkout:ReservationsConfirmPhase",
     ]
 
@@ -26,3 +27,15 @@ class ReservationsConfirmForm(ConfirmForm):
 
 class ReservationsConfirmPhase(ConfirmPhase):
     form_class = ReservationsConfirmForm
+
+
+class ReservationsAddressForm(AddressForm):
+    def __init__(self, **kwargs):
+        super(ReservationsAddressForm, self).__init__(**kwargs)
+        self.fields["phone"].required = True
+        self.fields["email"].required = True
+        self.fields["street"].required = False
+
+
+class ReservationsAddressesPhase(AddressesPhase):
+    address_form_class = ReservationsAddressForm
