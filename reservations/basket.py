@@ -16,8 +16,8 @@ class ReservableBasket(BaseBasket):
     def add_product(self, supplier, shop, product, quantity, force_new_line=False, extra=None, parent_line=None):
         if not extra:
             extra = {}
-        if self.request.POST.get("reservation_start", None):
-            extra["reservation_start"] = self.request.POST.get("reservation_start")
+        if self.request.POST.get("start", None):
+            extra["reservation_start"] = self.request.POST.get("start")
             extra["persons"] = self.request.POST.get("persons", 1)
         # TODO: enable this here once https://github.com/shoopio/shoop/issues/291 is resolved in some way
         # Currently setting `force_new_line` causes product not to be added at all.

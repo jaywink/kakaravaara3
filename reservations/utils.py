@@ -7,9 +7,12 @@ def get_start_and_end_from_request(request):
     Returns:
         date, date or None, None
     """
-    start = request.GET.get("start", None)
-    end = request.GET.get("end", None)
-    days = request.GET.get("days", None)
+    start = getattr(request, request.method).get("start", None)
+    end = getattr(request, request.method).get("end", None)
+    if "days" in getattr(request, request.method):
+        days = getattr(request, request.method).get("days", None)
+    else:
+        days = getattr(request, request.method).get("quantity", None)
     if start and (end or days):
         try:
             start_date = datetime.strptime(start, "%Y-%m-%d")
