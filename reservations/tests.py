@@ -6,6 +6,8 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.test import Client, RequestFactory
 from django.utils.translation import activate
+from freezegun import freeze_time
+
 from shoop.core.models import ShopProduct
 
 from kakaravaara.tests import KakaravaaraTestsBase
@@ -88,18 +90,20 @@ class ReservableViewsBaseTestCase(KakaravaaraTestsBase):
         self.client = Client()
 
 
+@freeze_time("2015-12-15")
 class ReservableSearchViewTestCase(ReservableViewsBaseTestCase):
     def setUp(self):
         super(ReservableSearchViewTestCase, self).setUp()
         self.reservable = ReservableProductFactory()
+        self.today = datetime.date.today()
+        self.now = datetime.time(15)
+        self.next = self.today + relativedelta.relativedelta(months=1)
         self.reservation = ReservationFactory(
             reservable=self.reservable,
-            start_time=datetime.datetime.today(),
-            end_time=datetime.datetime.today() + datetime.timedelta(days=3)
+            start_time=datetime.datetime.combine(self.today, self.now),
+            end_time=datetime.datetime.combine(self.today + datetime.timedelta(days=3), self.now)
         )
         self.response = self.client.get(reverse('reservations:reservable.search'))
-        self.today = datetime.date.today()
-        self.next = datetime.date.today() + relativedelta.relativedelta(months=1)
 
     def test_view_responds(self):
         self.assertContains(self.response, u"Select months to search from")
