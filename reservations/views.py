@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.http import JsonResponse
 from django.utils.timezone import localtime
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 from django.views.generic import TemplateView, View
 
 from shoop.admin.modules.products.views import ProductEditView
@@ -115,9 +115,20 @@ class DateRangeCheckView(View):
         is_free = reservable.is_period_days_free(start_date, end_date)
         total_days = (end_date - start_date).days
         if is_free:
+            price_info = reservable.product.get_price_info(request, quantity=total_days)
+            has_extra_info = price_info.period_modifiers > 0 or price_info.per_person_modifiers > 0
             price = {
-                "total": reservable.product.get_price(request, quantity=total_days).quantize(Decimal("1.00"))
+                "total": price_info.price.quantize(Decimal("1.00")),
+                "base": price_info.base_price.quantize(Decimal("1.00")),
+                "has_extra_info": has_extra_info,
             }
+            if has_extra_info:
+                price.update({
+                    "period_modifiers": price_info.period_modifiers.quantize(Decimal("1.00")),
+                    "per_person_modifiers": price_info.per_person_modifiers.quantize(Decimal("1.00")),
+                    "special_period_str": ugettext("Special period"),
+                    "persons_count_str": ugettext("Person count"),
+                })
         else:
             price = None
         return JsonResponse({

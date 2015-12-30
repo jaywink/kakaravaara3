@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+from decimal import Decimal
 
 import six
 from django.db.models import Q
@@ -45,18 +46,22 @@ class ReservablePricingModule(PricingModule):
             product_id = product.pk
 
         base_price = (shop_product.default_price_value or 0) * quantity
-        modifiers_price = self.get_modifiers_price(product_id, quantity, context.start_date, context.end_date)
-        total_price = base_price + modifiers_price
-        total_price = total_price + self.get_per_person_price(product, context.persons) * quantity
+        period_modifiers = self.get_period_modifiers(product_id, quantity, context.start_date, context.end_date)
+        per_person_modifiers = self.get_per_person_modifiers(product, context.persons) * quantity
+        total_price = base_price + period_modifiers + per_person_modifiers
 
-        return PriceInfo(
+        price_info = PriceInfo(
             price=shop.create_price(total_price),
-            base_price=shop.create_price(total_price),
+            base_price=shop.create_price(base_price),
             quantity=quantity,
         )
+        # Add some custom information to PriceInfo before returning it
+        price_info.period_modifiers = Decimal(period_modifiers)
+        price_info.per_person_modifiers = Decimal(per_person_modifiers)
+        return price_info
 
     @staticmethod
-    def get_per_person_price(product, persons):
+    def get_per_person_modifiers(product, persons):
         """Get added price for per person priced reservables."""
         if not product.type.identifier == "reservable" or not persons:
             return 0
@@ -67,7 +72,7 @@ class ReservablePricingModule(PricingModule):
         return difference * reservable.pricing_per_person_price
 
     @staticmethod
-    def get_modifiers_price(product_id, quantity, start_date, end_date):
+    def get_period_modifiers(product_id, quantity, start_date, end_date):
         """Get amount to add to base price from period modifiers."""
         modifiers_price = 0
         if start_date and end_date:

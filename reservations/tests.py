@@ -174,10 +174,43 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
                 (self.next + datetime.timedelta(days=3)).strftime("%Y-%m-%d")
             )
         )
+        price_info = self.reservable.product.get_price_info(request, quantity=3)
         self.assertJSONEqual(response.content.decode("utf-8"), {
             "result": True,
             "price": {
-                "total": str((self.reservable.product.get_price(request) * 3).quantize(Decimal("1.00"))),
+                "total": str(price_info.price.quantize(Decimal("1.00"))),
+                "base": str(price_info.base_price.quantize(Decimal("1.00"))),
+                "has_extra_info": False,
+            }
+        })
+
+    def test_free_period_should_return_period_is_free_and_extra_info(self):
+        request = RequestFactory().get("/")
+        request.GET = {"persons": 3}
+        request.shop = self.shop
+        self.reservable.pricing_per_person = True
+        self.reservable.pricing_per_person_included = 2
+        self.reservable.pricing_per_person_price = Decimal("10.00")
+        self.reservable.save()
+        response = self.client.get(
+            "%s?reservable_id=%s&start=%s&end=%s&persons=3" % (
+                reverse('reservations:check_period'),
+                self.reservable.id,
+                self.next.strftime("%Y-%m-%d"),
+                (self.next + datetime.timedelta(days=3)).strftime("%Y-%m-%d")
+            )
+        )
+        price_info = self.reservable.product.get_price_info(request, quantity=3)
+        self.assertJSONEqual(response.content.decode("utf-8"), {
+            "result": True,
+            "price": {
+                "total": str(price_info.price.quantize(Decimal("1.00"))),
+                "base": str(price_info.base_price.quantize(Decimal("1.00"))),
+                "period_modifiers": str(price_info.period_modifiers.quantize(Decimal("1.00"))),
+                "per_person_modifiers": str(price_info.per_person_modifiers.quantize(Decimal("1.00"))),
+                "has_extra_info": True,
+                "special_period_str": "Special period",
+                "persons_count_str": "Person count",
             }
         })
 

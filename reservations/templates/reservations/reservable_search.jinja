@@ -137,7 +137,15 @@
                                         <p class="text-danger">{% trans %}Chosen period is not available.{% endtrans %}</p>
                                     </div>
                                     <div id="{{ sku }}-price-container" class="text-center hidden">
-                                        <p class="text-info">{% trans %}Price for chosen period:{% endtrans %} <span id="{{ sku }}-period-price"></span></p>
+                                        <p class="text-success">
+                                            {% trans %}Price for chosen period:{% endtrans %}
+                                            <strong>
+                                                <span id="{{ sku }}-period-price"></span>
+                                            </strong>
+                                            <span class="hidden" id="{{ sku }}-price-extra-info-container">
+                                                <i class="glyphicon glyphicon-info-sign" title=""></i>
+                                            </span>
+                                        </p>
                                     </div>
                                     <button id="{{ sku }}-submit" type="submit" class="btn btn-primary btn-block">{% trans %}Reserve{% endtrans %}</button>
                                 </form>
@@ -202,8 +210,24 @@
                                 if (price) {
                                     $("#{{ sku }}-period-price").html(price.total);
                                     $("#{{ sku }}-price-container").removeClass("hidden");
+                                    if (price.has_extra_info) {
+                                        var extra_infos = [];
+                                        if (price.period_modifiers > 0) {
+                                            extra_infos.push(price.special_period_str + " " + price.period_modifiers + "€");
+                                        }
+                                        if (price.per_person_modifiers > 0) {
+                                            extra_infos.push(price.persons_count_str + " " + price.per_person_modifiers + "€");
+                                        }
+                                        $("#{{ sku }}-price-extra-info-container > i").prop(
+                                            "title", extra_infos.join(", ")
+                                        ).tooltip();
+                                        $("#{{ sku }}-price-extra-info-container").removeClass("hidden");
+                                    } else {
+                                        $("#{{ sku }}-price-extra-info-container").addClass("hidden");
+                                    }
                                 } else {
                                     $("#{{ sku }}-price-container").addClass("hidden");
+                                    $("#{{ sku }}-price-extra-info-container").addClass("hidden");
                                     $("#{{ sku }}-period-price").html("");
                                 }
                             }
