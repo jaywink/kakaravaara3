@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 from shoop.addons import add_enabled_addons
 
 ######## PATHS ########
@@ -32,6 +33,10 @@ SHOOP_CHECKOUT_VIEW_SPEC = ("reservations.checkout:ReservationsCheckoutView")
 SHOOP_ENABLED_ADDONS_FILE = os.path.join(BASE_DIR, "var", "enabled_addons")
 SHOOP_PRICING_MODULE = "reservable_pricing"
 SHOOP_ADDRESS_HOME_COUNTRY = "FI"
+SHOOP_ORDER_KNOWN_EXTRA_DATA_KEYS = [
+    ("reservation_start", "Reservation start"),
+    ("persons", "Persons"),
+]
 
 ######## Installed apps ########
 PREREQ_APPS = [
