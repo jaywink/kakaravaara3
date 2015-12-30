@@ -66,7 +66,6 @@ SHOOP_APPS = [
     "shoop.front.apps.customer_information",
     "shoop.front.apps.personal_order_history",
     "shoop.front.apps.simple_order_notification",
-    "shoop.front.apps.simple_search",
     "shoop.notify",
     "shoop.simple_cms",
     "shoop.simple_pricing",
