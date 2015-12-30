@@ -21,7 +21,7 @@ class ReservationsConfirmForm(ConfirmForm):
         super(ReservationsConfirmForm, self).__init__(**kwargs)
         terms_and_conditions = reverse_lazy("shoop:cms_page", kwargs={"url": "terms"})
         self.fields["accept_terms"].label = mark_safe(_("I have read and agree with the "
-                                                      "<a href='%s'>Terms and Conditions</a>")) % (terms_and_conditions)
+                                                      "<a href='%s' target='_blank'>Terms and Conditions</a>")) % (terms_and_conditions)
 
 
 class ReservationsConfirmPhase(ConfirmPhase):
