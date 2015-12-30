@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 from babel.dates import format_datetime
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from dateutil.relativedelta import relativedelta
 from django import http
@@ -90,7 +90,10 @@ class ReservableSearchView(TemplateView):
         assert self.end_date >= self.start_date
         current = self.start_date
         while True:
-            months.append(current.strftime("%Y-%m"))
+            # make sure there are selectable days in this month
+            not_this_month = date.today().replace(day=1) != current
+            if not_this_month or (date.today() + timedelta(days=2)).month == current.month:
+                months.append(current.strftime("%Y-%m"))
             next = current + relativedelta(months=1)
             if next.replace(day=1) <= self.end_date.replace(day=1):
                 current = next
