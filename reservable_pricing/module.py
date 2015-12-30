@@ -47,7 +47,7 @@ class ReservablePricingModule(PricingModule):
         base_price = (shop_product.default_price_value or 0) * quantity
         modifiers_price = self.get_modifiers_price(product_id, quantity, context.start_date, context.end_date)
         total_price = base_price + modifiers_price
-        total_price = total_price + self.get_per_person_price(product, context.persons)
+        total_price = total_price + self.get_per_person_price(product, context.persons) * quantity
 
         return PriceInfo(
             price=shop.create_price(total_price),
@@ -63,7 +63,7 @@ class ReservablePricingModule(PricingModule):
         reservable = product.reservable
         if not reservable.pricing_per_person:
             return 0
-        difference = persons - reservable.pricing_per_person_included
+        difference = max(0, persons - reservable.pricing_per_person_included)
         return difference * reservable.pricing_per_person_price
 
     @staticmethod

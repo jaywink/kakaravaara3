@@ -33,7 +33,7 @@ def get_persons_from_request(request):
     Returns:
         int
     """
-    persons = request.GET.get("persons", None)
+    persons = int(request.GET.get("persons", 1))
     return persons
 
 

@@ -3,7 +3,7 @@
 {% set reservable_form = form[form_def.name] %}
 
 {% call content_block(_("Reservable"), "fa-calendar-o") %}
-    {{ bs3.field(reservable_form.check_out_time) }}
-    {{ bs3.field(reservable_form.check_in_time) }}
-    {{ bs3.field(reservable_form.available_count) }}
+    {% for field in reservable_form %}
+        {{ bs3.field(field) }}
+    {% endfor %}
 {% endcall %}

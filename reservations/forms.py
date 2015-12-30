@@ -9,9 +9,12 @@ class ReservableProductForm(ModelForm):
     class Meta:
         model = ReservableProduct
         fields = (
-            "check_out_time",
-            "check_in_time",
-            "available_count",
+            #"check_out_time",  # not implemented yet
+            #"check_in_time",  # not implemented yet
+            #"available_count",  # not implemented yet
+            "pricing_per_person",
+            "pricing_per_person_included",
+            "pricing_per_person_price",
         )
 
 
@@ -36,5 +39,5 @@ class ReservableProductFormPart(FormPart):
             }
         )
 
-    def get_initial(self):
-        pass
+    def form_valid(self, form):
+        form["reservableproduct"].save()

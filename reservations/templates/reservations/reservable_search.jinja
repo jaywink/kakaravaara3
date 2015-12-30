@@ -214,7 +214,7 @@
                                     set{{ sku }}Button(true);
                                 } else {
                                     $.getJSON(
-                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ sku }}-start").val()  + '&days=' + $("#{{ sku }}-days").val(),
+                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ sku }}-start").val()  + '&days=' + $("#{{ sku }}-days").val() + '&persons=' + $("#{{ sku }}-persons").val(),
                                         function (data) {
                                             if (data && data.result === true) {
                                                 set{{ sku }}Button(false);
@@ -236,6 +236,8 @@
                             }
                             $("#{{ sku }}-days").change(check{{ sku }}Period);
                             $("#{{ sku }}-days").keyup(check{{ sku }}Period);
+                            $("#{{ sku }}-persons").change(check{{ sku }}Period);
+                            $("#{{ sku }}-persons").keyup(check{{ sku }}Period);
                         });
                     </script>
                 </div>

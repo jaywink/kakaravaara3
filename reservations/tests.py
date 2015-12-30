@@ -216,6 +216,13 @@ class ReservablePricePerPersonTestCase(KakaravaaraTestsBase):
         shop_product = ShopProduct.objects.get(product_id=self.reservable.product_id, shop=self.shop)
         self.assertAlmostEqual(price.value, shop_product.default_price_value + 3 * Decimal("10.00"), 6)
 
+    def test_reservable_with_pricing_per_person_active_person_count_changes_price_more_nights(self):
+        self.reservable.pricing_per_person = True
+        self.reservable.save()
+        price = self.reservable.product.get_price(self.request, quantity=3).quantize(Decimal("1.00"))
+        shop_product = ShopProduct.objects.get(product_id=self.reservable.product_id, shop=self.shop)
+        self.assertAlmostEqual(price.value, shop_product.default_price_value * 3 + 3 * Decimal("10.00") * 3, 6)
+
     def test_reservable_with_pricing_per_person_included_count_zero(self):
         self.reservable.pricing_per_person = True
         self.reservable.save()
