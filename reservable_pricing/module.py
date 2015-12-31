@@ -52,7 +52,7 @@ class ReservablePricingModule(PricingModule):
 
         price_info = PriceInfo(
             price=shop.create_price(total_price),
-            base_price=shop.create_price(base_price),
+            base_price=shop.create_price(total_price),
             quantity=quantity,
         )
         # Add some custom information to PriceInfo before returning it

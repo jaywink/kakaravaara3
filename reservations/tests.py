@@ -179,7 +179,6 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
             "result": True,
             "price": {
                 "total": str(price_info.price.quantize(Decimal("1.00"))),
-                "base": str(price_info.base_price.quantize(Decimal("1.00"))),
                 "has_extra_info": False,
             }
         })
@@ -205,7 +204,6 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
             "result": True,
             "price": {
                 "total": str(price_info.price.quantize(Decimal("1.00"))),
-                "base": str(price_info.base_price.quantize(Decimal("1.00"))),
                 "period_modifiers": str(price_info.period_modifiers.quantize(Decimal("1.00"))),
                 "per_person_modifiers": str(price_info.per_person_modifiers.quantize(Decimal("1.00"))),
                 "has_extra_info": True,

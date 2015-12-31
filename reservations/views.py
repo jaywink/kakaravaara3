@@ -119,7 +119,6 @@ class DateRangeCheckView(View):
             has_extra_info = price_info.period_modifiers > 0 or price_info.per_person_modifiers > 0
             price = {
                 "total": price_info.price.quantize(Decimal("1.00")),
-                "base": price_info.base_price.quantize(Decimal("1.00")),
                 "has_extra_info": has_extra_info,
             }
             if has_extra_info:
