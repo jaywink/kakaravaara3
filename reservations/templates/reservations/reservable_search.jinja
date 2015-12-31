@@ -277,8 +277,10 @@
 
 
 {% block extrameta %}
-    <script type="text/javascript" src="//cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css" />
+    <!-- qTip -->
+    <script type="text/javascript" src="{{ static("js/jquery.qtip.min.js") }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ static("css/jquery.qtip.min.css") }}" />
+
     <!-- Moment.js -->
     <script type="text/javascript" src="{{ static("js/moment-with-locales.min.js") }}"></script>
     <script type="text/javascript" src="{{ static("js/moment-timezone-with-data.min.js") }}"></script>
