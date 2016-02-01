@@ -11,19 +11,20 @@
     <script src="{{ static("js/jquery-1.11.3.min.js") }}"></script>
 
     {# Include all Bootstrap JavaScript libraries #}
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="{{ static("js/bootstrap.min.js") }}"></script>
 
     {% block extrameta %}{% endblock %}
 
     <title>{{ request.shop.public_name }} &ndash; {% block title %}{% endblock %}</title>
 
     {# Include favicon #}
-    <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}shoop/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{ static("shoop/img/favicon.ico") }}">
 
     {# Include Bootstrap styles #}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/cosmo/bootstrap.min.css">
+    {# Not vanilla bootstap, from here: //maxcdn.bootstrapcdn.com/bootswatch/3.3.2/cosmo/bootstrap.min.css #}
+    <link rel="stylesheet" href="{{ static("css/bootstrap.min.css") }}">
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/kakaravaara.css">
+    <link rel="stylesheet" href="{{ static("css/kakaravaara.css") }}">
 </head>
 <body>
     <header role="banner">
