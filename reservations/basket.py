@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
+
 from shoop.front.basket.objects import BaseBasket
 from shoop.front.basket.order_creator import BasketOrderCreator
+from shoop.utils.dates import parse_date
 
 from reservations.models import Reservation, ReservableProduct
 
@@ -17,7 +19,7 @@ class ReservableBasket(BaseBasket):
         if not extra:
             extra = {}
         if self.request.POST.get("start", None):
-            extra["reservation_start"] = self.request.POST.get("start")
+            extra["reservation_start"] = parse_date(self.request.POST.get("start"))
             extra["persons"] = self.request.POST.get("persons", 1)
         # TODO: enable this here once https://github.com/shoopio/shoop/issues/291 is resolved in some way
         # Currently setting `force_new_line` causes product not to be added at all.
@@ -32,7 +34,7 @@ class ReservableOrderCreator(BasketOrderCreator):
     def process_saved_order_line(self, order, order_line):
         if order_line.product and order_line.product.type.identifier == "reservable":
             # Create reservation
-            start_date = datetime.strptime(order_line.source_line.get("reservation_start"), "%Y-%m-%d")
+            start_date = order_line.source_line.get("reservation_start")
             reservable = ReservableProduct.objects.get(product=order_line.product)
             Reservation.objects.create(
                 reservable=reservable,

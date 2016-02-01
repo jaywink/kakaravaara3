@@ -47,7 +47,7 @@
                     {{ line.text }}
                 </td>
                 <td>
-                    {{ line.get("reservation_start", "") }}
+                    {{ line.get("reservation_start", "")|date }}
                 </td>
                 <td class="text-right">
                     {% if line.get("persons", None) %}

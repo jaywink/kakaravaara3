@@ -185,7 +185,11 @@
                                 $("#reservable-dates-{{ sku }}-{{ month }} .day:not('.reserved'):not('.disabled')").click(function (ev) {
                                     // Transfer start date to correct input and show the form
                                     var t = $(ev.currentTarget);
-                                    $("#{{ sku }}-start").val(t.data("date"));
+                                    {% if LANGUAGE_CODE == "fi" %}
+                                        $("#{{ sku }}-start").val(moment(t.data("date"), "YYYY-MM-DD").format("DD.MM.YYYY"));
+                                    {% else %}
+                                        $("#{{ sku }}-start").val(moment(t.data("date"), "YYYY-MM-DD").format("YYYY-MM-DD"));
+                                    {% endif %}
                                     $("#{{ sku }}-start").closest(".reservation-control").removeClass("hidden");
                                     $("#{{ sku }}-days").trigger("change");
                                 });
@@ -247,14 +251,20 @@
                             }
 
                             function check{{ sku }}Period() {
+                                var start_date;
                                 // Lookup backend to see if new range is free
                                 if ($("#{{ sku }}-days").val() <= 1) {
                                     set{{ sku }}Button(true);
                                     set{{ sku }}Error(true);
                                     set{{ sku }}Price(false);
                                 } else {
+                                    {% if LANGUAGE_CODE == "fi" %}
+                                        start_date = moment($("#{{ sku }}-start").val(), "DD.MM.YYYY").format("YYYY-MM-DD");
+                                    {% else %}
+                                        start_date = $("#{{ sku }}-start").val();
+                                    {% endif %}
                                     $.getJSON(
-                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ sku }}-start").val()  + '&days=' + $("#{{ sku }}-days").val() + '&persons=' + $("#{{ sku }}-persons").val(),
+                                        '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + start_date  + '&days=' + $("#{{ sku }}-days").val() + '&persons=' + $("#{{ sku }}-persons").val(),
                                         function (data) {
                                             if (data && data.result === true) {
                                                 set{{ sku }}Button(false);

@@ -44,7 +44,12 @@
                 </td>
                 <td>
                     {% if line.extra_data %}
-                        {{ line.extra_data.get("reservation_start", "") }}
+                        {% if LANGUAGE_CODE == "fi" %}
+                            {# Yes this is a weird hack, but Shoop wants to force extra data values as text #}
+                            {{ line.extra_data.get("reservation_start", "").split("-")|reverse|join(".") }}
+                        {% else %}
+                            {{ line.extra_data.get("reservation_start", "") }}
+                        {% endif %}
                     {% endif %}
                 </td>
                 <td class="text-right">

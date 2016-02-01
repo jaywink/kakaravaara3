@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+from shoop.utils.dates import parse_date
+
 
 def get_start_and_end_from_request(request):
     """Get start and end dates from request.
@@ -14,20 +16,14 @@ def get_start_and_end_from_request(request):
     else:
         days = getattr(request, request.method).get("quantity", None)
     if start and (end or days):
-        try:
-            start_date = datetime.strptime(start, "%Y-%m-%d")
-        except ValueError:
-            start_date = datetime.strptime(start, "%Y-%m")
+        start_date = parse_date(start)
         if end:
-            try:
-                end_date = datetime.strptime(end, "%Y-%m-%d")
-            except ValueError:
-                end_date = datetime.strptime(end, "%Y-%m")
+            end_date = parse_date(end)
         else:
             end_date = start_date + timedelta(days=int(days))
     else:
         return None, None
-    return start_date.date(), end_date.date()
+    return start_date, end_date
 
 
 def get_persons_from_request(request):
