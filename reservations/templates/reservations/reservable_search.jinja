@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div id="{{ sku }}-error-container" class="text-center hidden">
-                                        <p class="text-danger">{% trans %}Chosen period is not available.{% endtrans %}</p>
+                                        <p class="text-danger">/p>
                                     </div>
                                     <div id="{{ sku }}-price-container" class="text-center hidden">
                                         <p class="text-success">
@@ -199,7 +199,17 @@
                             }
 
                             function set{{ sku }}Error(status) {
+                                var error_message = "";
                                 if (status) {
+                                    var days = $("#{{ sku }}-days").val();
+                                    if (days === "") {
+                                        error_message = "";
+                                    } else if (days <= 1) {
+                                        error_message = "{% trans %}Minimum possible period is 2 nights.{% endtrans %}";
+                                    } else {
+                                        error_message = "{% trans %}Chosen period is not available.{% endtrans %}";
+                                    }
+                                    $("#{{ sku }}-error-container > p").html(error_message);
                                     $("#{{ sku }}-error-container").removeClass("hidden");
                                 } else {
                                     $("#{{ sku }}-error-container").addClass("hidden");
@@ -238,8 +248,10 @@
 
                             function check{{ sku }}Period() {
                                 // Lookup backend to see if new range is free
-                                if ($("#{{ sku }}-days").val() <= 0) {
+                                if ($("#{{ sku }}-days").val() <= 1) {
                                     set{{ sku }}Button(true);
+                                    set{{ sku }}Error(true);
+                                    set{{ sku }}Price(false);
                                 } else {
                                     $.getJSON(
                                         '{{ url("reservations:check_period") }}?reservable_id={{ reservable.id }}&start=' + $("#{{ sku }}-start").val()  + '&days=' + $("#{{ sku }}-days").val() + '&persons=' + $("#{{ sku }}-persons").val(),
