@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta, time
+import datetime
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
+from reservable_pricing.models import PeriodPriceModifier
 from shoop.core.models import Product, Order
 
 
@@ -11,8 +12,8 @@ class ReservableProduct(models.Model):
     """Products that have reservable properties."""
 
     product = models.OneToOneField(Product, verbose_name=_(u"reservable product"), related_name="reservable")
-    check_out_time = models.TimeField(verbose_name=_(u"sign out time"), default=time(hour=12))
-    check_in_time = models.TimeField(verbose_name=_(u"sign in time"), default=time(hour=15))
+    check_out_time = models.TimeField(verbose_name=_(u"sign out time"), default=datetime.time(hour=12))
+    check_in_time = models.TimeField(verbose_name=_(u"sign in time"), default=datetime.time(hour=15))
     available_count = models.IntegerField(verbose_name=_(u"available quantity"), default=1)
     pricing_per_person = models.BooleanField(verbose_name=_("pricing per person"), default=False)
     pricing_per_person_included = models.PositiveIntegerField(
@@ -44,6 +45,25 @@ class ReservableProduct(models.Model):
     def is_period_days_free(self, start, end):
         """Check if period is free."""
         return len(self.get_reserved_dates(start, end)) == 0
+
+    @property
+    def has_price_modifiers(self):
+        """Check if this reservable has price modifiers.
+
+        Returns:
+            True or False
+        """
+        if self.pricing_per_person:
+            return True
+        if self.period_price_modifiers.exists():
+            return True
+        return False
+
+    @property
+    def period_price_modifiers(self):
+        future_period_modifiers = PeriodPriceModifier.objects.filter(
+            product=self.product, start_date__gte=datetime.date.today()).order_by("start_date")
+        return future_period_modifiers
 
 
 class Reservation(models.Model):
@@ -92,5 +112,5 @@ class Reservation(models.Model):
             current = max(reservation.start_time.date(), start_date)
             while current < reservation.end_time.date() and current <= end_date:
                 dates.append(current)
-                current += timedelta(days=1)
+                current += datetime.timedelta(days=1)
         return dates

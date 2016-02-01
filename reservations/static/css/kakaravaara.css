@@ -3,3 +3,8 @@ div#billing div.required-field label.control-label::after,
 div#shipping div.required-field label.control-label::after {
     content: " *";
 }
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th {
+    border-top: none;
+}
