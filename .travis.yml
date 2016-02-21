@@ -2,6 +2,10 @@ language: python
 python:
   - "3.4"
 install: "pip install -r requirements/dev.txt"
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - node_modules/
 script: py.test --cov=./
 env:
   - TRAVIS_NODE_VERSION="4"
