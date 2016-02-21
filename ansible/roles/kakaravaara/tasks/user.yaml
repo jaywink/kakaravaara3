@@ -1,3 +1,7 @@
 ---
 - name: Kakaravaara user
   user: name=kakara state=present
+- name: Ensure www-data member of kakara group
+  user: name=www-data append=yes groups=kakara state=present
+- name: Make kakara home non-world readable
+  file: path=/home/kakara mode=0750 state=directory
