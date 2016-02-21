@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-26 18:59+0300\n"
+"POT-Creation-Date: 2016-02-21 19:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,316 +17,376 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: reservations/models.py:13 reservations/models.py:19
-#: reservations/models.py:53
-msgid "reservable product"
+msgid "period price modifier"
 msgstr ""
 
-#: reservations/models.py:14
-msgid "sign out time"
+msgid "period price modifiers"
 msgstr ""
 
-#: reservations/models.py:15
-msgid "sign in time"
+msgid "Reservable Pricing"
 msgstr ""
 
-#: reservations/models.py:16
-msgid "available quantity"
+msgid "Price modifiers"
 msgstr ""
 
-#: reservations/models.py:20
-msgid "reservable products"
+msgid "Period"
 msgstr ""
 
-#: reservations/models.py:55
-msgid "order"
+msgid "Day of Week"
 msgstr ""
 
-#: reservations/models.py:56
-msgid "starts"
+msgid "New period modifier"
 msgstr ""
 
-#: reservations/models.py:57
-msgid "ends"
-msgstr ""
-
-#: reservations/models.py:59
-msgid "adults"
-msgstr ""
-
-#: reservations/models.py:60
-msgid "children"
-msgstr ""
-
-#: reservations/models.py:63
-msgid "reservation"
-msgstr ""
-
-#: reservations/models.py:64
-msgid "reservations"
-msgstr ""
-
-#: reservations/templates/reservations/_reservable_product_form.jinja:5
-msgid "Reservable"
-msgstr ""
-
-#: reservations/templates/reservations/_reserved_dates_form.jinja:4
-#: reservations/templates/reservations/reservable_search.jinja:5
-#: reservations/templates/shoop/front/includes/_navigation.jinja:22
-#: reservations/views.py:34
-msgid "Reservations"
-msgstr ""
-
-#: reservations/templates/reservations/reservable_search.jinja:14
-msgid "Select months to search from"
-msgstr ""
-
-#: reservations/templates/reservations/reservable_search.jinja:76
-msgid "Cottages and their reserved periods."
-msgstr ""
-
-#: reservations/templates/reservations/reservable_search.jinja:79
-msgid ""
-"To reserve a cottage, click on a free date in the calendar, type in the "
-"number of days and click 'Reserve'."
-msgstr ""
-
-#: reservations/templates/reservations/reservable_search.jinja:103
-msgid "Arrival Date"
-msgstr ""
-
-#: reservations/templates/reservations/reservable_search.jinja:107
-msgid "Number of nights"
-msgstr ""
-
-#: reservations/templates/reservations/reservable_search.jinja:111
-msgid "Chosen period is not available."
-msgstr ""
-
-#: reservations/templates/reservations/reservable_search.jinja:113
-msgid "Reserve"
-msgstr ""
-
-#: reservations/templates/reservations/reservation_edit.jinja:7
-#: reservations/views.py:70
-msgid "New Reservation"
-msgstr ""
-
-#: reservations/templates/reservations/reservation_edit.jinja:17
 msgid "General information"
 msgstr ""
 
-#: reservations/templates/shoop/admin/orders/detail.jinja:9
-msgid "Details & Status"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:33
-msgid "Addresses"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:36
-msgid "Shipping address"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:40
-msgid "No shipping address defined."
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:44
-msgid "Billing address"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:48
-msgid "No billing address defined."
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:55
-msgid "Order Contents"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:60
-msgid "SKU"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:61
-msgid "Text"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:62
-msgid "Start Date"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:63
-msgid "End Date"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:64
-msgid "Taxless Unit Price"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:65
-#: reservations/templates/shoop/front/basket/partials/table.jinja:18
-#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:14
-#: reservations/templates/shoop/front/order/partials/product_table.jinja:13
-#: reservations/templates/shoop/front/product/_detail_order_section.jinja:3
-msgid "Quantity"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:66
-msgid "Taxless Discount"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:67
-#: reservations/templates/shoop/admin/orders/detail.jinja:125
-msgid "Tax"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:68
-#: reservations/templates/shoop/admin/orders/detail.jinja:132
-msgid "Taxless Total"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:69
-#: reservations/templates/shoop/admin/orders/detail.jinja:136
-msgid "Total incl. Tax"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:119
-msgid "Discount"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:122
-#: reservations/templates/shoop/front/basket/partials/table.jinja:19
-#: reservations/templates/shoop/front/basket/partials/table.jinja:31
-#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:15
-#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:21
-#: reservations/templates/shoop/front/includes/_navigation.jinja:66
-#: reservations/templates/shoop/front/order/partials/product_table.jinja:14
-#: reservations/templates/shoop/front/order/partials/product_table.jinja:20
-msgid "Total"
-msgstr ""
-
-#: reservations/templates/shoop/admin/orders/detail.jinja:125
-msgid "Taxless"
-msgstr ""
-
-#: reservations/templates/shoop/front/basket/partials/table.jinja:15
-#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:11
-msgid "Product"
-msgstr ""
-
-#: reservations/templates/shoop/front/basket/partials/table.jinja:16
-#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:12
-#: reservations/templates/shoop/front/order/partials/product_table.jinja:11
-msgid "Arrival"
-msgstr ""
-
-#: reservations/templates/shoop/front/basket/partials/table.jinja:17
-#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:13
-#: reservations/templates/shoop/front/order/partials/product_table.jinja:12
-msgid "Price"
-msgstr ""
-
-#: reservations/templates/shoop/front/basket/partials/table.jinja:18
-#: reservations/templates/shoop/front/checkout/_confirm_table.jinja:14
-#: reservations/templates/shoop/front/order/partials/product_table.jinja:13
-msgid "Nights"
-msgstr ""
-
-#: reservations/templates/shoop/front/basket/partials/table.jinja:27
-msgid "Update quantities"
-msgstr ""
-
-#: reservations/templates/shoop/front/basket/partials/table.jinja:94
-msgid "Remove product from basket"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:28
-msgid "Information"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:49
-msgid "Cart"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:81
-msgid "Your shopping cart is empty"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:87
-msgid "View cart"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:125
-msgid "Edit account details"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:132
-msgid "My orders"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:142
-msgid "Log out"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:151
-#: reservations/templates/shoop/front/includes/_navigation.jinja:158
-msgid "Log in"
-msgstr ""
-
-#: reservations/templates/shoop/front/includes/_navigation.jinja:165
-msgid "Register"
-msgstr ""
-
-#: reservations/templates/shoop/front/order/partials/product_table.jinja:10
-msgid "Title"
-msgstr ""
-
-#: reservations/templates/shoop/front/product/_detail_order_section.jinja:23
-msgid "Product not orderable"
-msgstr ""
-
-#: reservations/templates/shoop/front/product/_detail_order_section.jinja:37
-msgid "incl. VAT"
-msgstr ""
-
-#: reservations/templates/shoop/front/product/_detail_order_section.jinja:38
-msgid "VAT"
-msgstr ""
-
-#: reservations/templates/shoop/front/product/_detail_order_section.jinja:44
-#: reservations/templates/shoop/front/product/_detail_order_section.jinja:75
-msgid "Add to cart"
-msgstr ""
-
-#: reservations/templates/shoop/front/product/_detail_order_section.jinja:83
-msgid "Check availability"
-msgstr ""
-
-#: reservations/views.py:45
 msgid "Name"
 msgstr ""
 
-#: reservations/views.py:49
+msgid "Filter by product..."
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "End date"
+msgstr ""
+
+msgid "Modifier"
+msgstr ""
+
+msgid "New modifier"
+msgstr ""
+
+#, python-format
+msgid ""
+"I have read and agree with the <a href='%s' target='_blank'>Terms and "
+"Conditions</a>"
+msgstr ""
+
+msgid "reservable product"
+msgstr ""
+
+msgid "sign out time"
+msgstr ""
+
+msgid "sign in time"
+msgstr ""
+
+msgid "available quantity"
+msgstr ""
+
+msgid "pricing per person"
+msgstr ""
+
+msgid "people included in price"
+msgstr ""
+
+msgid "price per person"
+msgstr ""
+
+msgid "reservable products"
+msgstr ""
+
+msgid "order"
+msgstr ""
+
+msgid "starts"
+msgstr ""
+
+msgid "ends"
+msgstr ""
+
+msgid "persons"
+msgstr ""
+
+msgid "reservation"
+msgstr ""
+
+msgid "reservations"
+msgstr ""
+
+msgid "Reservations"
+msgstr ""
+
+msgid "Reservable"
+msgstr ""
+
+msgid "Select months to search from"
+msgstr ""
+
+msgid "Starting month"
+msgstr ""
+
+msgid "mm/yyyy"
+msgstr ""
+
+msgid "End month"
+msgstr ""
+
+msgid "Cottages and their reserved periods."
+msgstr ""
+
+msgid ""
+"To reserve a cottage, click on a free date in the calendar, type in the "
+"number of days and click 'Reserve'. Note! Dates in red are <strong>reserved</"
+"strong>."
+msgstr ""
+
+msgid "Price/night (from)"
+msgstr ""
+
+msgid "Arrival Date"
+msgstr ""
+
+msgid "Number of nights"
+msgstr ""
+
+msgid "Persons"
+msgstr ""
+
+msgid ""
+"Fill in the number of persons (6 years or older). This is needed for "
+"bedding, when included in the cottage price. Please check cottage details."
+msgstr ""
+
+msgid "Price for chosen period:"
+msgstr ""
+
+msgid "Reserve"
+msgstr ""
+
+msgid "Minimum possible period is 2 nights."
+msgstr ""
+
+msgid "Chosen period is not available."
+msgstr ""
+
+msgid "New Reservation"
+msgstr ""
+
+msgid "Details & Status"
+msgstr ""
+
+msgid "Order Number"
+msgstr ""
+
+msgid "Order Date"
+msgstr ""
+
+msgid "Reference"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "Ordered by"
+msgstr ""
+
+msgid "Creator"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Tax number"
+msgstr ""
+
+msgid "Total Price (taxless)"
+msgstr ""
+
+msgid "Total Price"
+msgstr ""
+
+msgid "Order Status"
+msgstr ""
+
+msgid "Payment Status"
+msgstr ""
+
+msgid "Shipping Status"
+msgstr ""
+
+msgid "Addresses"
+msgstr ""
+
+msgid "Shipping address"
+msgstr ""
+
+msgid "No shipping address defined."
+msgstr ""
+
+msgid "Billing address"
+msgstr ""
+
+msgid "No billing address defined."
+msgstr ""
+
+msgid "Order Contents"
+msgstr ""
+
+msgid "SKU"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Start Date"
+msgstr ""
+
+msgid "End Date"
+msgstr ""
+
+msgid "Taxless Unit Price"
+msgstr ""
+
+msgid "Quantity"
+msgstr ""
+
+msgid "Taxless Discount"
+msgstr ""
+
+msgid "Tax"
+msgstr ""
+
+msgid "Taxless Total"
+msgstr ""
+
+msgid "Total incl. Tax"
+msgstr ""
+
+msgid "Discount"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Taxless"
+msgstr ""
+
+msgid "Payments"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "Arrival"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Nights"
+msgstr ""
+
+msgid "Update quantities"
+msgstr ""
+
+msgid "Remove product from basket"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+msgid "Cart"
+msgstr ""
+
+msgid "Items"
+msgstr ""
+
+msgid "Your shopping cart is empty"
+msgstr ""
+
+msgid "View cart"
+msgstr ""
+
+msgid "Edit account details"
+msgstr ""
+
+msgid "My orders"
+msgstr ""
+
+msgid "Admin panel"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Product not orderable"
+msgstr ""
+
+msgid "Add to cart"
+msgstr ""
+
+msgid "Check availability"
+msgstr ""
+
+msgid "Additions to base price"
+msgstr ""
+
+msgid "Persons included"
+msgstr ""
+
+msgid "Additional persons"
+msgstr ""
+
+msgid "person"
+msgstr ""
+
+msgid "night"
+msgstr ""
+
+msgid "Product description"
+msgstr ""
+
+msgid "Product attributes"
+msgstr ""
+
+msgid "Includes these products"
+msgstr ""
+
+msgid "Also available in"
+msgstr ""
+
+msgid "Related products"
+msgstr ""
+
+msgid "We recommend these products"
+msgstr ""
+
+msgid "Users who bought this product also bought"
+msgstr ""
+
+msgid "Special period"
+msgstr ""
+
+msgid "Person count"
+msgstr ""
+
 msgid "Filter by reservable..."
 msgstr ""
 
-#: reservations/views.py:51
 msgid "From Order"
 msgstr ""
 
-#: reservations/views.py:52
 msgid "Sign In Time"
 msgstr ""
 
-#: reservations/views.py:53
 msgid "Sign Out Time"
-msgstr ""
-
-#: reservations/views.py:54
-msgid "Adults"
-msgstr ""
-
-#: reservations/views.py:55
-msgid "Children"
 msgstr ""
