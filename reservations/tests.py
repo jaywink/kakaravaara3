@@ -5,13 +5,17 @@ from dateutil import relativedelta
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.test import Client, RequestFactory
+from django.utils.timezone import make_aware
 from django.utils.translation import activate
 from freezegun import freeze_time
+from mock import Mock
+from shoop.testing.factories import create_empty_order, get_default_shop
 
 from reservable_pricing.factories import PeriodPriceModifierFactory
 from shoop.core.models import ShopProduct
 
 from kakaravaara.tests import KakaravaaraTestsBase
+from reservations.basket import ReservableOrderCreator
 from reservations.factories import ReservableProductFactory, ReservationFactory
 from reservations.models import Reservation
 from shoop.xtheme import set_current_theme
@@ -299,3 +303,41 @@ class ReservableHasPriceModifiersTestCase(KakaravaaraTestsBase):
         PeriodPriceModifierFactory(
             product=self.reservable.product, start_date=self.yesterday, end_date=self.yesterday)
         self.assertFalse(self.reservable.has_price_modifiers)
+
+
+class MockOrderLine(Mock):
+    def __init__(self, product, quantity, reservation_start, persons):
+        super(MockOrderLine, self).__init__()
+        self.product = product
+        self.quantity = quantity
+        self.source_line = {
+            "reservation_start": reservation_start,
+            "persons": persons,
+        }
+        self.order = create_empty_order(shop=get_default_shop()).save()
+        self.extra_data = {}
+        self.save_called = False
+
+    def save(self):
+        self.save_called = True
+
+
+class ReservableOrderCreatorTestCase(KakaravaaraTestsBase):
+    def setUp(self):
+        super(ReservableOrderCreatorTestCase, self).setUp()
+        self.request = RequestFactory().get("/")
+        self.reservable = ReservableProductFactory()
+        self.roc = ReservableOrderCreator(request=self.request)
+
+    def test_reservation_is_created_with_correct_data(self):
+        mock_order_line = MockOrderLine(self.reservable.product, 3, datetime.date(2016, 1, 1), 3)
+        self.roc.process_saved_order_line(Mock(), mock_order_line)
+        self.assertTrue(mock_order_line.save_called)
+        reservation = Reservation.objects.first()
+        self.assertEqual(reservation.reservable, self.reservable)
+        self.assertEqual(reservation.order, mock_order_line.order)
+        start_time = make_aware(datetime.datetime.combine(datetime.date(2016, 1, 1), self.reservable.check_in_time))
+        self.assertEqual(reservation.start_time, start_time)
+        end_time = make_aware(datetime.datetime.combine(datetime.date(2016, 1, 4), self.reservable.check_out_time))
+        self.assertEqual(reservation.end_time, end_time)
+        self.assertEqual(reservation.persons, 3)

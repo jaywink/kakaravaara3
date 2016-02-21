@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+import datetime
 
 from shoop.front.basket.objects import BaseBasket
 from shoop.front.basket.order_creator import BasketOrderCreator
@@ -36,13 +36,14 @@ class ReservableOrderCreator(BasketOrderCreator):
             # Create reservation
             start_date = order_line.source_line.get("reservation_start")
             reservable = ReservableProduct.objects.get(product=order_line.product)
+            start_time = datetime.datetime.combine(start_date, reservable.check_in_time)
+            end_date = start_date + datetime.timedelta(days=int(order_line.quantity))
+            end_time = datetime.datetime.combine(end_date, reservable.check_out_time)
             Reservation.objects.create(
                 reservable=reservable,
                 order=order_line.order,
-                start_time=start_date + timedelta(
-                    hours=reservable.check_in_time.hour, minutes=reservable.check_in_time.minute),
-                end_time=start_date + timedelta(days=int(order_line.quantity)) + timedelta(
-                    hours=reservable.check_out_time.hour, minutes=reservable.check_out_time.minute),
+                start_time=start_time,
+                end_time=end_time,
                 persons=order_line.source_line.get("persons", 1),
             )
             if not order_line.extra_data:
