@@ -1,0 +1,8 @@
+[run]
+omit =
+    **/tests.py
+    **/migrations/*.py
+    kakaravaara/settings/*.py
+    kakaravaara/wsgi.py
+    manage.py
+
