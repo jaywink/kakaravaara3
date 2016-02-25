@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://{{ request.get_host() }}{{ static("favicon.ico") }}" />
 
     {# jQuery #}
     <script src="{{ static("js/jquery-1.11.3.min.js") }}"></script>
@@ -16,9 +17,6 @@
     {% block extrameta %}{% endblock %}
 
     <title>{{ request.shop.public_name }} &ndash; {% block title %}{% endblock %}</title>
-
-    {# Include favicon #}
-    <link rel="icon" type="image/x-icon" href="{{ static("shoop/img/favicon.ico") }}">
 
     {# Include Bootstrap styles #}
     {# Not vanilla bootstap, from here: //maxcdn.bootstrapcdn.com/bootswatch/3.3.2/cosmo/bootstrap.min.css #}

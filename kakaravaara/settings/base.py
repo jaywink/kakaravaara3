@@ -50,6 +50,7 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
+    "kakaravaara",
     "reservations",
     "reservable_pricing",
 ]
