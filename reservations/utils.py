@@ -1,6 +1,22 @@
-from datetime import datetime, timedelta
+import re
+from datetime import timedelta
 
 from shoop.utils.dates import parse_date
+
+
+def expand_datestring_without_day(date):
+    """Expand date string YYYY-MM with day.
+
+    For example; 2016-02 will become 2016-02-01.
+
+    Args:
+        string - Date string that will be checked.
+    Returns:
+        string - Expanded date string with "-01" appended, or original given string.
+    """
+    if re.match("^[0-9]{4}-[0-9]{2}$", date):
+        return "%s-01" % date
+    return date
 
 
 def get_start_and_end_from_request(request):
@@ -10,7 +26,11 @@ def get_start_and_end_from_request(request):
         date, date or None, None
     """
     start = getattr(request, request.method).get("start", None)
+    if start:
+        start = expand_datestring_without_day(start)
     end = getattr(request, request.method).get("end", None)
+    if end:
+        end = expand_datestring_without_day(end)
     if "days" in getattr(request, request.method):
         days = getattr(request, request.method).get("days", None)
     else:
