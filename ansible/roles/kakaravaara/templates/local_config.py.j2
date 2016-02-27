@@ -20,3 +20,5 @@ DATABASES = {
         "HOST": "{{ db_host }}",
     }
 }
+
+CACHES = {'default': {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
