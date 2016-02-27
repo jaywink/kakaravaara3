@@ -22,10 +22,12 @@ class ReservableProduct(models.Model):
     pricing_per_person_price = models.DecimalField(
         verbose_name=_("price per person"), null=True, blank=True, decimal_places=2, max_digits=6,
     )
+    sort_order = models.PositiveIntegerField(verbose_name=_(u"sort order"), default=50)
 
     class Meta:
         verbose_name = _('reservable product')
         verbose_name_plural = _('reservable products')
+        ordering = ("sort_order",)
 
     def __str__(self):
         return self.product.safe_translation_getter("name") or self.product.sku
