@@ -208,8 +208,11 @@ REST_FRAMEWORK = {
 ######## Reservations ########
 RESERVABLE_SEARCH_VISIBLE_ATTRIBUTES = [
     "maxpersons",
-    "wifi",
+    "wlan",
     "equipment",
     "pets",
     "sauna",
+    "beds",
+    "boat",
+    "shower",
 ]
