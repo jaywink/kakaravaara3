@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{ static("css/kakaravaara.css") }}">
 </head>
 <body>
+    {% if request.path == "/" %}
+        {% include "kakaravaara/includes/facebook.jinja" %}
+    {% endif %}
     <header role="banner">
         {% include "shoop/front/includes/_navigation.jinja" %}
     </header>
