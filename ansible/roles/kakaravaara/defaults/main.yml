@@ -7,3 +7,14 @@ db_user: kakara
 db_name: kakara
 db_password: changeme
 db_host: 127.0.0.1
+
+# Uncomment and set for SMTP email
+#kakara_email_host: smtp.example.com
+#kakara_email_password: changeme
+#kakara_email_user: me@example.com
+#kakara_email_port: 587
+#kakara_email_use_tls: "True"
+#kakara_email_from: me@example.com
+
+# Uncomment to use DummyCache - good for lots of page editing for example
+#kakara_dummy_cache: true
