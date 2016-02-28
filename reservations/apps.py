@@ -9,5 +9,8 @@ class ReservationsAppConfig(AppConfig):
     provides = {
         "admin_module": [
             "reservations.module:ReservationsAdminModule"
+        ],
+        "notify_event": [
+            "reservations.notify_events:ReservationsOrderReceived"
         ]
     }
