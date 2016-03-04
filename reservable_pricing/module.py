@@ -99,13 +99,14 @@ class PriceModifierModule(AdminModule):
     def get_menu_entries(self, request):
         return [
             MenuEntry(
-                text=_("Period"), icon="fa fa-money",
+                text=_("Period price modifiers"), icon="fa fa-money",
                 url="reservable_pricing:modifiers.list",
                 category=self.category
             ),
-            MenuEntry(
-                text=_("Day of Week"), icon="fa fa-money",
-                url="reservable_pricing:modifiers.list",
-                category=self.category
-            ),
+            ## TODO: immlementation unfinished
+            # MenuEntry(
+            #     text=_("Day of Week"), icon="fa fa-money",
+            #     url="reservable_pricing:modifiers.list",
+            #     category=self.category
+            # ),
         ]
