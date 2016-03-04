@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 import datetime
+
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from reservable_pricing.models import PeriodPriceModifier
+from reservations.notify_events import ReservationsOrderReceived, get_order_details
 from shoop.core.models import Product, Order
+from shoop.front.signals import order_creator_finished
 
 
 class ReservableProduct(models.Model):
@@ -116,3 +122,23 @@ class Reservation(models.Model):
                 dates.append(current)
                 current += datetime.timedelta(days=1)
         return dates
+
+
+@receiver(order_creator_finished)
+def send_order_received_notification(sender, **kwargs):
+    order = kwargs["order"]
+    request = kwargs["request"]
+    ReservationsOrderReceived(
+        order=order,
+        order_id=order.id,
+        order_details=get_order_details(order),
+        order_url="%s%s" % (
+            settings.KAKARAVAARA_SITE_URL, reverse("shoop:order_complete", kwargs={"pk": order.pk, "key": order.key})
+        ),
+        customer_email=order.email,
+        customer_phone=order.phone,
+        customer_name=order.billing_address.name if order.billing_address else "",
+        language=request.LANGUAGE_CODE,
+        additional_notes=order.customer_comment,
+        total_sum=order.taxful_total_price_value,
+    ).run()

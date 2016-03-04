@@ -1,11 +1,8 @@
 import datetime
 
-from django.core.urlresolvers import reverse
-from django.dispatch import receiver
 from django.utils.translation import ugettext
 
 from shoop.core.models import OrderLineType
-from shoop.front.signals import order_creator_finished
 from shoop.notify import Event, Variable
 from shoop.notify.typology import Email, Language, Model, Phone, Text, Decimal, Integer, URL
 from shoop.utils.dates import parse_date
@@ -37,19 +34,3 @@ def get_order_details(order):
                 int(line.quantity), line.extra_data["persons"], start, end
             )))
     return "\n".join(details)
-
-
-@receiver(order_creator_finished)
-def send_order_received_notification(order, **kwargs):
-    ReservationsOrderReceived(
-        order=order,
-        order_id=order.id,
-        order_details=get_order_details(order),
-        order_url=reverse("shoop:show-order", kwargs={"pk": order.pk}),
-        customer_email=order.email,
-        customer_phone=order.phone,
-        customer_name=order.billing_address.name if order.billing_address else "",
-        language=order.language,
-        additional_notes=order.customer_comment,
-        total_sum=order.taxful_total_price_value,
-    ).run()

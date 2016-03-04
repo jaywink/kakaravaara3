@@ -216,3 +216,5 @@ RESERVABLE_SEARCH_VISIBLE_ATTRIBUTES = [
     "boat",
     "shower",
 ]
+######## Kakaravaara #########
+KAKARAVAARA_SITE_URL = "https://kakaravaara.fi"
