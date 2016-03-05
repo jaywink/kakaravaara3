@@ -1,78 +1,71 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Finnish translations for .
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the  project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-21 19:34+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2016-03-05 16:54+0000\n"
+"PO-Revision-Date: 2016-03-05 18:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.2.0\n"
+"X-Generator: Poedit 1.8.4\n"
 
 msgid "period price modifier"
-msgstr ""
+msgstr "erikoishinta ajanjaksolle"
 
 msgid "period price modifiers"
-msgstr ""
+msgstr "erikoishinnat ajanjaksoille"
 
-#, fuzzy
-#| msgid "Reservable"
 msgid "Reservable Pricing"
-msgstr "Varattava tuote"
+msgstr "Varattavien hinnoittelu"
 
 msgid "Price modifiers"
-msgstr ""
+msgstr "Hintamuuntimet"
 
-msgid "Period"
-msgstr ""
+msgid "Period price modifiers"
+msgstr "Ajanjaksojen hintamuuntimet"
 
-msgid "Day of Week"
-msgstr ""
-
+# | msgid "New modifier"
 msgid "New period modifier"
-msgstr ""
+msgstr "Uusi muunnin"
 
 msgid "General information"
-msgstr "Yleistiedot"
+msgstr "Yleistä"
 
 msgid "Name"
 msgstr "Nimi"
 
-#, fuzzy
-#| msgid "Filter by reservable..."
 msgid "Filter by product..."
-msgstr "Etsi varattavan mukaan..."
+msgstr "Etsi tuotteita..."
 
-#, fuzzy
-#| msgid "Start Date"
 msgid "Start date"
 msgstr "Saapumispäivämäärä"
 
-#, fuzzy
-#| msgid "End Date"
 msgid "End date"
 msgstr "Lähtöpäivämäärä"
 
 msgid "Modifier"
-msgstr ""
+msgstr "Muunnin"
 
 msgid "New modifier"
-msgstr ""
+msgstr "Uusi muunnin"
 
 #, python-format
 msgid ""
 "I have read and agree with the <a href='%s' target='_blank'>Terms and "
 "Conditions</a>"
 msgstr ""
+"Olen lukenut ja hyväksyn <a href='%s' target='_blank'>varaus- ja "
+"peruutusehdot</a>."
 
 msgid "reservable product"
 msgstr "varattava tuote"
@@ -87,13 +80,16 @@ msgid "available quantity"
 msgstr "saatavilla oleva määrä"
 
 msgid "pricing per person"
-msgstr ""
+msgstr "hinnoittelu henkilömäärän mukaan"
 
 msgid "people included in price"
-msgstr ""
+msgstr "perushintaan kuuluvat henkilöt"
 
 msgid "price per person"
-msgstr ""
+msgstr "hinta per henkilö"
+
+msgid "sort order"
+msgstr "järjestys"
 
 msgid "reservable products"
 msgstr "varattavat tuotteet"
@@ -108,7 +104,7 @@ msgid "ends"
 msgstr "päättyy"
 
 msgid "persons"
-msgstr ""
+msgstr "henkilöitä"
 
 msgid "reservation"
 msgstr "varaus"
@@ -119,38 +115,39 @@ msgstr "varaukset"
 msgid "Reservations"
 msgstr "Varaukset"
 
+#, python-brace-format
+msgid "    {nights} nights, {persons} persons, {start} - {end}"
+msgstr "    {nights} yötä, {persons} henkilöä, {start} - {end}"
+
 msgid "Reservable"
-msgstr "Varattava tuote"
+msgstr "Varattava"
 
 msgid "Select months to search from"
-msgstr "Etsi valitulta ajanjaksolta"
+msgstr "Valitse ajanjakso"
 
 msgid "Starting month"
-msgstr ""
+msgstr "Alkukuukausi"
 
 msgid "mm/yyyy"
-msgstr ""
+msgstr "kk.vvvv"
 
 msgid "End month"
-msgstr ""
+msgstr "Päättymiskuukausi"
 
 msgid "Cottages and their reserved periods."
-msgstr "Mökit ja niiden varaukset."
+msgstr "Mökit ja varaukset."
 
-#, fuzzy
-#| msgid ""
-#| "To reserve a cottage, click on a free date in the calendar, type in the "
-#| "number of days and click 'Reserve'."
 msgid ""
 "To reserve a cottage, click on a free date in the calendar, type in the "
 "number of days and click 'Reserve'. Note! Dates in red are <strong>reserved</"
 "strong>."
 msgstr ""
-"Varataksesi mökin klikkaa haluamaasi saapumispäivämäärää ja valitse kuinka "
-"monta yötä haluat varata. Klikkaa sitten 'Varaa' nappia."
+"Valitse kalenterista saapumispäivämäärä. Lisää öiden ja henkilöiden määrä ja "
+"klikkaa 'Varaa'. Huom! Kalenterissa punaisella olevat päivät ovat "
+"<strong>varattuja</strong>."
 
 msgid "Price/night (from)"
-msgstr ""
+msgstr "Hinta/yö (alk)"
 
 msgid "Arrival Date"
 msgstr "Saapumispäivämäärä"
@@ -159,87 +156,77 @@ msgid "Number of nights"
 msgstr "Öiden määrä"
 
 msgid "Persons"
-msgstr ""
+msgstr "Henkilöitä"
 
 msgid ""
 "Fill in the number of persons (6 years or older). This is needed for "
 "bedding, when included in the cottage price. Please check cottage details."
 msgstr ""
+"Anna henkilöiden määrä (6v tai yli). Tätä tarvitaan lakanoita varten, jos ne "
+"kuuluvat mökin hintaan. Tarkista mökin kuvaus."
 
 msgid "Price for chosen period:"
-msgstr ""
+msgstr "Hinta valitulle ajanjaksolle:"
 
 msgid "Reserve"
 msgstr "Varaa"
 
 msgid "Minimum possible period is 2 nights."
-msgstr ""
+msgstr "Vähimmäisjakso on kaksi yötä."
 
 msgid "Chosen period is not available."
-msgstr "Valittu ajanjakso ei ole saatavilla."
+msgstr "Valittu ajanjakso ei ole vapaa."
 
 msgid "New Reservation"
 msgstr "Uusi varaus"
 
 msgid "Details & Status"
-msgstr "Tilanne"
+msgstr "Tiedot ja tilanne"
 
 msgid "Order Number"
-msgstr ""
+msgstr "Tilausnumero"
 
-#, fuzzy
-#| msgid "Order Contents"
 msgid "Order Date"
-msgstr "Tilauksen sisältö"
+msgstr "Tilauspäivämäärä"
 
 msgid "Reference"
-msgstr ""
+msgstr "Viite"
 
 msgid "Label"
-msgstr ""
+msgstr "Otsikko"
 
 msgid "Customer"
-msgstr ""
+msgstr "Asiakas"
 
 msgid "Ordered by"
-msgstr ""
+msgstr "Tilaaja"
 
 msgid "Creator"
-msgstr ""
+msgstr "Luonut"
 
 msgid "Phone"
-msgstr ""
+msgstr "Puhelin"
 
 msgid "Email"
-msgstr ""
+msgstr "Sähköposti"
 
 msgid "Tax number"
-msgstr ""
+msgstr "ALV"
 
-#, fuzzy
-#| msgid "Total incl. Tax"
 msgid "Total Price (taxless)"
-msgstr "Verollinen yhteensä"
+msgstr "Yhteensä veroton"
 
-#, fuzzy
-#| msgid "Total"
 msgid "Total Price"
 msgstr "Yhteensä"
 
-#, fuzzy
-#| msgid "Order Contents"
 msgid "Order Status"
-msgstr "Tilauksen sisältö"
+msgstr "Tilauksen tilanne"
 
-#, fuzzy
-#| msgid "Details & Status"
 msgid "Payment Status"
-msgstr "Tilanne"
+msgstr "Maksun tilanne"
 
-#, fuzzy
-#| msgid "Shipping address"
 msgid "Shipping Status"
-msgstr "Toimitusosoite"
+msgstr "Toimituksen tilanne"
 
 msgid "Addresses"
 msgstr "Osoitteet"
@@ -251,7 +238,7 @@ msgid "No shipping address defined."
 msgstr "Ei toimitusosoitetta."
 
 msgid "Billing address"
-msgstr "Laskutusosoite."
+msgstr "Laskutusosoite"
 
 msgid "No billing address defined."
 msgstr "Ei laskutusosoitetta."
@@ -260,7 +247,7 @@ msgid "Order Contents"
 msgstr "Tilauksen sisältö"
 
 msgid "SKU"
-msgstr "Tuotekoodi"
+msgstr "Koodi"
 
 msgid "Text"
 msgstr "Teksti"
@@ -287,7 +274,7 @@ msgid "Taxless Total"
 msgstr "Veroton yhteensä"
 
 msgid "Total incl. Tax"
-msgstr "Verollinen yhteensä"
+msgstr "Yhteensä verollinen"
 
 msgid "Discount"
 msgstr "Alennus"
@@ -299,7 +286,7 @@ msgid "Taxless"
 msgstr "Veroton"
 
 msgid "Payments"
-msgstr ""
+msgstr "Maksut"
 
 msgid "Product"
 msgstr "Tuote"
@@ -311,37 +298,38 @@ msgid "Price"
 msgstr "Hinta"
 
 msgid "Nights"
-msgstr "Öitä"
+msgstr "yötä"
 
 msgid "Update quantities"
 msgstr "Päivitä määrät"
 
 msgid "Remove product from basket"
-msgstr "Poista tuote ostoskorista"
+msgstr "Poista tuote korista"
 
 msgid "Information"
-msgstr "Info"
+msgstr "Tiedot"
 
 msgid "Cart"
-msgstr "Ostoskori"
+msgstr "Kori"
 
 msgid "Items"
-msgstr ""
+msgstr "Rivit"
 
 msgid "Your shopping cart is empty"
-msgstr "Ostoskori on tyhjä"
+msgstr "Korisi on tyhjä"
 
 msgid "View cart"
-msgstr "Avaa ostoskori"
+msgstr "Näytä kori"
 
 msgid "Edit account details"
 msgstr "Muokkaa tilitietoja"
 
+# | msgid "order"
 msgid "My orders"
 msgstr "Tilaukseni"
 
 msgid "Admin panel"
-msgstr ""
+msgstr "Admin paneeli"
 
 msgid "Log out"
 msgstr "Kirjaudu ulos"
@@ -350,73 +338,61 @@ msgid "Log in"
 msgstr "Kirjaudu sisään"
 
 msgid "Register"
-msgstr "Rekisteröi"
+msgstr "Rekisteröidy"
 
 msgid "Title"
-msgstr "Nimike"
+msgstr "Otsikko"
 
 msgid "Product not orderable"
-msgstr "Tuote ei ole tilattavissa"
+msgstr "Tuote ei ole saatavilla"
 
 msgid "Add to cart"
-msgstr "Lisään ostoskoriin"
+msgstr "Lisää koriin"
 
 msgid "Check availability"
 msgstr "Tarkista varaustilanne"
 
 msgid "Additions to base price"
-msgstr ""
+msgstr "Lisäykset perushintaan"
 
 msgid "Persons included"
-msgstr ""
+msgstr "Henkilöitä perushintaan"
 
 msgid "Additional persons"
-msgstr ""
+msgstr "Ylimääräiset henkilöt"
 
 msgid "person"
-msgstr ""
+msgstr "henkilö"
 
-#, fuzzy
-#| msgid "Nights"
 msgid "night"
-msgstr "Öitä"
+msgstr "yö"
 
 msgid "Product description"
-msgstr ""
+msgstr "Tuotteen kuvaus"
 
-#, fuzzy
-#| msgid "Product not orderable"
 msgid "Product attributes"
-msgstr "Tuote ei ole tilattavissa"
+msgstr "Tuotteen ominaisuudet"
 
-#, fuzzy
-#| msgid "reservable products"
 msgid "Includes these products"
-msgstr "varattavat tuotteet"
+msgstr "Sisältää nämä tuotteet"
 
-#, fuzzy
-#| msgid "available quantity"
 msgid "Also available in"
-msgstr "saatavilla oleva määrä"
+msgstr "Saatavilla myös"
 
-#, fuzzy
-#| msgid "reservable products"
 msgid "Related products"
-msgstr "varattavat tuotteet"
+msgstr "Liittyvät tuotteet"
 
 msgid "We recommend these products"
-msgstr ""
+msgstr "Suosittelemamme tuotteet"
 
 msgid "Users who bought this product also bought"
-msgstr ""
+msgstr "Henkilöt jotka ostivat tämän ostivat myös"
 
 msgid "Special period"
-msgstr ""
+msgstr "Erikoisjakso"
 
-#, fuzzy
-#| msgid "Discount"
 msgid "Person count"
-msgstr "Alennus"
+msgstr "Henkilömäärä"
 
 msgid "Filter by reservable..."
 msgstr "Etsi varattavan mukaan..."
