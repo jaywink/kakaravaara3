@@ -39,7 +39,7 @@
                     autoclose: true,
                     startView: "year",
                     minView: "year",
-                    language: "fi",
+                    language: "{{ LANGUAGE_CODE }}",
                     initialDate: moment.tz("{{ start_date }}", "Europe/Helsinki"),
                     startDate: moment().startOf("month").tz("Europe/Helsinki").toDate()
                 });
@@ -49,7 +49,7 @@
                     autoclose: true,
                     startView: "year",
                     minView: "year",
-                    language: "fi",
+                    language: "{{ LANGUAGE_CODE }}",
                     initialDate: moment.tz("{{ end_date }}", "Europe/Helsinki"),
                     startDate: moment().startOf("month").tz("Europe/Helsinki").toDate()
                 }).change(function() {
@@ -164,7 +164,7 @@
                                 }
                                 $("#reservable-dates-{{ sku }}-{{ month }}").datetimepicker({
                                     startView: 2,
-                                    language: 'fi',
+                                    language: '{{ LANGUAGE_CODE }}',
                                     minView: 2,
                                     format: 'dd.mm.yyyy',
                                     weekStart: 1,
