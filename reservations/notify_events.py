@@ -30,7 +30,7 @@ def get_order_details(order):
         if line.product.type.identifier == "reservable":
             start = parse_date(line.extra_data["reservation_start"])
             end = start + datetime.timedelta(days=int(line.quantity))
-            details.append(ugettext("    %s nights, %s persons, %s - %s" % (
-                int(line.quantity), line.extra_data["persons"], start, end
-            )))
+            details.append(ugettext("    {nights} nights, {persons} persons, {start} - {end}".format(
+                nights=int(line.quantity), persons=line.extra_data["persons"], start=start, end=end)
+            ))
     return "\n".join(details)
