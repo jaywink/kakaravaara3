@@ -1,8 +1,7 @@
 from django.conf.urls import url, patterns
 
 from reservations.views import (
-    ReservableProductEditView, ReservationEditView, ReservableSearchView, DateRangeCheckView,
-    ReservationsAdminList)
+    ReservableProductEditView, ReservableSearchView, DateRangeCheckView)
 
 
 urlpatterns = patterns(
