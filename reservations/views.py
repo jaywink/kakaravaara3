@@ -50,6 +50,11 @@ class ReservableSearchView(TemplateView):
     template_name = "reservations/reservable_search.jinja"
 
     def get(self, request, *args, **kwargs):
+        self._set_dates_from_request(request)
+        return super(ReservableSearchView, self).get(request, *args, **kwargs)
+
+    def _set_dates_from_request(self, request):
+        """Get start and end from the request."""
         start = request.GET.get("start", None)
         end = request.GET.get("end", None)
         if not start:
@@ -58,7 +63,8 @@ class ReservableSearchView(TemplateView):
         else:
             self.start_date = datetime.strptime(start, "%Y-%m").date().replace(day=1)
             self.end_date = datetime.strptime(end, "%Y-%m").date() + relativedelta(day=1, months=1, days=-1)
-        return super(ReservableSearchView, self).get(request, *args, **kwargs)
+        if self.end_date < self.start_date:
+            self.start_date = self.end_date
 
     def _get_reservables(self):
         return ReservableProduct.objects.all()
