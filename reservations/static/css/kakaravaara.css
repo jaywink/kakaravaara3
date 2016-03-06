@@ -8,3 +8,14 @@ div#shipping div.required-field label.control-label::after {
 .table-borderless > tbody > tr > th {
     border-top: none;
 }
+
+/* Site colours */
+body.kakaravaara {
+    background-color: #9FC4D4;
+}
+nav.kakaravaara {
+    background-color: #083D54;
+}
+div.container.kakaravaara {
+    background-color: white;
+}

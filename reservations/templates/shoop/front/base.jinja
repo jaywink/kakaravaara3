@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="{{ static("css/kakaravaara.css") }}">
 </head>
-<body>
+<body class="kakaravaara">
     {% if request.path == "/" %}
         {% include "kakaravaara/includes/facebook.jinja" %}
     {% endif %}
@@ -32,7 +32,7 @@
         {% include "shoop/front/includes/_navigation.jinja" %}
     </header>
 
-    <div class="container">
+    <div class="container kakaravaara">
 
         {% if messages %}
             {% for message in messages %}
