@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from reservable_pricing.models import PeriodPriceModifier
 from reservations.notify_events import ReservationsOrderReceived, get_order_details
-from shoop.core.models import Product, Order
+from shoop.core.models import Product, OrderLine
 from shoop.front.signals import order_creator_finished
 
 
@@ -79,8 +79,8 @@ class Reservation(models.Model):
 
     reservable = models.ForeignKey(
         ReservableProduct, verbose_name=_(u"reservable product"), related_name="reservations")
-    order = models.ForeignKey(
-        Order, verbose_name=_("order"), related_name="reservations", null=True, blank=True)
+    order_line = models.OneToOneField(
+        OrderLine, verbose_name=_("order line"), related_name="reservation", null=True, blank=True)
     start_time = models.DateTimeField(verbose_name=_(u"starts"))
     end_time = models.DateTimeField(verbose_name=_(u"ends"))
     persons = models.IntegerField(verbose_name=_(u"persons"), default=1)

@@ -41,7 +41,7 @@ class ReservableOrderCreator(BasketOrderCreator):
             end_time = datetime.datetime.combine(end_date, reservable.check_out_time)
             Reservation.objects.create(
                 reservable=reservable,
-                order=order_line.order,
+                order_line=order_line,
                 start_time=start_time,
                 end_time=end_time,
                 persons=order_line.source_line.get("persons", 1),

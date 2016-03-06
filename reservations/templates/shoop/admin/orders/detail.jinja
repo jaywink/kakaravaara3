@@ -60,11 +60,12 @@
                                 <th class="text-right">{% trans %}Start Date{% endtrans %}</th>
                                 <th class="text-right">{% trans %}End Date{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Taxless Unit Price{% endtrans %}</th>
-                                <th class="text-right">{% trans %}Nights / Quantity{% endtrans %}</th>
+                                <th class="text-right">{% trans %}Quantity / Nights{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Taxless Discount{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Tax{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Taxless Total{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Total incl. Tax{% endtrans %}</th>
+                                <th class="text-right">{% trans %}Actions{% endtrans %}</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -80,15 +81,13 @@
                                 <td>{{ line.sku }}</td>
                                 <td>{{ line.text }}</td>
                                 <td>
-                                    {% if line.product and line.product.type.identifier == "reservable" %}
-                                        {{ line.extra_data["reservation_start"] }}
+                                    {% if line.reservation %}
+                                        {{ line.reservation.start_time|date }}
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if line.product and line.product.type.identifier == "reservable" %}
-                                        {% if line.extra_data["reservation_end"] %}
-                                            {{ line.extra_data["reservation_end"] }}
-                                        {% endif %}
+                                    {% if line.reservation %}
+                                        {{ line.reservation.end_time|date }}
                                     {% endif %}
                                 </td>
                                 <td class="text-right">{{ line.taxless_base_unit_price|money }}</td>
@@ -97,6 +96,11 @@
                                 <td class="text-right">{{ line.tax_rate|percent }}</td>
                                 <td class="text-right">{{ line.taxless_price|money }}</td>
                                 <td class="text-right">{{ line.taxful_price|money }}</td>
+                                <td class="text-right">
+                                    {% if line.reservation %}
+                                        <a href="{{ url("shoop_admin:reservations.edit", pk=line.reservation.pk) }}" class="btn btn-sm"><i class="fa fa-calendar"></i></a>
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
