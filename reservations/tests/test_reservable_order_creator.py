@@ -47,3 +47,5 @@ class ReservableOrderCreatorTestCase(KakaravaaraTestsBase):
         end_time = make_aware(datetime.datetime.combine(datetime.date(2016, 1, 4), self.reservable.check_out_time))
         self.assertEqual(reservation.end_time, end_time)
         self.assertEqual(reservation.persons, 3)
+        self.assertEqual(mock_order_line.extra_data["reservation_end"], "2016-01-04")
+

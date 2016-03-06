@@ -60,7 +60,7 @@
                                 <th class="text-right">{% trans %}Start Date{% endtrans %}</th>
                                 <th class="text-right">{% trans %}End Date{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Taxless Unit Price{% endtrans %}</th>
-                                <th class="text-right">{% trans %}Quantity{% endtrans %}</th>
+                                <th class="text-right">{% trans %}Nights / Quantity{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Taxless Discount{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Tax{% endtrans %}</th>
                                 <th class="text-right">{% trans %}Taxless Total{% endtrans %}</th>
@@ -81,12 +81,14 @@
                                 <td>{{ line.text }}</td>
                                 <td>
                                     {% if line.product and line.product.type.identifier == "reservable" %}
-                                        TBD date here
+                                        {{ line.extra_data["reservation_start"] }}
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if line.product and line.product.type.identifier == "reservable" %}
-                                        TBD date here
+                                        {% if line.extra_data["reservation_end"] %}
+                                            {{ line.extra_data["reservation_end"] }}
+                                        {% endif %}
                                     {% endif %}
                                 </td>
                                 <td class="text-right">{{ line.taxless_base_unit_price|money }}</td>
