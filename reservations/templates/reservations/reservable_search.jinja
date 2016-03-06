@@ -32,6 +32,11 @@
 
         <script type="text/javascript">
             var dates = {{ reserved_days|safe }};
+
+            function reloadWithPeriod($from, $to) {
+                window.location = '{{ url("reservations:reservable.search") }}?start='+moment($from.val(), "MM/YYYY").format("YYYY-MM")+'&end='+moment($to.val(), "MM/YYYY").format("YYYY-MM");
+            }
+
             $(window).ready(function() {
                 $("#from_month").datetimepicker({
                     format: "mm/yyyy",
@@ -42,6 +47,11 @@
                     language: "{{ LANGUAGE_CODE }}",
                     initialDate: moment.tz("{{ start_date }}", "Europe/Helsinki"),
                     startDate: moment().startOf("month").tz("Europe/Helsinki").toDate()
+                }).change(function() {
+                    var $from = $("#from_month");
+                    var $to = $("#to_month");
+                    $to.val($from.val());
+                    reloadWithPeriod($from, $to);
                 });
                 $("#to_month").datetimepicker({
                     format: "mm/yyyy",
@@ -53,10 +63,12 @@
                     initialDate: moment.tz("{{ end_date }}", "Europe/Helsinki"),
                     startDate: moment().startOf("month").tz("Europe/Helsinki").toDate()
                 }).change(function() {
-                    $("body").addClass("loading");
-                    var from = $("#from_month").val();
-                    var to = $("#to_month").val();
-                    window.location = '{{ url("reservations:reservable.search") }}?start='+moment(from, "MM/YYYY").format("YYYY-MM")+'&end='+moment(to, "MM/YYYY").format("YYYY-MM");
+                    var $from = $("#from_month");
+                    var $to = $("#to_month");
+                    if (moment($to.val(), "MM/YYYY") < moment($from.val(), "MM/YYYY")) {
+                        $from.val($to.val());
+                    }
+                    reloadWithPeriod($from, $to);
                 });
             });
         </script>
