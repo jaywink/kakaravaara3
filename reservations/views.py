@@ -15,7 +15,7 @@ from django.views.generic import TemplateView, View
 
 from shoop.admin.modules.products.views import ProductEditView
 from shoop.admin.toolbar import URLActionButton
-from shoop.admin.utils.picotable import Column, TextFilter
+from shoop.admin.utils.picotable import Column, TextFilter, DateRangeFilter
 from shoop.admin.utils.views import PicotableListView, CreateOrUpdateView
 from shoop.utils.i18n import get_current_babel_locale
 
@@ -36,7 +36,7 @@ class ReservableProductEditView(ProductEditView):
 class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
-        exclude = ()
+        exclude = ("order_line",)
 
 
 class ReservationEditView(CreateOrUpdateView):
@@ -47,11 +47,11 @@ class ReservationEditView(CreateOrUpdateView):
 
     def get_toolbar(self):
         toolbar = super(ReservationEditView, self).get_toolbar()
-        if self.object and self.object.order:
+        if self.object and self.object.order_line:
             toolbar.append(URLActionButton(
                 text=_("View Order"),
                 icon="fa fa-inbox",
-                url=reverse("shoop_admin:order.detail", kwargs={"pk": self.object.order.pk}),
+                url=reverse("shoop_admin:order.detail", kwargs={"pk": self.object.order_line.order.pk}),
             ))
         return toolbar
 
@@ -155,16 +155,18 @@ class DateRangeCheckView(View):
 class ReservationsAdminList(PicotableListView):
     model = Reservation
     columns = [
+        Column("id", _("ID"), sort_field="id", display="id", filter_config=TextFilter()),
         Column(
             "name", _("Name"), sort_field="reservable__product__translations__name",
             display="reservable__product__name",
-            filter_config=TextFilter(
-                filter_field="reservable__product__translations__name",
-                placeholder=_("Filter by reservable..."))
+            filter_config=TextFilter(filter_field="reservable__product__translations__name")
         ),
-        Column("order", _("From Order"), sort_field="order", display="order"),
-        Column("start_time", _("Sign In Time"), sort_field="start_time", display="format_start_time"),
-        Column("end_time", _("Sign Out Time"), sort_field="end_time", display="format_end_time"),
+        Column("order", _("From Order"), sort_field="order_line__order", display="order_line__order",
+               filter_config=TextFilter(filter_field="order_line__order__id")),
+        Column("start_time", _("Sign In Time"), sort_field="start_time", display="format_start_time",
+               filter_config=DateRangeFilter(filter_field="start_time")),
+        Column("end_time", _("Sign Out Time"), sort_field="end_time", display="format_end_time",
+               filter_config=DateRangeFilter(filter_field="end_time")),
         Column("persons", _("Persons"), display="persons"),
     ]
 
