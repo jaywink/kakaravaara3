@@ -15,15 +15,4 @@ urlpatterns = patterns(
         r"^sa/products/(?P<pk>\d+)/$", ReservableProductEditView.as_view(),
         name="product.edit"
     ),
-
-    url(
-        r'^sa/reservations/new/',
-        ReservationEditView.as_view(), name="reservations.new"),
-
-    url(
-        r'^sa/reservations/(?P<pk>\d+)/',
-        ReservationEditView.as_view(), name="reservations.edit"),
-
-    url(r"^sa/reservations/",
-        ReservationsAdminList.as_view(), name="reservations.list")
 )
