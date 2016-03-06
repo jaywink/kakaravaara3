@@ -45,6 +45,16 @@ class ReservationEditView(CreateOrUpdateView):
     context_object_name = "reservation"
     form_class = ReservationForm
 
+    def get_toolbar(self):
+        toolbar = super(ReservationEditView, self).get_toolbar()
+        if self.object and self.object.order:
+            toolbar.append(URLActionButton(
+                text=_("View Order"),
+                icon="fa fa-inbox",
+                url=reverse("shoop_admin:order.detail", kwargs={"pk": self.object.order.pk}),
+            ))
+        return toolbar
+
 
 class ReservableSearchView(TemplateView):
     template_name = "reservations/reservable_search.jinja"
@@ -169,10 +179,10 @@ class ReservationsAdminList(PicotableListView):
         toolbar.append(URLActionButton(
             text=_("New Reservation"),
             icon="fa fa-calendar",
-            url=reverse("reservations:reservations.new"),
+            url=reverse("shoop_admin:reservations.new"),
         ))
         return toolbar
 
     def get_object_url(self, instance):
         return reverse(
-            "reservations:reservations.edit", kwargs={"pk": instance.id})
+            "shoop_admin:reservations.edit", kwargs={"pk": instance.id})
