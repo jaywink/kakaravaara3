@@ -7,6 +7,7 @@ from django.test import RequestFactory
 
 from reservations.factories import ReservableProductFactory, ReservationFactory
 from reservations.tests.test_reservable_views import ReservableViewsBaseTestCase
+from shoop.utils.i18n import format_money
 
 
 class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
@@ -49,7 +50,7 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
         self.assertJSONEqual(response.content.decode("utf-8"), {
             "result": True,
             "price": {
-                "total": str(price_info.price.quantize(Decimal("1.00"))),
+                "total": format_money(price_info.price),
                 "has_extra_info": False,
             }
         })
@@ -74,7 +75,7 @@ class DateRangeCheckViewTestCase(ReservableViewsBaseTestCase):
         self.assertJSONEqual(response.content.decode("utf-8"), {
             "result": True,
             "price": {
-                "total": str(price_info.price.quantize(Decimal("1.00"))),
+                "total": format_money(price_info.price),
                 "period_modifiers": str(price_info.period_modifiers.quantize(Decimal("1.00"))),
                 "per_person_modifiers": str(price_info.per_person_modifiers.quantize(Decimal("1.00"))),
                 "has_extra_info": True,

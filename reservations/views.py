@@ -17,7 +17,7 @@ from shoop.admin.modules.products.views import ProductEditView
 from shoop.admin.toolbar import URLActionButton
 from shoop.admin.utils.picotable import Column, TextFilter, DateRangeFilter
 from shoop.admin.utils.views import PicotableListView, CreateOrUpdateView
-from shoop.utils.i18n import get_current_babel_locale
+from shoop.utils.i18n import get_current_babel_locale, format_money
 
 from reservations.forms import ReservableProductFormPart
 from reservations.models import Reservation, ReservableProduct
@@ -134,7 +134,7 @@ class DateRangeCheckView(View):
             price_info = reservable.product.get_price_info(request, quantity=total_days)
             has_extra_info = price_info.period_modifiers > 0 or price_info.per_person_modifiers > 0
             price = {
-                "total": price_info.price.quantize(Decimal("1.00")),
+                "total": format_money(price_info.price),
                 "has_extra_info": has_extra_info,
             }
             if has_extra_info:
