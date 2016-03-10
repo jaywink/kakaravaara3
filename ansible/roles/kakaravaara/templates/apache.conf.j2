@@ -32,7 +32,7 @@
     ProxyPass / uwsgi://127.0.0.1:3031/
 
     SSLEngine on
-    SSLCertificateFile /etc/ssl/certs/{{ hostname }}.crt
-    SSLCertificateKeyFile /etc/ssl/private/{{ hostname }}.key
-    SSLCertificateChainFile /etc/ssl/certs/{{ hostname }}.chain.pem
+    SSLCertificateFile /etc/letsencrypt/live/{{ hostname }}/cert.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/{{ hostname }}/privkey.pem
+    SSLCertificateChainFile /etc/letsencrypt/live/{{ hostname }}/chain.pem
 </VirtualHost>
