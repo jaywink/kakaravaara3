@@ -119,6 +119,9 @@ TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
         "APP_DIRS": True,
+        "DIRS": [
+            "templates_third_party",
+        ],
         "OPTIONS": {
             "match_extension": ".jinja",
             'context_processors': TEMPLATE_CONTEXT_PROCESSORS,
