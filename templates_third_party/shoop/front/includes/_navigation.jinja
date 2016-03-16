@@ -49,50 +49,52 @@
                     {% endblock %}
                 </li>
                 {% endif %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-shopping-cart"></i> {% trans %}Cart{% endtrans %} <span>({{ request.basket.product_count }}) </span><span class="caret"></span></a>
-                    <div class="dropdown-menu">
-                        <div class="col-sm-12">
-                            <table class="table">
-                                <colgroup>
-                                    <col style="min-width: 210px;">
-                                    <col style="min-width: 90px;">
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th>{% trans %}Items{% endtrans %}</th>
-                                        <th class="text-right">{% trans %}Price{% endtrans %}</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>
-                                            {% trans %}Total{% endtrans %}
-                                        </th>
-                                        <th class="text-right">
-                                            {{ request.basket.total_price|money }}
-                                        </th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    {% for line in request.basket.get_lines() %}
+                {% if request.basket.product_count %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-shopping-cart"></i> {% trans %}Cart{% endtrans %} <span>({{ request.basket.product_count }}) </span><span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <colgroup>
+                                        <col style="min-width: 210px;">
+                                        <col style="min-width: 90px;">
+                                    </colgroup>
+                                    <thead>
                                         <tr>
-                                            <td>{{ line.quantity|number }} &times; {{ line.text }}</td>
-                                            <td class="text-right">{{ line.price|money }}</td>
+                                            <th>{% trans %}Items{% endtrans %}</th>
+                                            <th class="text-right">{% trans %}Price{% endtrans %}</th>
                                         </tr>
-                                    {% else %}
+                                    </thead>
+                                    <tfoot>
                                         <tr>
-                                            <td colspan="2" class="text-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> {% trans %}Your shopping cart is empty{% endtrans %}</td>
+                                            <th>
+                                                {% trans %}Total{% endtrans %}
+                                            </th>
+                                            <th class="text-right">
+                                                {{ request.basket.total_price|money }}
+                                            </th>
                                         </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <a href="{{ url("shoop:basket") }}" class="btn btn-block btn-primary">
-                                {% trans %}View cart{% endtrans %} <i class="glyphicon glyphicon-chevron-right"></i>
-                            </a>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for line in request.basket.get_lines() %}
+                                            <tr>
+                                                <td>{{ line.quantity|number }} &times; {{ line.text }}</td>
+                                                <td class="text-right">{{ line.price|money }}</td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="2" class="text-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> {% trans %}Your shopping cart is empty{% endtrans %}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <a href="{{ url("shoop:basket") }}" class="btn btn-block btn-primary">
+                                    {% trans %}View cart{% endtrans %} <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                {% endif %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-globe"></i>
