@@ -44,18 +44,20 @@
 
             {% block before_content_title %}{% endblock %}
 
-            {% if self.content_title() %}
-                <div class="page-header">
-                    <h1>{% block content_title %}{% endblock %}</h1>
-                </div>
+            {% if request.path != "/" %}
+                {% if self.content_title() %}
+                    <div class="page-header">
+                        <h1>{% block content_title %}{% endblock %}</h1>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="extra-padding-top"></div>
             {% endif %}
 
             <div class="page-content">
                 {% block content %}{% endblock %}
             </div>
-
         </main>
-
     </div>
 
     {# Include all Extra JavaScript #}

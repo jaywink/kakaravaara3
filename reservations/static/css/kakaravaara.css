@@ -9,6 +9,11 @@ div#shipping div.required-field label.control-label::after {
     border-top: none;
 }
 
+/* Some extra control with padding */
+.extra-padding-top {
+    padding-top: 15px;
+}
+
 /* Site colours */
 body.kakaravaara {
     background-color: #9FC4D4;
