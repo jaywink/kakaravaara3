@@ -113,67 +113,6 @@
                         {% endfor %}
                     </ul>
                 </li>
-                {% if user.is_authenticated() %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            {% if user.first_name or user.last_name %}
-                                {{ user.get_full_name() }}
-                            {% else %}
-                                {{ user }}
-                            {% endif %}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ url("shoop:customer_edit") }}">
-                                    <i class="glyphicon glyphicon-user"></i> {% trans %}Edit account details{% endtrans %}
-                                </a>
-                            </li>
-                            {% if shoop.urls.has_url("shoop:personal-orders") %}
-                            <li>
-                                <a href="{{ url("shoop:personal-orders") }}">
-                                    <i class="glyphicon glyphicon-list-alt"></i>
-                                    {% trans %}My orders{% endtrans %}
-                                </a>
-                            </li>
-                            {% endif %}
-                            {% if user.is_superuser %}
-                                <li><a href="{{ url("shoop_admin:dashboard") }}"><i class="glyphicon glyphicon-cog"></i> {% trans %}Admin panel{% endtrans %}</a></li>
-                            {% endif %}
-                            {% if shoop.urls.has_url("shoop:logout") %}
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="{{ url("shoop:logout") }}">
-                                    <i class="glyphicon glyphicon-log-out"></i> {% trans %}Log out{% endtrans %}
-                                </a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </li>
-                {% else %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-user"></i> {% trans %}Log in{% endtrans %}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            {% if shoop.urls.has_url("shoop:login") %}
-                            <li>
-                                <a href="{{ url("shoop:login") }}">
-                                    <i class="glyphicon glyphicon-log-in"></i> {% trans %}Log in{% endtrans %}
-                                </a>
-                            </li>
-                            {% endif %}
-                            {% if shoop.urls.has_url("shoop:registration_register") %}
-                            <li>
-                                <a href="{{ url("shoop:registration_register") }}">
-                                    <i class="glyphicon glyphicon-edit"></i> {% trans %}Register{% endtrans %}
-                                </a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </li>
-                {% endif %}
             </ul>
         </div>
     </div>
