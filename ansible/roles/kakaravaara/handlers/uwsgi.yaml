@@ -1,3 +1,0 @@
----
-- name: restart uwsgi
-  service: name=kakara state=restarted
