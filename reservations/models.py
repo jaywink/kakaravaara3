@@ -7,11 +7,11 @@ from django.db import models
 from django.db.models import Q
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
+from shoop.core.models import Product, OrderLine
+from shoop.core.order_creator.signals import order_creator_finished
 
 from reservable_pricing.models import PeriodPriceModifier
 from reservations.notify_events import ReservationsOrderReceived, get_order_details
-from shoop.core.models import Product, OrderLine
-from shoop.front.signals import order_creator_finished
 
 
 class ReservableProduct(models.Model):
