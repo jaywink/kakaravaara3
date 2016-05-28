@@ -64,7 +64,6 @@ SHOOP_APPS = [
     "shoop.admin",
     "shoop.core",
     "shoop.default_tax",
-    "shoop.discount_pricing",
     "shoop.front",
     "shoop.front.apps.auth",
     "shoop.front.apps.customer_information",
