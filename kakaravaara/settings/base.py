@@ -71,7 +71,7 @@ SHOOP_APPS = [
     "shoop.front.apps.simple_order_notification",
     "shoop.notify",
     "shoop.simple_cms",
-    "shoop.simple_pricing",
+    'shoop.customer_group_pricing',
     "shoop.simple_supplier",
     "shoop_simple_theme",
     "shoop.xtheme",
