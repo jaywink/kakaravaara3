@@ -21,3 +21,6 @@ db_host: 127.0.0.1
 
 # Set to false for no https, for development
 kakara_https: true
+
+# Set to true for development environment - NOT IN PRODUCTION
+kakara_debug: false
