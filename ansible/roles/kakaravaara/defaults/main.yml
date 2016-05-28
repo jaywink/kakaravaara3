@@ -18,3 +18,6 @@ db_host: 127.0.0.1
 
 # Uncomment to use DummyCache - good for lots of page editing for example
 #kakara_dummy_cache: true
+
+# Set to false for no https, for development
+kakara_https: true
