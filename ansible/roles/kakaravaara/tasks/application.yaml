@@ -45,6 +45,5 @@
   django_manage: app_path=/home/kakara/kakaravaara command=shoop_init virtualenv=/home/kakara/venv
   become: yes
   become_user: kakara
-  when: init_site is defined
   environment:
     DJANGO_SETTINGS_MODULE: kakaravaara.settings.prod
