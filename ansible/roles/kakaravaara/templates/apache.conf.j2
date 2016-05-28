@@ -1,13 +1,14 @@
 <VirtualHost *:80>
     ServerName {{ hostname }}
     ServerAlias www.{{ hostname }}
+{% if kakara_https %}
     RedirectPermanent / https://{{ hostname }}/
 </VirtualHost>
 
 <VirtualHost *:443>
     ServerName {{ hostname }}
     ServerAlias www.{{ hostname }}
-
+{% endif %}
     ServerAdmin webmaster@{{ hostname }}
 
     DocumentRoot {{ web_root }}
@@ -30,9 +31,10 @@
     ProxyPass /static !
     ProxyPass /media !
     ProxyPass / uwsgi://127.0.0.1:3031/
-
+{% if kakara_https %}
     SSLEngine on
     SSLCertificateFile /etc/letsencrypt/live/{{ hostname }}/cert.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/{{ hostname }}/privkey.pem
     SSLCertificateChainFile /etc/letsencrypt/live/{{ hostname }}/chain.pem
+{% endif %}
 </VirtualHost>
