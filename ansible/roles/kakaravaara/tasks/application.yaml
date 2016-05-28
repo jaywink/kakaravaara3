@@ -4,7 +4,7 @@
 - name: Make sure venv directory is owned by user
   file: path=/home/kakara/venv owner=kakara group=kakara recurse=yes state=directory
 - name: Get latest kakara code
-  git: accept_hostkey=yes dest=/home/kakara/kakaravaara repo=https://github.com/jaywink/kakaravaara3.git force=yes
+  git: accept_hostkey=yes dest=/home/kakara/kakaravaara repo=https://github.com/jaywink/kakaravaara3.git force=yes version=rebase-shoop
   become: yes
   become_user: kakara
   notify:
