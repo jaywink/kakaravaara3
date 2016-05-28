@@ -7,7 +7,11 @@ from kakaravaara.settings.base import *
 SECRET_KEY = '{{ secret_key }}'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+{% if kakara_debug %}
+DEBUG = True
+{% else %}
 DEBUG = False
+{% endif %}
 
 ALLOWED_HOSTS = ["{{ hostname }}", "www.{{ hostname }}"]
 
