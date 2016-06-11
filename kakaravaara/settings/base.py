@@ -38,6 +38,7 @@ SHOOP_ORDER_KNOWN_EXTRA_DATA_KEYS = [
     ("reservation_start", "Reservation start"),
     ("persons", "Persons"),
 ]
+SHOOP_ORDER_SOURCE_MODIFIER_MODULES = []
 
 ######## Installed apps ########
 PREREQ_APPS = [
