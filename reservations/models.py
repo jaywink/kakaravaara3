@@ -127,7 +127,7 @@ class Reservation(models.Model):
 @receiver(order_creator_finished)
 def send_order_received_notification(sender, **kwargs):
     order = kwargs["order"]
-    request = kwargs["request"]
+    request = kwargs["source"].request
     ReservationsOrderReceived(
         order=order,
         order_id=order.id,
