@@ -9,13 +9,16 @@ from django.utils.translation import ugettext_lazy as _
 from reservable_pricing.models import PeriodPriceModifier
 from reservations.utils import get_start_and_end_from_request, get_persons_from_request
 from shoop.admin.base import AdminModule, MenuEntry
-from shoop.core.models import ShopProduct
+from shoop.core.models import ShopProduct, AnonymousContact
 from shoop.core.pricing import PriceInfo, PricingContext, PricingModule
 
 
 class ReservablePricingContext(PricingContext):
-    REQUIRED_VALUES = ("start_date", "end_date", "shop")
-    shop = None
+    def __init__(self, shop, customer, start_date, end_date, persons=None, **kwargs):
+        super(ReservablePricingContext, self).__init__(shop, customer, **kwargs)
+        self.start_date = start_date
+        self.end_date = end_date
+        self.persons = persons
 
 
 class ReservablePricingModule(PricingModule):
@@ -33,6 +36,7 @@ class ReservablePricingModule(PricingModule):
             start_date=start_date,
             end_date=end_date,
             persons=persons,
+            customer=AnonymousContact(),
         )
 
     def get_price_info(self, context, product, quantity=1):

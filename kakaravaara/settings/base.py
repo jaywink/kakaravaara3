@@ -32,6 +32,7 @@ SHOOP_BASKET_ORDER_CREATOR_SPEC = ("reservations.basket:ReservableOrderCreator")
 SHOOP_CHECKOUT_VIEW_SPEC = ("reservations.checkout:ReservationsCheckoutView")
 SHOOP_ENABLED_ADDONS_FILE = os.path.join(BASE_DIR, "var", "enabled_addons")
 SHOOP_PRICING_MODULE = "reservable_pricing"
+SHOOP_DISCOUNT_MODULES = []
 SHOOP_ADDRESS_HOME_COUNTRY = "FI"
 SHOOP_ORDER_KNOWN_EXTRA_DATA_KEYS = [
     ("reservation_start", "Reservation start"),

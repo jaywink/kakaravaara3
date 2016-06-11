@@ -1,10 +1,12 @@
 import datetime
 from decimal import Decimal
+from unittest.mock import patch
 
 from django.test import RequestFactory
 from django.utils.timezone import make_aware
 
-from shoop.core.models import Supplier
+from shoop.core.models import Supplier, AnonymousContact
+from shoop.core.pricing import get_pricing_module
 from shoop.testing.factories import create_order_with_product
 
 from kakaravaara.tests import KakaravaaraTestsBase
@@ -13,6 +15,17 @@ from reservations.factories import ReservableProductFactory
 from reservations.models import Reservation
 
 
+def get_pricing_context(shop, customer=None):
+    return get_pricing_module().get_context_from_data(
+        shop=shop,
+        customer=(customer or AnonymousContact()),
+        start_date=datetime.date(2016, 1, 1),
+        end_date=datetime.date(2016, 1, 4),
+        persons=3
+    )
+
+
+@patch("shoop.testing.factories._get_pricing_context", new=get_pricing_context)
 class ReservableOrderCreatorTestCase(KakaravaaraTestsBase):
     def setUp(self):
         super(ReservableOrderCreatorTestCase, self).setUp()
@@ -39,4 +52,3 @@ class ReservableOrderCreatorTestCase(KakaravaaraTestsBase):
         self.assertEqual(reservation.end_time, end_time)
         self.assertEqual(reservation.persons, 3)
         self.assertEqual(order_line.extra_data["reservation_end"], "2016-01-04")
-

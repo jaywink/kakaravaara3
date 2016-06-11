@@ -2,7 +2,7 @@ import datetime
 from decimal import Decimal
 
 from django.test import RequestFactory
-from shoop.core.models import ShopProduct
+from shoop.core.models import ShopProduct, AnonymousContact
 
 from kakaravaara.tests import KakaravaaraTestsBase
 from reservable_pricing.factories import PeriodPriceModifierFactory
@@ -15,6 +15,7 @@ class ReservablePricePerPersonTestCase(KakaravaaraTestsBase):
         self.request = RequestFactory().get("/")
         self.request.GET = {"persons": 3}
         self.request.shop = self.shop
+        self.request.customer = AnonymousContact()
         self.reservable = ReservableProductFactory(
             pricing_per_person_included=0, pricing_per_person_price=Decimal("10.00"),
         )
