@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-05 16:54+0000\n"
-"PO-Revision-Date: 2016-03-16 22:13+0200\n"
+"POT-Creation-Date: 2016-06-18 18:19+0000\n"
+"PO-Revision-Date: 2016-06-18 21:21+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.8.4\n"
+"Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 msgid "period price modifier"
 msgstr "erikoishinta ajanjaksolle"
@@ -36,7 +36,7 @@ msgstr "Ajanjaksojen hintamuuntimet"
 
 # | msgid "New modifier"
 msgid "New period modifier"
-msgstr "Uusi muunnin"
+msgstr "Uusi ajanjaksomuunnin"
 
 msgid "General information"
 msgstr "Yleistä"
@@ -94,8 +94,8 @@ msgstr "järjestys"
 msgid "reservable products"
 msgstr "varattavat tuotteet"
 
-msgid "order"
-msgstr "tilaus"
+msgid "order line"
+msgstr "tilausrivi"
 
 msgid "starts"
 msgstr "alkaa"
@@ -180,6 +180,27 @@ msgstr "Valittu ajanjakso ei ole vapaa."
 msgid "New Reservation"
 msgstr "Uusi varaus"
 
+msgid "View Order"
+msgstr "Näytä tilaus"
+
+msgid "Special period"
+msgstr "Erikoisjakso"
+
+msgid "Person count"
+msgstr "Henkilömäärä"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "From Order"
+msgstr "Tilauksesta"
+
+msgid "Sign In Time"
+msgstr "Sisäänkirjautuminen"
+
+msgid "Sign Out Time"
+msgstr "Uloskirjautuminen"
+
 msgid "Details & Status"
 msgstr "Tiedot ja tilanne"
 
@@ -261,8 +282,8 @@ msgstr "Lähtöpäivämäärä"
 msgid "Taxless Unit Price"
 msgstr "Veroton yksikköhinta"
 
-msgid "Quantity"
-msgstr "Määrä"
+msgid "Quantity / Nights"
+msgstr "Määrä / Yöt"
 
 msgid "Taxless Discount"
 msgstr "Veroton alennus"
@@ -275,6 +296,9 @@ msgstr "Veroton yhteensä"
 
 msgid "Total incl. Tax"
 msgstr "Yhteensä verollinen"
+
+msgid "Actions"
+msgstr "Toiminnot"
 
 msgid "Discount"
 msgstr "Alennus"
@@ -296,6 +320,9 @@ msgstr "Saapuminen"
 
 msgid "Price"
 msgstr "Hinta"
+
+msgid "Quantity"
+msgstr "Määrä"
 
 msgid "Nights"
 msgstr "yötä"
@@ -320,25 +347,6 @@ msgstr "Korisi on tyhjä"
 
 msgid "View cart"
 msgstr "Näytä kori"
-
-msgid "Edit account details"
-msgstr "Muokkaa tilitietoja"
-
-# | msgid "order"
-msgid "My orders"
-msgstr "Tilaukseni"
-
-msgid "Admin panel"
-msgstr "Admin paneeli"
-
-msgid "Log out"
-msgstr "Kirjaudu ulos"
-
-msgid "Log in"
-msgstr "Kirjaudu sisään"
-
-msgid "Register"
-msgstr "Rekisteröidy"
 
 msgid "Title"
 msgstr "Otsikko"
@@ -387,21 +395,3 @@ msgstr "Suosittelemamme tuotteet"
 
 msgid "Users who bought this product also bought"
 msgstr "Henkilöt jotka ostivat tämän ostivat myös"
-
-msgid "Special period"
-msgstr "Erikoisjakso"
-
-msgid "Person count"
-msgstr "Henkilömäärä"
-
-msgid "Filter by reservable..."
-msgstr "Etsi varattavan mukaan..."
-
-msgid "From Order"
-msgstr "Tilauksesta"
-
-msgid "Sign In Time"
-msgstr "Sisäänkirjautuminen"
-
-msgid "Sign Out Time"
-msgstr "Uloskirjautuminen"
