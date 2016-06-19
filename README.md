@@ -13,6 +13,14 @@ After running `shoop_init` management command, the following needs done:
 * Enable `Shoop Simple Theme`.
 * Enable `Default Payment Method`.
 * Enable `Default Shipping Method`.
+* Set `Default Supplier` module to `Simple Supplier`.
+
+## Products
+
+Each product must have a supplier, for example `Default Supplier`. If the admin is broken:
+
+    s = Supplier.objects.first()
+    s.shop_products.add(ShopProduct.objects.get(product__sku=<sku>))
 
 ## License
 
