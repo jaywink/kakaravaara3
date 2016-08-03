@@ -9,3 +9,5 @@
   command: creates=/home/kakara/venv virtualenv -p python3.4 /home/kakara/venv
 - name: Update pip
   pip: name=pip state=latest virtualenv=/home/kakara/venv
+- name: Update setuptools
+  pip: name=setuptools state=latest virtualenv=/home/kakara/venv
