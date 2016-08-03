@@ -1,14 +1,14 @@
 -r base.txt
 
 # runserver_plus and other goodies
-Werkzeug==0.10.4
-django-debug-toolbar==1.3.2
+Werkzeug==0.11.10
+django-debug-toolbar==1.5
 
 # testing
-pytest-django==2.8.0
+pytest-django==2.9.1
 # included from shoop test reqs
-beautifulsoup4==4.3.2
-mock==1.0.1
+beautifulsoup4==4.5.0
+mock==2.0.0
 pytest-cache==1.0
-pytest-cov==1.8.1
-freezegun==0.3.5
+pytest-cov==2.3.0
+freezegun==0.3.7
