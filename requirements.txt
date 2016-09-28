@@ -1,0 +1,3 @@
+# Appease gemnasium by including all requirements here.
+-r requirements/prod.txt
+-r requirements/dev.txt
