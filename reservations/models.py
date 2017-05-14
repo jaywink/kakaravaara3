@@ -5,12 +5,14 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from reservable_pricing.models import PeriodPriceModifier
 from reservations.notify_events import ReservationsOrderReceived, get_order_details
-from shoop.core.models import Product, OrderLine
+from shoop.core.models import Product, Order, OrderLine
+from shoop.core.models._orders import OrderStatusRole
 from shoop.front.signals import order_creator_finished
 
 
@@ -142,3 +144,11 @@ def send_order_received_notification(sender, **kwargs):
         additional_notes=order.customer_comment,
         total_sum=order.taxful_total_price_value,
     ).run()
+
+
+@receiver(post_save, sender=Order)
+def order_post_save(sender, instance, **kwargs):
+    if instance.status.role == OrderStatusRole.CANCELED:
+        reservations = Reservation.objects.filter(order_line__order=instance)
+        for reservation in reservations:
+            reservation.delete()
