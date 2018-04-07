@@ -1,6 +1,7 @@
 ---
 - name: Ensure locales are set
   lineinfile: line='LANGUAGE="en_US.UTF-8"' dest=/etc/default/locale state=present
+- name: Ensure locales are set
   lineinfile: line='LC_ALL="en_US.UTF-8"' dest=/etc/default/locale state=present
 - name: System dependencies
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=86400

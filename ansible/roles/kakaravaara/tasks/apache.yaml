@@ -1,18 +1,34 @@
 ---
+- name: Disable site
+  command: a2dissite kakara
+
 - name: Apache uwsgi module deps
-  apt: name=libapache2-mod-proxy-uwsgi
+  apt: name=libapache2-mod-proxy-html
   notify:
     - restart apache
+
 - name: Apache modules
   apache2_module: state=present name={{ item }}
   with_items:
-    - proxy_uwsgi
+    - proxy_http
     - proxy
     - ssl
   notify:
     - restart apache
+
+- name: Apache uwsgi module deps
+  apt: name=libapache2-mod-proxy-uwsgi
+  notify:
+    - restart apache
+
+- name: Apache modules
+  apache2_module: state=present name=proxy_uwsgi
+  notify:
+    - restart apache
+
 - name: Apache site
   template: dest=/etc/apache2/sites-available/kakara.conf src=apache.conf.j2
+
 - name: Enable site
   command: a2ensite kakara
   notify:
