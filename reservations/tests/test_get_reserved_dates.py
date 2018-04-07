@@ -46,6 +46,18 @@ class ReservationsGetReservedDatesTestCase(KakaravaaraTestsBase):
         )
         self.assertEquals(len(dates), 10)
 
+    def test_get_reserved_dates_for_period_returns_correct_dates__spanning_months(self):
+        ReservationFactory(
+            reservable=self.reservable,
+            start_time=datetime.datetime(year=2015, month=6, day=30, hour=15),
+            end_time=datetime.datetime(year=2015, month=8, day=5, hour=12)
+        )
+        dates = Reservation.get_reserved_days_for_period(
+            start_date=datetime.date(year=2015, month=7, day=15),
+            end_date=datetime.date(year=2015, month=7, day=20)
+        )
+        self.assertEquals(len(dates), 6)
+
     def test_is_period_free(self):
         ReservationFactory(
             reservable=self.reservable,

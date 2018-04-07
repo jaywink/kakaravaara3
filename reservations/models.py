@@ -113,12 +113,23 @@ class Reservation(models.Model):
             list of dates or []
         """
         reservations = Reservation.objects.filter(
+            start_time__gte=start_date, end_time__lte=end_date,
+        )
+        reservations = reservations | Reservation.objects.filter(
             Q(start_time__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
+        )
+        reservations = reservations | Reservation.objects.filter(
+            (
+                Q(start_time__lt=start_date) & Q(end_time__gte=start_date)
+            ) |
+            (
+                Q(start_time__lte=end_date) & Q(end_time__gt=end_date)
+            )
         )
         if reservable:
             reservations = reservations.filter(reservable=reservable)
         dates = []
-        for reservation in reservations:
+        for reservation in reservations.distinct():
             current = max(reservation.start_time.date(), start_date)
             while current < reservation.end_time.date() and current <= end_date:
                 dates.append(current)
