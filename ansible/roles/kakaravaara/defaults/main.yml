@@ -24,3 +24,6 @@ kakara_https: true
 
 # Set to true for development environment - NOT IN PRODUCTION
 kakara_debug: false
+
+# Repository branch or tag
+kakara_version: master
