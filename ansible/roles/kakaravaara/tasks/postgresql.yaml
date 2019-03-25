@@ -1,4 +1,11 @@
 ---
+- name: PostgreSQL system dependencies
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=86400
+  with_items:
+    - libpq-dev
+    - postgresql-9.3
+    - python-psycopg2
+
 - name: Create database
   postgresql_db: name={{ db_name }}
   become_user: postgres

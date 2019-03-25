@@ -8,19 +8,19 @@
   become: yes
   become_user: kakara
   notify:
-    - restart uwsgi
+    - restart kakara
 - name: Install app requirements
   pip: requirements=/home/kakara/kakaravaara/requirements/prod.txt virtualenv=/home/kakara/venv extra_args='-U'
   become: yes
   become_user: kakara
   notify:
-    - restart uwsgi
+    - restart kakara
 - name: Create local settings
   template: dest=/home/kakara/kakaravaara/kakaravaara/settings/prod.py src=local_config.py.j2
   become: yes
   become_user: kakara
   notify:
-    - restart uwsgi
+    - restart kakara
 - name: Migrate db
   django_manage: app_path=/home/kakara/kakaravaara command=migrate virtualenv=/home/kakara/venv
   become: yes
@@ -34,7 +34,7 @@
   environment:
     DJANGO_SETTINGS_MODULE: kakaravaara.settings.prod
   notify:
-    - restart uwsgi
+    - restart kakara
 - name: Collect statics
   django_manage: app_path=/home/kakara/kakaravaara command=collectstatic virtualenv=/home/kakara/venv
   become: yes

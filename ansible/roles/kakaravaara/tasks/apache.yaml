@@ -1,11 +1,7 @@
 ---
 - name: Disable site
   command: a2dissite kakara
-
-- name: Apache uwsgi module deps
-  apt: name=libapache2-mod-proxy-html
-  notify:
-    - restart apache
+  ignore_errors: yes
 
 - name: Apache modules
   apache2_module: state=present name={{ item }}

@@ -1,8 +1,0 @@
-# Ignore all by default
-*
-
-# Whitelist needed
-!.gitignore
-!roles
-!kakaravaara.yaml.example
-!vars/kakara.yml.example

@@ -8,10 +8,6 @@
   with_items:
     - git
     - gettext
-    # Postgresql
-    - libpq-dev
-    - postgresql-9.3
-    - python-psycopg2
     # Apache
     - apache2
     # Pillow

@@ -27,3 +27,6 @@ kakara_debug: false
 
 # Repository branch or tag
 kakara_version: master
+
+# By default don't install postgres
+kakara_install_postgres: false
