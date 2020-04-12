@@ -77,7 +77,7 @@ class ReservableSearchView(TemplateView):
             self.start_date = self.end_date
 
     def _get_reservables(self):
-        return ReservableProduct.objects.all()
+        return ReservableProduct.objects.filter(product__sku__in=("kamari", "pirtti"))
 
     def _get_reserved_days_as_strings(self):
         reservables = self._get_reservables()
