@@ -5,60 +5,64 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-05 16:54+0000\n"
+"POT-Creation-Date: 2020-05-06 21:38+0300\n"
 "PO-Revision-Date: 2016-03-16 22:13+0200\n"
 "Last-Translator: \n"
-"Language-Team: \n"
 "Language: fi\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.2.0\n"
-"X-Generator: Poedit 1.8.4\n"
+"Generated-By: Babel 2.8.0\n"
 
+#: reservable_pricing/models.py:20
 msgid "period price modifier"
 msgstr "erikoishinta ajanjaksolle"
 
+#: reservable_pricing/models.py:21
 msgid "period price modifiers"
 msgstr "erikoishinnat ajanjaksoille"
 
+#: reservable_pricing/module.py:23
 msgid "Reservable Pricing"
 msgstr "Varattavien hinnoittelu"
 
+#: reservable_pricing/module.py:96
 msgid "Price modifiers"
 msgstr "Hintamuuntimet"
 
+#: reservable_pricing/module.py:102
 msgid "Period price modifiers"
 msgstr "Ajanjaksojen hintamuuntimet"
 
-# | msgid "New modifier"
-msgid "New period modifier"
-msgstr "Uusi muunnin"
-
-msgid "General information"
-msgstr "Yleistä"
-
+#: reservable_pricing/views.py:17 reservations/views.py:160
 msgid "Name"
 msgstr "Nimi"
 
+#: reservable_pricing/views.py:21
 msgid "Filter by product..."
 msgstr "Etsi tuotteita..."
 
+#: reservable_pricing/views.py:23
 msgid "Start date"
 msgstr "Saapumispäivämäärä"
 
+#: reservable_pricing/views.py:24
 msgid "End date"
 msgstr "Lähtöpäivämäärä"
 
+#: reservable_pricing/views.py:25
 msgid "Modifier"
 msgstr "Muunnin"
 
+#: reservable_pricing/views.py:37
 msgid "New modifier"
 msgstr "Uusi muunnin"
 
+#: reservations/checkout.py:24
 #, python-format
 msgid ""
 "I have read and agree with the <a href='%s' target='_blank'>Terms and "
@@ -67,341 +71,424 @@ msgstr ""
 "Olen lukenut ja hyväksyn <a href='%s' target='_blank'>varaus- ja "
 "peruutusehdot</a>."
 
+#: reservations/models.py:22 reservations/models.py:36
+#: reservations/models.py:83
 msgid "reservable product"
 msgstr "varattava tuote"
 
+#: reservations/models.py:23
 msgid "sign out time"
 msgstr "uloskirjautuminen"
 
+#: reservations/models.py:24
 msgid "sign in time"
 msgstr "sisäänkirjautuminen"
 
+#: reservations/models.py:25
 msgid "available quantity"
 msgstr "saatavilla oleva määrä"
 
+#: reservations/models.py:26
 msgid "pricing per person"
 msgstr "hinnoittelu henkilömäärän mukaan"
 
+#: reservations/models.py:28
 msgid "people included in price"
 msgstr "perushintaan kuuluvat henkilöt"
 
+#: reservations/models.py:31
 msgid "price per person"
 msgstr "hinta per henkilö"
 
+#: reservations/models.py:33
 msgid "sort order"
 msgstr "järjestys"
 
+#: reservations/models.py:37
 msgid "reservable products"
 msgstr "varattavat tuotteet"
 
-msgid "order"
-msgstr "tilaus"
+#: reservations/models.py:85
+msgid "order line"
+msgstr ""
 
+#: reservations/models.py:86
 msgid "starts"
 msgstr "alkaa"
 
+#: reservations/models.py:87
 msgid "ends"
 msgstr "päättyy"
 
+#: reservations/models.py:88
 msgid "persons"
 msgstr "henkilöitä"
 
+#: reservations/models.py:91
 msgid "reservation"
 msgstr "varaus"
 
+#: reservations/models.py:92
 msgid "reservations"
 msgstr "varaukset"
 
+#: reservations/module.py:8
+#: reservations/templates/reservations/reservable_search.jinja:5
+#: reservations/templates/reservations/reservable_search.jinja:10
 msgid "Reservations"
 msgstr "Varaukset"
 
+#: reservations/notify_events.py:34
 #, python-brace-format
 msgid "    {nights} nights, {persons} persons, {start} - {end}"
 msgstr "    {nights} yötä, {persons} henkilöä, {start} - {end}"
 
-msgid "Reservable"
-msgstr "Varattava"
-
-msgid "Select months to search from"
-msgstr "Valitse ajanjakso"
-
-msgid "Starting month"
-msgstr "Alkukuukausi"
-
-msgid "mm/yyyy"
-msgstr "kk.vvvv"
-
-msgid "End month"
-msgstr "Päättymiskuukausi"
-
-msgid "Cottages and their reserved periods."
-msgstr "Mökit ja varaukset."
-
-msgid ""
-"To reserve a cottage, click on a free date in the calendar, type in the "
-"number of days and click 'Reserve'. Note! Dates in red are <strong>reserved</"
-"strong>."
+#: reservations/views.py:52
+msgid "View Order"
 msgstr ""
-"Valitse kalenterista saapumispäivämäärä. Lisää öiden ja henkilöiden määrä ja "
-"klikkaa 'Varaa'. Huom! Kalenterissa punaisella olevat päivät ovat "
-"<strong>varattuja</strong>."
 
-msgid "Price/night (from)"
-msgstr "Hinta/yö (alk)"
-
-msgid "Arrival Date"
-msgstr "Saapumispäivämäärä"
-
-msgid "Number of nights"
-msgstr "Öiden määrä"
-
-msgid "Persons"
-msgstr "Henkilöitä"
-
-msgid ""
-"Fill in the number of persons (6 years or older). This is needed for "
-"bedding, when included in the cottage price. Please check cottage details."
-msgstr ""
-"Anna henkilöiden määrä (6v tai yli). Tätä tarvitaan lakanoita varten, jos ne "
-"kuuluvat mökin hintaan. Tarkista mökin kuvaus."
-
-msgid "Price for chosen period:"
-msgstr "Hinta valitulle ajanjaksolle:"
-
-msgid "Reserve"
-msgstr "Varaa"
-
-msgid "Minimum possible period is 2 nights."
-msgstr "Vähimmäisjakso on kaksi yötä."
-
-msgid "Chosen period is not available."
-msgstr "Valittu ajanjakso ei ole vapaa."
-
-msgid "New Reservation"
-msgstr "Uusi varaus"
-
-msgid "Details & Status"
-msgstr "Tiedot ja tilanne"
-
-msgid "Order Number"
-msgstr "Tilausnumero"
-
-msgid "Order Date"
-msgstr "Tilauspäivämäärä"
-
-msgid "Reference"
-msgstr "Viite"
-
-msgid "Label"
-msgstr "Otsikko"
-
-msgid "Customer"
-msgstr "Asiakas"
-
-msgid "Ordered by"
-msgstr "Tilaaja"
-
-msgid "Creator"
-msgstr "Luonut"
-
-msgid "Phone"
-msgstr "Puhelin"
-
-msgid "Email"
-msgstr "Sähköposti"
-
-msgid "Tax number"
-msgstr "ALV"
-
-msgid "Total Price (taxless)"
-msgstr "Yhteensä veroton"
-
-msgid "Total Price"
-msgstr "Yhteensä"
-
-msgid "Order Status"
-msgstr "Tilauksen tilanne"
-
-msgid "Payment Status"
-msgstr "Maksun tilanne"
-
-msgid "Shipping Status"
-msgstr "Toimituksen tilanne"
-
-msgid "Addresses"
-msgstr "Osoitteet"
-
-msgid "Shipping address"
-msgstr "Toimitusosoite"
-
-msgid "No shipping address defined."
-msgstr "Ei toimitusosoitetta."
-
-msgid "Billing address"
-msgstr "Laskutusosoite"
-
-msgid "No billing address defined."
-msgstr "Ei laskutusosoitetta."
-
-msgid "Order Contents"
-msgstr "Tilauksen sisältö"
-
-msgid "SKU"
-msgstr "Koodi"
-
-msgid "Text"
-msgstr "Teksti"
-
-msgid "Start Date"
-msgstr "Saapumispäivämäärä"
-
-msgid "End Date"
-msgstr "Lähtöpäivämäärä"
-
-msgid "Taxless Unit Price"
-msgstr "Veroton yksikköhinta"
-
-msgid "Quantity"
-msgstr "Määrä"
-
-msgid "Taxless Discount"
-msgstr "Veroton alennus"
-
-msgid "Tax"
-msgstr "Vero"
-
-msgid "Taxless Total"
-msgstr "Veroton yhteensä"
-
-msgid "Total incl. Tax"
-msgstr "Yhteensä verollinen"
-
-msgid "Discount"
-msgstr "Alennus"
-
-msgid "Total"
-msgstr "Yhteensä"
-
-msgid "Taxless"
-msgstr "Veroton"
-
-msgid "Payments"
-msgstr "Maksut"
-
-msgid "Product"
-msgstr "Tuote"
-
-msgid "Arrival"
-msgstr "Saapuminen"
-
-msgid "Price"
-msgstr "Hinta"
-
-msgid "Nights"
-msgstr "yötä"
-
-msgid "Update quantities"
-msgstr "Päivitä määrät"
-
-msgid "Remove product from basket"
-msgstr "Poista tuote korista"
-
-msgid "Information"
-msgstr "Lisätiedot"
-
-msgid "Cart"
-msgstr "Kori"
-
-msgid "Items"
-msgstr "Rivit"
-
-msgid "Your shopping cart is empty"
-msgstr "Korisi on tyhjä"
-
-msgid "View cart"
-msgstr "Näytä kori"
-
-msgid "Edit account details"
-msgstr "Muokkaa tilitietoja"
-
-# | msgid "order"
-msgid "My orders"
-msgstr "Tilaukseni"
-
-msgid "Admin panel"
-msgstr "Admin paneeli"
-
-msgid "Log out"
-msgstr "Kirjaudu ulos"
-
-msgid "Log in"
-msgstr "Kirjaudu sisään"
-
-msgid "Register"
-msgstr "Rekisteröidy"
-
-msgid "Title"
-msgstr "Otsikko"
-
-msgid "Product not orderable"
-msgstr "Tuote ei ole saatavilla"
-
-msgid "Add to cart"
-msgstr "Lisää koriin"
-
-msgid "Check availability"
-msgstr "Tarkista varaustilanne"
-
-msgid "Additions to base price"
-msgstr "Lisäykset perushintaan"
-
-msgid "Persons included"
-msgstr "Henkilöitä perushintaan"
-
-msgid "Additional persons"
-msgstr "Ylimääräiset henkilöt"
-
-msgid "person"
-msgstr "henkilö"
-
-msgid "night"
-msgstr "yö"
-
-msgid "Product description"
-msgstr "Tuotteen kuvaus"
-
-msgid "Product attributes"
-msgstr "Tuotteen ominaisuudet"
-
-msgid "Includes these products"
-msgstr "Sisältää nämä tuotteet"
-
-msgid "Also available in"
-msgstr "Saatavilla myös"
-
-msgid "Related products"
-msgstr "Liittyvät tuotteet"
-
-msgid "We recommend these products"
-msgstr "Suosittelemamme tuotteet"
-
-msgid "Users who bought this product also bought"
-msgstr "Henkilöt jotka ostivat tämän ostivat myös"
-
+#: reservations/views.py:144
 msgid "Special period"
 msgstr "Erikoisjakso"
 
+#: reservations/views.py:145
 msgid "Person count"
 msgstr "Henkilömäärä"
 
-msgid "Filter by reservable..."
-msgstr "Etsi varattavan mukaan..."
+#: reservations/views.py:158
+msgid "ID"
+msgstr ""
 
+#: reservations/views.py:164
 msgid "From Order"
 msgstr "Tilauksesta"
 
+#: reservations/views.py:166
 msgid "Sign In Time"
 msgstr "Sisäänkirjautuminen"
 
+#: reservations/views.py:168
 msgid "Sign Out Time"
 msgstr "Uloskirjautuminen"
+
+#: reservations/templates/reservations/reservable_search.jinja:146
+#: reservations/views.py:170
+msgid "Persons"
+msgstr "Henkilöitä"
+
+#: reservations/views.py:182
+msgid "New Reservation"
+msgstr "Uusi varaus"
+
+#: reservations/templates/reservations/_reservable_product_form.jinja:5
+msgid "Reservable"
+msgstr "Varattava"
+
+#: reservations/templates/reservations/reservable_search.jinja:19
+msgid "Select months to search from"
+msgstr "Valitse ajanjakso"
+
+#: reservations/templates/reservations/reservable_search.jinja:26
+msgid "Starting month"
+msgstr "Alkukuukausi"
+
+#: reservations/templates/reservations/reservable_search.jinja:27
+#: reservations/templates/reservations/reservable_search.jinja:33
+msgid "mm/yyyy"
+msgstr "kk.vvvv"
+
+#: reservations/templates/reservations/reservable_search.jinja:32
+msgid "End month"
+msgstr "Päättymiskuukausi"
+
+#: reservations/templates/reservations/reservable_search.jinja:84
+msgid "Cottages and their reserved periods."
+msgstr "Mökit ja varaukset."
+
+#: reservations/templates/reservations/reservable_search.jinja:87
+msgid ""
+"To reserve a cottage, click on a free date in the calendar, type in the "
+"number of days and click 'Reserve'. Note! Dates in red are "
+"<strong>reserved</strong>."
+msgstr ""
+"Valitse kalenterista saapumispäivämäärä. Lisää öiden ja henkilöiden määrä"
+" ja klikkaa 'Varaa'. Huom! Kalenterissa punaisella olevat päivät ovat "
+"<strong>varattuja</strong>."
+
+#: reservations/templates/reservations/reservable_search.jinja:117
+msgid "Price/night (from)"
+msgstr "Hinta/yö (alk)"
+
+#: reservations/templates/reservations/reservable_search.jinja:138
+msgid "Arrival Date"
+msgstr "Saapumispäivämäärä"
+
+#: reservations/templates/reservations/reservable_search.jinja:142
+msgid "Number of nights"
+msgstr "Öiden määrä"
+
+#: reservations/templates/reservations/reservable_search.jinja:150
+msgid "Fill in the number of persons over 12 years old."
+msgstr "Syötä yli 12 vuotiaiden henkilöiden määrä."
+
+#: reservations/templates/reservations/reservable_search.jinja:158
+msgid "Price for chosen period:"
+msgstr "Hinta valitulle ajanjaksolle:"
+
+#: reservations/templates/reservations/reservable_search.jinja:167
+msgid "Reserve"
+msgstr "Varaa"
+
+#: reservations/templates/reservations/reservable_search.jinja:229
+msgid "Minimum possible period is 2 nights."
+msgstr "Vähimmäisjakso on kaksi yötä."
+
+#: reservations/templates/reservations/reservable_search.jinja:231
+msgid "Chosen period is not available."
+msgstr "Valittu ajanjakso ei ole vapaa."
+
+# | msgid "New modifier"
+#~ msgid "New period modifier"
+#~ msgstr "Uusi muunnin"
+
+#~ msgid "General information"
+#~ msgstr "Yleistä"
+
+#~ msgid "order"
+#~ msgstr "tilaus"
+
+#~ msgid ""
+#~ "Fill in the number of persons (6"
+#~ " years or older). This is needed "
+#~ "for bedding, when included in the "
+#~ "cottage price. Please check cottage "
+#~ "details."
+#~ msgstr ""
+#~ "Anna henkilöiden määrä (6v tai yli). "
+#~ "Tätä tarvitaan lakanoita varten, jos ne"
+#~ " kuuluvat mökin hintaan. Tarkista mökin "
+#~ "kuvaus."
+
+#~ msgid "Details & Status"
+#~ msgstr "Tiedot ja tilanne"
+
+#~ msgid "Order Number"
+#~ msgstr "Tilausnumero"
+
+#~ msgid "Order Date"
+#~ msgstr "Tilauspäivämäärä"
+
+#~ msgid "Reference"
+#~ msgstr "Viite"
+
+#~ msgid "Label"
+#~ msgstr "Otsikko"
+
+#~ msgid "Customer"
+#~ msgstr "Asiakas"
+
+#~ msgid "Ordered by"
+#~ msgstr "Tilaaja"
+
+#~ msgid "Creator"
+#~ msgstr "Luonut"
+
+#~ msgid "Phone"
+#~ msgstr "Puhelin"
+
+#~ msgid "Email"
+#~ msgstr "Sähköposti"
+
+#~ msgid "Tax number"
+#~ msgstr "ALV"
+
+#~ msgid "Total Price (taxless)"
+#~ msgstr "Yhteensä veroton"
+
+#~ msgid "Total Price"
+#~ msgstr "Yhteensä"
+
+#~ msgid "Order Status"
+#~ msgstr "Tilauksen tilanne"
+
+#~ msgid "Payment Status"
+#~ msgstr "Maksun tilanne"
+
+#~ msgid "Shipping Status"
+#~ msgstr "Toimituksen tilanne"
+
+#~ msgid "Addresses"
+#~ msgstr "Osoitteet"
+
+#~ msgid "Shipping address"
+#~ msgstr "Toimitusosoite"
+
+#~ msgid "No shipping address defined."
+#~ msgstr "Ei toimitusosoitetta."
+
+#~ msgid "Billing address"
+#~ msgstr "Laskutusosoite"
+
+#~ msgid "No billing address defined."
+#~ msgstr "Ei laskutusosoitetta."
+
+#~ msgid "Order Contents"
+#~ msgstr "Tilauksen sisältö"
+
+#~ msgid "SKU"
+#~ msgstr "Koodi"
+
+#~ msgid "Text"
+#~ msgstr "Teksti"
+
+#~ msgid "Start Date"
+#~ msgstr "Saapumispäivämäärä"
+
+#~ msgid "End Date"
+#~ msgstr "Lähtöpäivämäärä"
+
+#~ msgid "Taxless Unit Price"
+#~ msgstr "Veroton yksikköhinta"
+
+#~ msgid "Quantity"
+#~ msgstr "Määrä"
+
+#~ msgid "Taxless Discount"
+#~ msgstr "Veroton alennus"
+
+#~ msgid "Tax"
+#~ msgstr "Vero"
+
+#~ msgid "Taxless Total"
+#~ msgstr "Veroton yhteensä"
+
+#~ msgid "Total incl. Tax"
+#~ msgstr "Yhteensä verollinen"
+
+#~ msgid "Discount"
+#~ msgstr "Alennus"
+
+#~ msgid "Total"
+#~ msgstr "Yhteensä"
+
+#~ msgid "Taxless"
+#~ msgstr "Veroton"
+
+#~ msgid "Payments"
+#~ msgstr "Maksut"
+
+#~ msgid "Product"
+#~ msgstr "Tuote"
+
+#~ msgid "Arrival"
+#~ msgstr "Saapuminen"
+
+#~ msgid "Price"
+#~ msgstr "Hinta"
+
+#~ msgid "Nights"
+#~ msgstr "yötä"
+
+#~ msgid "Update quantities"
+#~ msgstr "Päivitä määrät"
+
+#~ msgid "Remove product from basket"
+#~ msgstr "Poista tuote korista"
+
+#~ msgid "Information"
+#~ msgstr "Lisätiedot"
+
+#~ msgid "Cart"
+#~ msgstr "Kori"
+
+#~ msgid "Items"
+#~ msgstr "Rivit"
+
+#~ msgid "Your shopping cart is empty"
+#~ msgstr "Korisi on tyhjä"
+
+#~ msgid "View cart"
+#~ msgstr "Näytä kori"
+
+#~ msgid "Edit account details"
+#~ msgstr "Muokkaa tilitietoja"
+
+# | msgid "order"
+#~ msgid "My orders"
+#~ msgstr "Tilaukseni"
+
+#~ msgid "Admin panel"
+#~ msgstr "Admin paneeli"
+
+#~ msgid "Log out"
+#~ msgstr "Kirjaudu ulos"
+
+#~ msgid "Log in"
+#~ msgstr "Kirjaudu sisään"
+
+#~ msgid "Register"
+#~ msgstr "Rekisteröidy"
+
+#~ msgid "Title"
+#~ msgstr "Otsikko"
+
+#~ msgid "Product not orderable"
+#~ msgstr "Tuote ei ole saatavilla"
+
+#~ msgid "Add to cart"
+#~ msgstr "Lisää koriin"
+
+#~ msgid "Check availability"
+#~ msgstr "Tarkista varaustilanne"
+
+#~ msgid "Additions to base price"
+#~ msgstr "Lisäykset perushintaan"
+
+#~ msgid "Persons included"
+#~ msgstr "Henkilöitä perushintaan"
+
+#~ msgid "Additional persons"
+#~ msgstr "Ylimääräiset henkilöt"
+
+#~ msgid "person"
+#~ msgstr "henkilö"
+
+#~ msgid "night"
+#~ msgstr "yö"
+
+#~ msgid "Product description"
+#~ msgstr "Tuotteen kuvaus"
+
+#~ msgid "Product attributes"
+#~ msgstr "Tuotteen ominaisuudet"
+
+#~ msgid "Includes these products"
+#~ msgstr "Sisältää nämä tuotteet"
+
+#~ msgid "Also available in"
+#~ msgstr "Saatavilla myös"
+
+#~ msgid "Related products"
+#~ msgstr "Liittyvät tuotteet"
+
+#~ msgid "We recommend these products"
+#~ msgstr "Suosittelemamme tuotteet"
+
+#~ msgid "Users who bought this product also bought"
+#~ msgstr "Henkilöt jotka ostivat tämän ostivat myös"
+
+#~ msgid "Filter by reservable..."
+#~ msgstr "Etsi varattavan mukaan..."
+
+#~ msgid ""
+#~ "Fill in the number of persons over"
+#~ " 12 years old. This is needed "
+#~ "for bedding, when included in the "
+#~ "cottage price. Please check cottage "
+#~ "details."
+#~ msgstr ""
+#~ "Anna henkilöiden määrä (6v tai yli). "
+#~ "Tätä tarvitaan lakanoita varten, jos ne"
+#~ " kuuluvat mökin hintaan. Tarkista mökin "
+#~ "kuvaus."
+
