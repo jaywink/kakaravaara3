@@ -2,7 +2,7 @@
 
 # runserver_plus and other goodies
 Werkzeug==0.11.10
-django-debug-toolbar==1.5
+django-debug-toolbar==1.11.1
 
 # testing
 pytest-django==2.9.1
