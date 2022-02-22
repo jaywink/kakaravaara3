@@ -380,14 +380,14 @@ msgstr "Valittu ajanjakso ei ole vapaa."
 #~ msgid "Product"
 #~ msgstr "Tuote"
 
-#~ msgid "Arrival"
-#~ msgstr "Saapuminen"
+msgid "Arrival"
+msgstr "Saapuminen"
 
 #~ msgid "Price"
 #~ msgstr "Hinta"
 
-#~ msgid "Nights"
-#~ msgstr "yötä"
+msgid "Nights"
+msgstr "yötä"
 
 #~ msgid "Update quantities"
 #~ msgstr "Päivitä määrät"
@@ -398,8 +398,8 @@ msgstr "Valittu ajanjakso ei ole vapaa."
 #~ msgid "Information"
 #~ msgstr "Lisätiedot"
 
-#~ msgid "Cart"
-#~ msgstr "Kori"
+msgid "Cart"
+msgstr "Kori"
 
 #~ msgid "Items"
 #~ msgstr "Rivit"
