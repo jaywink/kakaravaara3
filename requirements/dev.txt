@@ -1,7 +1,7 @@
 -r base.txt
 
 # runserver_plus and other goodies
-Werkzeug==0.11.10
+Werkzeug==2.2.3
 django-debug-toolbar==1.5
 
 # testing
